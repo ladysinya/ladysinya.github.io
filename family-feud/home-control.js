@@ -1,7 +1,7 @@
 class HomeControl {
     data;
     questionTemplate;
-    channel = new BroadcastChannel('my_channel');
+    channel = new BroadcastChannel('ladysinya.github.io_family_feud_broadcast_channel');
     qNumber = 0;
     
     async init() {
