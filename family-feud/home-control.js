@@ -7,7 +7,7 @@ class HomeControl {
     async init() {
         this.questionTemplate = document.getElementById('question-template');
 
-        await fetch('/data.json')
+        await fetch('./data.json')
         .then(async (response) => {
             let responseContent = await response.text();
             this.data = JSON.parse(responseContent);
