@@ -6,7 +6,7 @@ class Home {
     async init() {
         this.channel.addEventListener('message', e => this.messageEventListener(e))
         
-        await fetch('/data.json')
+        await fetch('./data.json')
         .then(async (response) => {
             let responseContent = await response.text();
             this.data = JSON.parse(responseContent);
