@@ -1,0 +1,48 @@
+html {
+  height: 100vh;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background-color: cornsilk;
+}
+
+.main.main-control {
+  display: flex;
+  flex-direction: column;
+  font-family: "Open Sans", sans-serif;
+  height: 100%;
+}
+
+.page-title {
+  width: 100%;
+  padding: 24px;
+  background-color: darkseagreen;
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 0 auto;
+  font-family: "Mystery Quest", Tofu;
+  font-weight: 400;
+  font-size: 50px;
+  width: fit-content;
+  color: brown;
+  background-color: darkseagreen;
+}
+
+.page {
+  height: -webkit-fill-available;
+  width: 100%;
+  display: flex;
+}
+
+.list-collection {
+  border-right: 1px solid burlywood;
+  width: 25%;
+}
+
+.list-content {
+  width: 75%;
+}
