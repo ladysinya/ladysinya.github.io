@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Family Feud</title>
+        <link rel="stylesheet" href="/home.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Mystery+Quest&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="main">
+            <div class="header-row">
+                <div id="team-1" class="team-group">
+                    <div class="team-name" contenteditable="true">Team Gobbles</div>
+                    <div class="team-strikes">
+                        <div class="strike" disabled></div>
+                        <div class="strike" disabled></div>
+                        <div class="strike" disabled></div>
+                    </div>
+                    <div class="team-points">0</div>
+                </div>
+                <div class="title-group">
+                    <div class="page-title">Gobble Games</div>
+                    <!-- <img class="candy-corn-img" src="/assets/candyCorn.png"> -->
+                    <!-- <img class="bat-img" src="/assets/large_flying-bat6.png"> -->
+                    <img src="/assets/Turkey-split-monogram.svg" alt="" class="turkey-img">
+                </div>
+                <div id="team-2" class="team-group">
+                    <div class="team-name" contenteditable="true">Team Wobbles</div>
+                    <div class="team-strikes">
+                        <div class="strike" disabled></div>
+                        <div class="strike" disabled></div>
+                        <div class="strike" disabled></div>
+                    </div>
+                    <div class="team-points">0</div>
+                </div>
+            </div>
+            <div id="question" class="question-row">
+                &nbsp;
+            </div>
+            <div class="answers-row">
+                <div class="answers-col-1">
+                    <div id="answer-1" class="answer">
+                        <div class="answer-number">1</div>
+                        <div class="answer-text">
+                            <div class="answer-text-content"></div>
+                            <div class="answer-text-overlay"></div>
+                        </div>
+                    </div>
+                    <div id="answer-2" class="answer">
+                        <div class="answer-number">2</div>
+                        <div class="answer-text">
+                            <div class="answer-text-content"></div>
+                            <div class="answer-text-overlay"></div>
+                        </div>
+                    </div>
+                    <div id="answer-3" class="answer">
+                        <div class="answer-number">3</div>
+                        <div class="answer-text">
+                            <div class="answer-text-content"></div>
+                            <div class="answer-text-overlay"></div>
+                        </div>
+                    </div>
+                    <div id="answer-4" class="answer">
+                        <div class="answer-number">4</div>
+                        <div class="answer-text">
+                            <div class="answer-text-content"></div>
+                            <div class="answer-text-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="answer-col-border"></div>
+                <div class="answers-col-2">
+                    <div id="answer-5" class="answer">
+                        <div class="answer-number">5</div>
+                        <div class="answer-text">
+                            <div class="answer-text-content"></div>
+                            <div class="answer-text-overlay"></div>
+                        </div>
+                    </div>
+                    <div id="answer-6" class="answer">
+                        <div class="answer-number">6</div>
+                        <div class="answer-text">
+                            <div class="answer-text-content"></div>
+                            <div class="answer-text-overlay"></div>
+                        </div>
+                    </div>
+                    <div id="answer-7" class="answer">
+                        <div class="answer-number">7</div>
+                        <div class="answer-text">
+                            <div class="answer-text-content"></div>
+                            <div class="answer-text-overlay"></div>
+                        </div>
+                    </div>
+                    <div id="answer-8" class="answer">
+                        <div class="answer-number">8</div>
+                        <div class="answer-text">
+                            <div class="answer-text-content"></div>
+                            <div class="answer-text-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://kit.fontawesome.com/6b595a6242.js" crossorigin="anonymous"></script>
+        <script src="/home.js"></script>
+        <script>
+            let home = new Home();
+            home.init();
+        </script>
+    </body>
+</html>
