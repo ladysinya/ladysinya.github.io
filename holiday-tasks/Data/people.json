@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "name": "Bob",
+        "sendCard": true,
+        "shipGifts": false,
+        "purchasesComplete": false,
+        "budget": 100.00,
+        "address": {
+            "line1": "1973 Woodbury Lane",
+            "line2": null,
+            "city": "Columbia",
+            "state": "TN",
+            "zip": "38401"
+        },
+        "notes": null
+    },
+    {
+        "id": 2,
+        "name": "Brian Chambers",
+        "sendCard": true,
+        "shipGifts": false,
+        "purchasesComplete": false,
+        "budget": 100.00,
+        "address": {
+            "line1": "240 Star Pointer Way",
+            "line2": null,
+            "city": "Spring Hill",
+            "state": "TN",
+            "zip": "37174"
+        },
+        "notes": null
+    }
+]

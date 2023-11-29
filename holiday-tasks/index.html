@@ -9,14 +9,70 @@
     </head>
     <body>
         <div class="main main-control">
-            <div class="page-title">
-                <h1>Holiday Tasks</h1>
+            <div class="page-header">
+                <div class="page-title">
+                    <div class="page-title-text">Holiday Tasks</div>
+                    <img class="candy-cane" src="./assets/candy_cane.png" alt="candy_cane">
+                    <img class="holly" src="./assets/Holly.png" alt="Holly">
+                </div>
             </div>
-            <div class="page">
-                <div class="list-collection">Collections</div>
-                <div class="list-content">Content</div>
+            <div class="section-selections">
+                <button data-section="people" class="section-btn section-active">
+                    <i class="fa-solid fa-people-group"></i>
+                    <div>People</div>
+                </button>
+                <button data-section="lists" class="section-btn">
+                    <i class="fa fa-clipboard-list"></i>
+                    <div>Lists</div>
+                </button>
+                <button data-section="gifts" class="section-btn">
+                    <i class="fa fa-gifts"></i>
+                    <div>Gifts</div>                        
+                </button>
+            </div>
+            <div class="section-content">
+                <section data-section="people">
+                    
+                </section>
+                <section data-section="lists" class="display-none">
+                    <div class="page">
+                        <div class="list-collection">Collections</div>
+                        <div class="list-content">Content</div>
+                    </div>
+                </section>
+                <section data-section="gifts" class="display-none">
+                    gift things
+                </section>
             </div>
         </div>
+        <template id="people-card-template">
+            <div class="card people-card">
+                <div class="people-card-row">
+                    <div contenteditable="true" class="people-card-name"></div>
+                    <div class="people-card-budget-group">
+                        <div class="dollar-sign">$</div>
+                        <div contenteditable="true" class="people-card-budget"></div>
+                    </div>
+                </div>
+                <div class="people-card-row">
+                    <div class="people-card-address">
+                        <div contenteditable="true" class="people-card-address-line1"></div>
+                        <div contenteditable="true" class="people-card-address-line2"></div>
+                        <div contenteditable="true" class="people-card-address-city"></div>
+                        <div contenteditable="true" class="people-card-address-state"></div>
+                        <div contenteditable="true" class="people-card-address-zip"></div>
+                    </div>
+                </div>
+                <div class="people-card-row">
+                    <button class="people-card-send-card">Send Card</button>
+                    <button class="people-card-ship-gifts">Ship Gifts</button>
+                    <button class="people-card-purchases-complete">Purchases Complete</button>
+                </div>
+                <div class="people-card-row">
+                    <textarea rows="5" class="people-card-notes"></textarea>
+                </div>
+            </div>
+        </template>
         <script src="https://kit.fontawesome.com/6b595a6242.js" crossorigin="anonymous"></script>
         <script src="./script.js"></script>
         <script>

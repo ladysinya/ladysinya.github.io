@@ -15,34 +15,133 @@ body {
   height: 100%;
 }
 
-.page-title {
+.page-header {
   width: 100%;
-  padding: 24px;
+  padding-top: 24px;
   background-color: darkseagreen;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+.page-header .page-title {
+  position: relative;
 }
 
-h1 {
-  margin: 0 auto;
+.section-selections {
+  display: flex;
+}
+.section-selections .section-btn {
+  position: relative;
+  width: -webkit-fill-available;
+  background-color: darkblue;
+  border: none;
+  padding: 12px;
+  font-size: 24px;
+  color: white;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  opacity: 0.75;
+}
+.section-selections .section-btn > * {
+  margin: auto 0;
+}
+.section-selections .section-btn.section-active {
+  background-image: url("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTlncGxlaTM5NmJscHFtMG05NWJiZzY0OXhsbGk3dmc4Z3g4YWRuZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/T2J86H6QVTHoDnysnW/giphy.gif");
+  opacity: 1;
+}
+
+.page-title-text {
+  margin: 0 auto 12px auto;
   font-family: "Mystery Quest", Tofu;
   font-weight: 400;
   font-size: 50px;
   width: fit-content;
-  color: brown;
+  color: firebrick;
   background-color: darkseagreen;
 }
 
+.candy-cane,
+.holly {
+  position: absolute;
+}
+
+.candy-cane {
+  height: 60px;
+  left: -10%;
+  top: -20%;
+  transform: rotate(30deg);
+}
+
+.holly {
+  height: 100px;
+  right: -24%;
+  bottom: -15%;
+  transform: rotate(-90deg);
+}
+
 .page {
-  height: -webkit-fill-available;
+  height: 100%;
   width: 100%;
   display: flex;
 }
 
 .list-collection {
-  border-right: 1px solid burlywood;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2392156863);
   width: 25%;
 }
 
 .list-content {
   width: 75%;
+}
+
+.display-none {
+  display: none;
+}
+
+.section-content {
+  height: -webkit-fill-available;
+}
+.section-content section {
+  height: 100%;
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2392156863);
+  border: 1px solid rgba(0, 0, 0, 0.2392156863);
+  margin: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.people-card-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.people-card-row textarea {
+  width: 100%;
+}
+
+.people-card-name {
+  font-size: 24px;
+  font-weight: 600;
+  color: firebrick;
+}
+
+.people-card-budget-group {
+  display: flex;
+}
+
+.people-card-address {
+  display: flex;
+  gap: 4px;
+}
+.people-card-address > *:after {
+  content: ",";
+}
+.people-card-address > *:last-child::after {
+  content: "";
 }
