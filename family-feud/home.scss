@@ -1,9 +1,9 @@
 html {
-    background-image: url(./assets/thanksgiving_background_1.jpg);
+    background-image: url(./assets/a1dbc75c1bbc9d5d63bb0024ffb74d97.jpg);
 }
 
 body {
-    background-color: #fff8dc4D;
+    background-color: #E0FFFF4D;
 }
 
 body, html {
@@ -27,11 +27,11 @@ body, html {
 
     .team-name {
         font-size: 48px;
-        color: cornsilk;
+        color: lightcyan;
         text-align: center;
         font-family: "Brush Script MT", cursive;
         letter-spacing: 5px;
-        background-color: #423101BF;
+        background-color: rgba(30, 144, 255, 0.7490196078);
         border: none;
         outline: none;
         border-radius: 8px;
@@ -48,7 +48,7 @@ body, html {
         display: flex;
         gap: 10px;
         justify-content: center;
-        background-color: #fff8dc;
+        background-color: lightcyan;
         border-radius: 8px;
         margin-bottom: 10px;
         
@@ -86,11 +86,11 @@ body, html {
 
     .team-points {
         font-size: 36px;
-        color: cornsilk;
+        color: lightcyan;
         text-align: center;
         font-weight: 600;
         font-variant: all-small-caps;
-        background-color: saddlebrown;
+        background-color: RoyalBlue;
         border-radius: 10px;
         padding: 16px 24px;
     }
@@ -101,40 +101,40 @@ body, html {
     position: relative;
     border-radius: 10px;
     width: 330px;
-    margin: 0 auto;
-    background-color: cornsilk;
-    border-radius: 100%;
+    margin: auto;
+    background-color: lightcyan;
+    // border-radius: 100%;
 
     .page-title {
         font-size: 48px;
         padding: 24px 36px;
         text-align: center;
         font-family: "Mystery Quest", Tofu;
-        color: saddlebrown;
-        position: absolute;
-        top: 99px;
-        left: 50%;
-        transform: translate(-50%, 0);
-        width: 100%;
+        color: RoyalBlue;
+        // position: absolute;
+        // top: 99px;
+        // left: 50%;
+        // transform: translate(-50%, 0);
+        // width: 100%;
     }
 
-    // .candy-corn-img {
-    //     position: absolute;
-    //     transform: rotate(45deg) translate(70%, 0%);
-    //     bottom: 0;
-    //     right: 0;
-    //     height: 80px;
-    //     width: auto;
-    // }
+    .candy-corn-img {
+        position: absolute;
+        transform: rotate(45deg) translate(70%, 0%);
+        bottom: 0;
+        right: 0;
+        height: 80px;
+        width: auto;
+    }
     
-    // .bat-img {
-    //     position: absolute;
-    //     transform: rotate(-32deg) translate(-10%, -55%);
-    //     top: 0;
-    //     left: 0;
-    //     height: 160px;
-    //     width: auto;
-    // }
+    .bat-img {
+        position: absolute;
+        transform: rotate(-32deg) translate(-10%, -55%);
+        top: 0;
+        left: 0;
+        height: 160px;
+        width: auto;
+    }
 
     .turkey-img {
         position: absolute;
@@ -147,10 +147,10 @@ body, html {
 
 .question-row {
     margin: 24px 0;
-    background-color: cornsilk;
+    background-color: lightcyan;
     border-radius: 10px;
     font-size: 44px;
-    color: firebrick;
+    color: DodgerBlue;
     text-align: center;
     padding: 24px;
 }
@@ -172,7 +172,7 @@ body, html {
         -webkit-mask: var(--mask);
         mask: var(--mask);
 
-        background: cornsilk;
+        background: lightcyan;
         width: 30px;
     }
 
@@ -183,9 +183,9 @@ body, html {
 
         .answer-number {
             font-size: 44px;
-            color: firebrick;
-            border: 5px solid firebrick;
-            background-color: cornsilk;
+            color: DodgerBlue;
+            border: 5px solid DodgerBlue;
+            background-color: lightcyan;
             border-radius: 50%;
             aspect-ratio: 1;
             // font-weight: 600;
@@ -199,13 +199,13 @@ body, html {
             width: -webkit-fill-available;
 
             .answer-text-content {
-                background-color: cornsilk;
+                background-color: lightcyan;
                 border-radius: 10px;
                 height: 100%;
                 font-size: 36px;
                 padding: 8px;
                 box-sizing: border-box;
-                color: saddlebrown;
+                color: RoyalBlue;
             }
 
             .answer-text-overlay {
@@ -215,7 +215,7 @@ body, html {
                 left: 0;
                 right: 0;
                 border-radius: 10px;
-                background-color: saddlebrown;
+                background-color: RoyalBlue;
                 width: 100%;
                 transition: width 1s ease-in-out;
 
@@ -255,7 +255,7 @@ body, html {
             top: 50%;
             font-weight: 600;
             padding: 8px;
-            color: cornsilk;
+            color: lightcyan;
             border-radius: 4px;
             border: none;
             transform: translateY(-50%);
@@ -289,12 +289,12 @@ body, html {
     gap: 10px;
 
     details {
-        background-color: cornsilk;
+        background-color: lightcyan;
         border-radius: 8px;
         padding: 4px 16px;
 
         &[open] {
-            border: 3px solid saddlebrown;
+            border: 3px solid RoyalBlue;
         }
 
         summary {
@@ -344,7 +344,7 @@ body, html {
             }
 
             .fa-eye-slash {
-                color: saddlebrown;
+                color: RoyalBlue;
             }
         }
     }
@@ -352,8 +352,8 @@ body, html {
 
 #next-question-button {
     font-size: 24px;
-    background-color: firebrick;
-    color: cornsilk;
+    background-color: DodgerBlue;
+    color: lightcyan;
     margin: 8px auto;
     padding: 8px;
     border-radius: 4px;

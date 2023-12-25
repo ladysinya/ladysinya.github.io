@@ -1,10 +1,10 @@
 @charset "UTF-8";
 html {
-  background-image: url(./assets/thanksgiving_background_1.jpg);
+  background-image: url(./assets/a1dbc75c1bbc9d5d63bb0024ffb74d97.jpg);
 }
 
 body {
-  background-color: rgba(255, 248, 220, 0.3019607843);
+  background-color: rgba(224, 255, 255, 0.3019607843);
 }
 
 body, html {
@@ -28,11 +28,11 @@ body, html {
 }
 .team-group .team-name {
   font-size: 48px;
-  color: cornsilk;
+  color: lightcyan;
   text-align: center;
   font-family: "Brush Script MT", cursive;
   letter-spacing: 5px;
-  background-color: rgba(66, 49, 1, 0.7490196078);
+  background-color: rgba(30, 144, 255, 0.7490196078);
   border: none;
   outline: none;
   border-radius: 8px;
@@ -46,7 +46,7 @@ body, html {
   display: flex;
   gap: 10px;
   justify-content: center;
-  background-color: #fff8dc;
+  background-color: lightcyan;
   border-radius: 8px;
   margin-bottom: 10px;
 }
@@ -79,11 +79,11 @@ body, html {
 }
 .team-group .team-points {
   font-size: 36px;
-  color: cornsilk;
+  color: lightcyan;
   text-align: center;
   font-weight: 600;
   font-variant: all-small-caps;
-  background-color: saddlebrown;
+  background-color: RoyalBlue;
   border-radius: 10px;
   padding: 16px 24px;
 }
@@ -93,21 +93,31 @@ body, html {
   position: relative;
   border-radius: 10px;
   width: 330px;
-  margin: 0 auto;
-  background-color: cornsilk;
-  border-radius: 100%;
+  margin: auto;
+  background-color: lightcyan;
 }
 .title-group .page-title {
   font-size: 48px;
   padding: 24px 36px;
   text-align: center;
   font-family: "Mystery Quest", Tofu;
-  color: saddlebrown;
+  color: RoyalBlue;
+}
+.title-group .candy-corn-img {
   position: absolute;
-  top: 99px;
-  left: 50%;
-  transform: translate(-50%, 0);
-  width: 100%;
+  transform: rotate(45deg) translate(70%, 0%);
+  bottom: 0;
+  right: 0;
+  height: 80px;
+  width: auto;
+}
+.title-group .bat-img {
+  position: absolute;
+  transform: rotate(-32deg) translate(-10%, -55%);
+  top: 0;
+  left: 0;
+  height: 160px;
+  width: auto;
 }
 .title-group .turkey-img {
   position: absolute;
@@ -119,10 +129,10 @@ body, html {
 
 .question-row {
   margin: 24px 0;
-  background-color: cornsilk;
+  background-color: lightcyan;
   border-radius: 10px;
   font-size: 44px;
-  color: firebrick;
+  color: DodgerBlue;
   text-align: center;
   padding: 24px;
 }
@@ -141,7 +151,7 @@ body, html {
     radial-gradient(15.24px at calc(100% + 11.50px) 50%,#0000 99%,#000 101%) calc(100% - 10px) calc(50% - 20px)/calc(51% - 10px) 40px repeat-y;
   -webkit-mask: var(--mask);
   mask: var(--mask);
-  background: cornsilk;
+  background: lightcyan;
   width: 30px;
 }
 .answers-row .answer {
@@ -151,9 +161,9 @@ body, html {
 }
 .answers-row .answer .answer-number {
   font-size: 44px;
-  color: firebrick;
-  border: 5px solid firebrick;
-  background-color: cornsilk;
+  color: DodgerBlue;
+  border: 5px solid DodgerBlue;
+  background-color: lightcyan;
   border-radius: 50%;
   aspect-ratio: 1;
   height: 50px;
@@ -165,13 +175,13 @@ body, html {
   width: -webkit-fill-available;
 }
 .answers-row .answer .answer-text .answer-text-content {
-  background-color: cornsilk;
+  background-color: lightcyan;
   border-radius: 10px;
   height: 100%;
   font-size: 36px;
   padding: 8px;
   box-sizing: border-box;
-  color: saddlebrown;
+  color: RoyalBlue;
 }
 .answers-row .answer .answer-text .answer-text-overlay {
   position: absolute;
@@ -180,7 +190,7 @@ body, html {
   left: 0;
   right: 0;
   border-radius: 10px;
-  background-color: saddlebrown;
+  background-color: RoyalBlue;
   width: 100%;
   transition: width 1s ease-in-out;
 }
@@ -214,7 +224,7 @@ body, html {
   top: 50%;
   font-weight: 600;
   padding: 8px;
-  color: cornsilk;
+  color: lightcyan;
   border-radius: 4px;
   border: none;
   transform: translateY(-50%);
@@ -240,12 +250,12 @@ body, html {
   gap: 10px;
 }
 #questions-container details {
-  background-color: cornsilk;
+  background-color: lightcyan;
   border-radius: 8px;
   padding: 4px 16px;
 }
 #questions-container details[open] {
-  border: 3px solid saddlebrown;
+  border: 3px solid RoyalBlue;
 }
 #questions-container details summary {
   font-size: 24px;
@@ -283,13 +293,13 @@ body, html {
   color: green;
 }
 #questions-container details .icons .fa-eye-slash {
-  color: saddlebrown;
+  color: RoyalBlue;
 }
 
 #next-question-button {
   font-size: 24px;
-  background-color: firebrick;
-  color: cornsilk;
+  background-color: DodgerBlue;
+  color: lightcyan;
   margin: 8px auto;
   padding: 8px;
   border-radius: 4px;
