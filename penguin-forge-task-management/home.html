@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="google-signin-client_id" content="289591580550-pqcno3nk8e0sbajcfmuucq3ng47o3gve.apps.googleusercontent.com">
+        <title>Test App</title>
+        <link rel="stylesheet" href="./home.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Mystery+Quest&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="main">
+            <h1>Test App</h1>
+            <div class="g-signin2" data-onsuccess="home.onSignIn"></div>
+            <a href="#" onclick="home.signOut();">Sign out</a>
+        </div>
+        <script src="https://kit.fontawesome.com/6b595a6242.js" crossorigin="anonymous"></script>
+        <script src="./home.js"></script>
+        <script>
+            let home = new Home();
+            home.init();
+        </script>
+    </body>
+</html>
