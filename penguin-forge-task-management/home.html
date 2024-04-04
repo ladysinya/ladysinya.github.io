@@ -11,11 +11,10 @@
     <body>
         <div class="main">
             <h1>Test App</h1>
-            <div class="g-signin2" data-onsuccess="home.onSignIn"></div>
-            <a href="#" onclick="home.signOut();">Sign out</a>
+            <button onclick="home.client.requestAccessToken();">Authorize me</button>
         </div>
         <script src="https://kit.fontawesome.com/6b595a6242.js" crossorigin="anonymous"></script>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script src="https://accounts.google.com/gsi/client" onload="console.log('TODO: add onload function')" async defer></script>
         <script src="./home.js"></script>
         <script>
             let home = new Home();

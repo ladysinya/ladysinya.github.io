@@ -11,18 +11,14 @@ class Home {
         console.log('event', message);
     }
 
-    onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    }
-
-    signOut() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(() => {
-            console.log('User signed out.');
-        });
-    }
+    client = google.accounts.oauth2.initTokenClient({
+        client_id: '289591580550-pqcno3nk8e0sbajcfmuucq3ng47o3gve.apps.googleusercontent.com',
+        callback: (tokenResponse) => {
+          console.log('callback triggered', tokenResponse)
+          if (tokenResponse && tokenResponse.access_token) {
+            gapi.client.setApiKey('AIzaSyC9vfSA9xMiMB6WFRJ-dLIyMZsqz5gfkb8');
+            gapi.client.load('calendar', 'v3', listUpcomingEvents);
+          }
+        },
+      });
 }
