@@ -55,7 +55,6 @@ body {
 }
 
 .edge-right {
-  right: 20px;
   background: repeating-linear-gradient(to right, #fffff6, #383826 1px, #fffff6 8px, #383826 1px);
 }
 
