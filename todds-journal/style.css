@@ -51,7 +51,7 @@ body {
 }
 
 .edge-left {
-  left: 20px;
+  left: 10px;
   background: repeating-linear-gradient(to left, #fffff6, #383826 1px, #fffff6 8px, #383826 1px);
 }
 
@@ -102,13 +102,13 @@ body {
 }
 
 .page {
-  width: 88%;
+  width: 78%;
   height: 97%;
   background-color: beige;
   background-image: linear-gradient(var(--lines) 0.05em, transparent 0.05em);
   background-size: 100% 4em;
   position: absolute;
-  left: 10%;
+  left: 20%;
   top: 25px;
   border: 1px solid dimgray;
   -webkit-box-shadow: 10px 5px 20px -1px rgba(0, 0, 0, 0.75);
