@@ -20,8 +20,6 @@ body {
 }
 
 .notebook {
-	// width: 1800px;
-	// height: 1150px;
     width: 100%;
     height: 100%;
     background-color: #331f00;
@@ -30,20 +28,20 @@ body {
     z-index: -200;
     border-radius: 8px;
     margin: 25px 0;
-    transform: translate(-20px, 25px);
+    transform: translate(-20px, 10px);
     overflow: hidden;
 
-	&:before {
-        content: "";
-        position: absolute;
-        top: -15px;
-        background-color: #331f00;
-        width: 300px;
-        height: 2540px;
-        border-radius: 8px;
-        z-index: -201;
-        left: 30px;
-	}
+	// &:before {
+    //     content: "";
+    //     position: absolute;
+    //     top: -15px;
+    //     background-color: #331f00;
+    //     width: 300px;
+    //     height: 2540px;
+    //     border-radius: 8px;
+    //     z-index: -201;
+    //     left: 30px;
+	// }
 }
  
 .edge-left,
