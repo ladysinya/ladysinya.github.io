@@ -51,10 +51,12 @@ body {
 }
 
 .edge-left {
+  left: 10px;
   background: repeating-linear-gradient(to left, #fffff6, #383826 1px, #fffff6 8px, #383826 1px);
 }
 
 .edge-right {
+  right: 5px;
   background: repeating-linear-gradient(to right, #fffff6, #383826 1px, #fffff6 8px, #383826 1px);
 }
 
