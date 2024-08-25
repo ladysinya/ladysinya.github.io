@@ -1,0 +1,327 @@
+// sass --watch --no-source-map style.scss style.css
+
+:root {
+	--margin-line: #941c5a;
+	--lines: darkslategray;
+	--turn-transition-time: 1s;
+}
+
+html,
+body {
+	background-color: gainsboro;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	height: 98vh;
+	z-index: -201;
+	width: 100vw;
+	// overflow: hidden;
+}
+
+.notebook {
+	// width: 1800px;
+	// height: 1150px;
+    width: 100%;
+    height: 100%;
+    background-color: #331f00;
+    position: relative;
+    display: flex;
+    z-index: -200;
+    border-radius: 8px;
+    margin: 25px 0;
+    transform: translate(-20px, 25px);
+    overflow: hidden;
+
+	&:before {
+        content: "";
+        position: absolute;
+        top: -15px;
+        background-color: #331f00;
+        width: 300px;
+        height: 2540px;
+        border-radius: 8px;
+        z-index: -201;
+        left: 30px;
+	}
+}
+ 
+.edge-left,
+.edge-right {
+	position: absolute;
+	top: 26px;
+	height: 95.15vh;
+	width: 50px;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.edge-left {
+	left: 20px;
+	background: repeating-linear-gradient(
+		to left,
+		#fffff6,
+		#383826 1px,
+		#fffff6 8px,
+		#383826 1px
+	);
+}
+
+.edge-right {
+	right: 20px;
+	background: repeating-linear-gradient(
+		to right,
+		#fffff6,
+		#383826 1px,
+		#fffff6 8px,
+		#383826 1px
+	);
+}
+
+.notebook.closed {
+	border-top-left-radius: 24px;
+	border-bottom-left-radius: 24px;
+	width: 900px;
+
+	&:before {
+		right: 100%;
+		width: 30px;
+		height: 1150px;
+		top: 0;
+		border-radius: 12px;
+	}
+
+	&:after {
+		content: "";
+		position: absolute;
+		top: 50%;
+		right: 50%;
+		width: 800px;
+		height: 1050px;
+		border: 10px solid green;
+		transform: translate(50%, -50%);
+		border-radius: 8px;
+	}
+
+	.edge-left,
+	.edge-right,
+	.margin,
+	.tab {
+		display: none;
+	}
+
+	.page {
+		width: 0;
+		color: transparent;
+		border: none;
+	}
+}
+
+.page {
+    width: 88%;
+    height: 97%;
+    background-color: beige;
+    background-image: linear-gradient(var(--lines) 0.05em, transparent 0.05em);
+    background-size: 100% 4em;
+    position: absolute;
+    left: 10%;
+    top: 25px;
+    border: 1px solid dimgray;
+    -webkit-box-shadow: 10px 5px 20px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 5px 20px -1px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 5px 20px -1px rgba(0, 0, 0, 0.75);
+
+	&:before,
+	&:after {
+		content: "";
+		position: absolute;
+		top: 0;
+	}
+
+	.margin {
+		position: absolute;
+		top: 0;
+		height: 100%;
+		width: 2px;
+		background-color: var(--margin-line);
+		left: 4em;
+	}
+
+	&:before {
+		height: 100%;
+		width: 100%;
+		background: linear-gradient(
+			to left,
+			rgba(0, 0, 0, 0) 0%,
+			rgba(0, 0, 0, 0) 98%,
+			rgba(0, 0, 0, 0.25) 100%
+		);
+	}
+
+	&:after {
+		height: 6em;
+		width: 100%;
+		background-color: beige;
+		left: 0;
+		z-index: -1;
+	}
+
+	&:first-child {
+		&.page-turned ~ .edge-right {
+			opacity: 0;
+			transition: opacity 100ms 200ms;
+		}
+
+		&:not(.page-turned) ~ .edge-right {
+			opacity: 1;
+			transition: opacity 100ms calc(var(--turn-transition-time) - 200ms);
+		}
+	}
+}
+
+p {
+    position: absolute;
+    top: 9.15rem;
+    left: 4rem;
+    width: calc(100% - 10rem);
+    height: calc(100% - 7rem);
+    background-color: transparent;
+    border: none;
+    font-family: "Homemade Apple", cursive;
+    font-size: 3rem;
+    line-height: 1.34;
+    padding-left: 1rem;
+    margin: 0;
+    resize: none;
+}
+
+#page-0,
+.page-turned {
+	transform-origin: left center;
+	transform: scale(-1, 1);
+	transition: transform var(--turn-transition-time) ease-in-out;
+
+	p {
+		opacity: 0;
+		transition: opacity var(--turn-transition-time) steps(2, jump-none);
+	}
+}
+
+.page:not(.page-turned) {
+	transform-origin: left center;
+	transform: scale(1, 1);
+	transition: transform var(--turn-transition-time) ease-in-out;
+
+	p {
+		opacity: 1;
+		transition: opacity var(--turn-transition-time) steps(2, jump-none);
+	}
+}
+
+.notebook {
+	.tab {
+		--r: 25px; /* control the radius */
+		position: absolute;
+		color: white;
+		line-height: 2; /* control the height */
+		padding-inline: 1em;
+		border-inline: var(--r) solid #0000;
+		border-block: 2px solid #594b36;
+		border-radius: calc(2 * var(--r)) calc(2 * var(--r)) 0 0 / var(--r);
+		mask: radial-gradient(var(--r) at var(--r) 0, #0000 98%, #000 101%)
+				calc(-1 * var(--r)) 100%/100% var(--r) repeat-x,
+			conic-gradient(#000 0 0) padding-box;
+		background: #bd5532 border-box; /* border-box is needed for a gradient coloration */
+		width: 130px;
+		transform: rotate(90deg);
+		text-align: center;
+		cursor: pointer;
+		font-family: "Edu AU VIC WA NT Hand", cursive;
+		font-size: 15px;
+		font-optical-sizing: auto;
+		font-weight: 600;
+
+		&-home {
+			@extend .tab;
+			background-color: #8c5400;
+			top: 140px;
+		}
+
+		&-page-2 {
+			@extend .tab;
+			background-color: #84540b;
+			top: 350px;
+		}
+
+		&-page-3 {
+			@extend .tab;
+			background-color: #795115;
+			top: 560px;
+		}
+
+		&-page-4 {
+			@extend .tab;
+			background-color: #6f4f20;
+			top: 770px;
+		}
+
+		&-page-5 {
+			@extend .tab;
+			background-color: #644d2b;
+			top: 980px;
+		}
+
+		&-page-6 {
+			@extend .tab;
+			background-color: #594b36;
+			top: 1190px;
+		}
+
+		&:not(.tab-flipped) {
+			transform: rotate(90deg);
+			transition: transform 0s 0.9s;
+		}
+	}
+
+	.tab-flipped {
+		transform: rotate(-90deg);
+		transition: transform 0s 0.3s;
+		animation: transparentAt50 var(--turn-transition-time);
+		opacity: 0.5;
+	}
+}
+
+.tab:not(.tab-flipped) {
+	animation: otherTransparentAt50 var(--turn-transition-time);
+}
+
+@keyframes transparentAt50 {
+	0% {
+		opacity: 1;
+	}
+	10% {
+		opacity: 0;
+	}
+	90% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+// Why is this necessary!? WHYYY!?!?!?
+@keyframes otherTransparentAt50 {
+	0% {
+		opacity: 1;
+	}
+	10% {
+		opacity: 0;
+	}
+	90% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
