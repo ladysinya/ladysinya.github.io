@@ -5,7 +5,7 @@ class Scanner {
             qrbox: 250
           });
           
-          this.html5QrCodeScanner.render(this.onScanSuccess, this.onScanError);
+        this.html5QrCodeScanner.render(this.onScanSuccess, this.onScanError);
 	}
 
     // When scan is successful fucntion will produce data
