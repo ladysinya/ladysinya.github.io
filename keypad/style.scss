@@ -38,7 +38,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	border: 3px solid #7fff00;
-	border-radius: 1em; // 16px
+	border-radius: 0.25em; // 16px
 	padding: 0.25em; // 16px
 	aspect-ratio: 1;
 	text-align: center;
@@ -162,6 +162,7 @@ body {
 	flex-direction: column;
 	justify-content: space-between;
     aspect-ratio: 1.5;
+    border: 3px solid white;
 
 	.lock-status-indicator {
 		&:after {
@@ -175,7 +176,7 @@ body {
 	}
 
 	&[data-status="locked"] {
-		border: 1px solid #a52a2ae6;
+		// border: 1px solid #a52a2ae6;
 		background-color: #a52a2ae6;
 
 		.lock-status-indicator {
@@ -202,7 +203,7 @@ body {
 	}
 
 	&[data-status="unlocked"] {
-		border: 1px solid #008000e6;
+		// border: 1px solid #008000e6;
 		background-color: #008000e6;
 
 		.lock-status-indicator {

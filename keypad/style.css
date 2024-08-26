@@ -36,7 +36,7 @@ body {
   display: flex;
   flex-direction: column;
   border: 3px solid #7fff00;
-  border-radius: 1em;
+  border-radius: 0.25em;
   padding: 0.25em;
   aspect-ratio: 1;
   text-align: center;
@@ -141,6 +141,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   aspect-ratio: 1.5;
+  border: 3px solid white;
 }
 .status-and-input .lock-status-indicator:after {
   display: flex;
@@ -151,7 +152,6 @@ body {
   flex: 1;
 }
 .status-and-input[data-status=locked] {
-  border: 1px solid rgba(165, 42, 42, 0.9019607843);
   background-color: rgba(165, 42, 42, 0.9019607843);
 }
 .status-and-input[data-status=locked] .lock-status-indicator:after {
@@ -169,7 +169,6 @@ body {
   display: none;
 }
 .status-and-input[data-status=unlocked] {
-  border: 1px solid rgba(0, 128, 0, 0.9019607843);
   background-color: rgba(0, 128, 0, 0.9019607843);
 }
 .status-and-input[data-status=unlocked] .lock-status-indicator:after {
