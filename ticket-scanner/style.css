@@ -108,6 +108,10 @@ body {
   background: white;
 }
 
+#reader__dashboard:has(#html5-qrcode-select-camera:disabled) {
+  display: none;
+}
+
 img[alt="Info icon"] {
   display: none;
 }
