@@ -1,0 +1,130 @@
+h1 {
+    text-align: center;
+  }
+  
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: DarkSeaGreen;
+    display: flex;
+  }
+  
+  #reader {
+    width: 500px;
+    border: none !important;
+  }
+  
+  .result {
+    background-color: green;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .row {
+    display: flex;
+    margin: auto;
+    width: 100%;
+  }
+  
+  .message-col {
+    flex: 1;
+  }
+  
+  /* #success-row, */
+  #error-row {
+    height: 100%;
+  }
+  
+  #start-row {
+    background-color: DarkSeaGreen;
+  }
+  
+  #success-row {
+    background-color: SeaGreen;
+    height: 100%;
+  
+    .message {
+      position: relative;
+  
+      .first-sub-message {
+        position: absolute;
+        font-size: 110px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: -webkit-fill-available;
+        box-sizing: border-box;
+  
+        &.opacity-none {
+          opacity: 0;
+          transition: opacity 2s;
+        }
+      }
+  
+      .not-first-sub-message {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: -webkit-fill-available;
+        box-sizing: border-box;
+        transition: opacity 2s;
+      }
+    }
+  }
+  
+  .opacity-none {
+    opacity: 0;
+  }
+  
+  #error-row {
+    background-color: brown;
+  
+    .message {
+      font-size: 110px;
+    }
+  }
+  
+  .message {
+    height: 100%;
+    padding: 24px;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-variant: all-small-caps;
+    text-align: center;
+    margin: auto;
+    justify-content: center;
+  
+    .zone-label {
+      font-size: 110px;
+    }
+  }
+  
+  #reader__scan_region {
+    background: white;
+  }
+  
+  #reader__dashboard {
+    &:has(#html5-qrcode-button-camera-stop) {
+      display: none;
+    }
+  }
+  
+  img[alt="Info icon"] {
+    display: none;
+  }
+  
+  .display-none {
+    display: none;
+  }
+  

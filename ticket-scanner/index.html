@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>    
+<head>
+    <title>Scanner</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&amp;family=Lobster&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://kit.fontawesome.com/6b595a6242.css" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&amp;display=swap" rel="stylesheet">
+</head>
+<body>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <div id="start-row" class="row">
+        <div class="col">
+            <div id="reader"></div>
+        </div>
+        <div class="col message-col">
+            <div class="message">
+            <span>Scan your</span>
+            <span class="zone-label">River Zone</span>
+            <span>access pass here.</span>
+            </div>
+        </div>
+    </div>
+        
+    <div id="success-row" class="row display-none">
+        <div class="message">
+            <span class="first-sub-message">Ticket accepted</span>
+            <div class="not-first-sub-message opacity-none">
+            <span>Welcome to the</span>
+            <span class="zone-label">River Zone</span>
+            </div>
+        </div>
+    </div>
+        
+    <div id="error-row" class="row display-none">
+        <div class="message">
+            Invalid Ticket
+        </div>
+    </div>
+    <script>
+        // When scan is successful fucntion will produce data
+        function onScanSuccess(qrCodeMessage) {
+            if (qrCodeMessage.toLowerCase().includes("riverzoneticket")) {
+                document.getElementById("start-row").classList.add("display-none");
+                const successRow = document.getElementById("success-row");
+                successRow.classList.remove("display-none");
+
+                setTimeout(() => {
+                successRow
+                    .querySelector(".first-sub-message")
+                    .classList.add("opacity-none");
+                successRow
+                    .querySelector(".not-first-sub-message")
+                    .classList.remove("opacity-none");
+                }, 2000);
+            } else {
+                document.getElementById("start-row").classList.add("display-none");
+                document.getElementById("error-row").classList.remove("display-none");
+
+                setTimeout(() => {
+                document.getElementById("start-row").classList.remove("display-none");
+                document.getElementById("error-row").classList.add("display-none");
+                }, 5000);
+            }
+        }
+
+        // When scan is unsuccessful fucntion will produce error message
+        function onScanError(errorMessage) {}
+
+        // Setting up Qr Scanner properties
+        var html5QrCodeScanner = new Html5QrcodeScanner("reader", {
+            fps: 10,
+            qrbox: 250
+        });
+
+        // in
+        html5QrCodeScanner.render(onScanSuccess, onScanError);
+
+    </script>
+</body>
+</html>
