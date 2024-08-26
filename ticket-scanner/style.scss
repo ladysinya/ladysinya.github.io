@@ -114,11 +114,11 @@ h1 {
     background: white;
   }
   
-  #reader__dashboard {
-    &:has(#html5-qrcode-button-camera-stop) {
-      display: none;
-    }
-  }
+//   #reader__dashboard {
+//     &:has(#html5-qrcode-button-camera-stop) {
+//       display: none;
+//     }
+//   }
   
   img[alt="Info icon"] {
     display: none;
