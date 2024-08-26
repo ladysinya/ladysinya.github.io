@@ -1,0 +1,245 @@
+@charset "UTF-8";
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: min(1.5vw, 2vh);
+  display: flex;
+  justify-content: center;
+  margin: 1.5em;
+  background-color: black;
+  font-family: "Orbitron", sans-serif;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+  border-radius: 1em;
+  padding: 1em;
+  margin: 1em;
+  border: 1px solid royalblue;
+}
+
+.keypad-numbers {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 1fr;
+  gap: 2em;
+}
+
+.keypad-button {
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #7fff00;
+  border-radius: 1em;
+  padding: 1em;
+  aspect-ratio: 1;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  color: #7fff00;
+  background-color: transparent;
+  grid-column: span 2;
+}
+.keypad-button:active {
+  box-shadow: 0px 0px 0.75em 0.75em #008000;
+  background-color: #008000;
+}
+.keypad-button:not(:active) {
+  box-shadow: none;
+  transition: box-shadow 1s, background-color 1s linear;
+}
+.keypad-button::before {
+  font-size: 3em;
+  content: attr(data-btn-out);
+}
+
+.action-btn {
+  grid-column: span 3;
+  width: auto;
+  aspect-ratio: unset;
+}
+.action-btn::before {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.action-btn[data-btn-out=Reset] {
+  background-color: rgba(0, 0, 128, 0.7490196078);
+}
+.action-btn[data-btn-out=Enter] {
+  background-color: rgba(0, 128, 0, 0.7490196078);
+}
+.action-btn:active[data-btn-out=Reset] {
+  box-shadow: 0px 0px 0.75em 0.75em #000080;
+  background-color: #000080;
+}
+.action-btn:active[data-btn-out=Enter] {
+  box-shadow: 0px 0px 0.75em 0.75em #008000;
+  background-color: #008000;
+}
+
+.fa-solid.fa-shield {
+  display: none;
+  font-size: 12em;
+  position: relative;
+  color: white;
+  width: fit-content;
+  margin: auto;
+}
+.fa-solid.fa-shield:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  font-size: 0.55em;
+}
+
+.code-input-viewer-group {
+  width: 100%;
+  display: none;
+  justify-content: space-around;
+  margin: auto 0;
+}
+.code-input-viewer-group:has(.code-input-viewer[data-code]:not([data-code=""])) {
+  display: flex;
+}
+.code-input-viewer-group.show-code .code-input-viewer[data-code=""]:after {
+  visibility: visible;
+  content: "_";
+}
+.code-input-viewer-group.show-code .code-input-viewer[data-code]:not([data-code=""]):after {
+  content: attr(data-code);
+}
+
+.code-input-viewer {
+  font-size: min(6.75vw, 9vh);
+  font-weight: 600;
+  color: white;
+  position: relative;
+}
+.code-input-viewer[data-code=""]:after {
+  visibility: hidden;
+  content: "*";
+}
+.code-input-viewer[data-code]:not([data-code=""]):after {
+  visibility: visible;
+  content: "*";
+  color: white;
+}
+
+.status-and-input {
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.status-and-input .lock-status-indicator:after {
+  display: flex;
+  justify-content: center;
+  font-size: 4.5em;
+  color: white;
+  margin-bottom: auto 0;
+  flex: 1;
+}
+.status-and-input[data-status=locked] {
+  border: 1px solid rgba(165, 42, 42, 0.9019607843);
+  background-color: rgba(165, 42, 42, 0.9019607843);
+}
+.status-and-input[data-status=locked] .lock-status-indicator:after {
+  content: "Locked";
+}
+.status-and-input[data-status=locked].locked-invalid .fa-solid.fa-shield {
+  display: block;
+}
+.status-and-input[data-status=locked].locked-invalid .fa-solid.fa-shield:after {
+  transform: translate(-22%, -50%);
+  content: "×";
+  color: #a52a2a;
+}
+.status-and-input[data-status=locked].locked-invalid .code-input-viewer-group:has(.code-input-viewer[data-code]:not([data-code=""])) {
+  display: none;
+}
+.status-and-input[data-status=unlocked] {
+  border: 1px solid rgba(0, 128, 0, 0.9019607843);
+  background-color: rgba(0, 128, 0, 0.9019607843);
+}
+.status-and-input[data-status=unlocked] .lock-status-indicator:after {
+  content: "Unlocked";
+}
+.status-and-input[data-status=unlocked] .fa-solid.fa-shield {
+  display: block;
+}
+.status-and-input[data-status=unlocked] .fa-solid.fa-shield:after {
+  transform: translate(-23%, -50%);
+  content: "✔";
+  color: #008000;
+}
+.status-and-input[data-status=unlocked] .code-input-viewer-group:has(.code-input-viewer[data-code]:not([data-code=""])) {
+  display: none;
+}
+
+.shake {
+  animation: shake 0.2s 5 0.5s ease-in-out;
+}
+
+.fastgrow {
+  animation: fastgrow 1.5s 0.2s linear;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(5px, 5px) rotate(5deg);
+  }
+  50% {
+    transform: translate(0, 0) rotate(0eg);
+  }
+  75% {
+    transform: translate(-5px, 5px) rotate(-5deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+@keyframes fastgrow {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fastgrow {
+  0% {
+    transform: scale(1);
+  }
+  33% {
+    transform: scale(1.5);
+  }
+  34% {
+    transform: scale(1);
+  }
+  66% {
+    transform: scale(1.5);
+  }
+  67% {
+    transform: scale(1);
+  }
+  99% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html style="margin: 0; padding: 0;">    
+<head>
+    <title>Todds Journal</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body style="margin: 0; padding: 0;">
+    <div class="main">
+        <div class="keypad-numbers">
+            <div class="keypad-button" data-btn-out="1">~</div>
+            <div class="keypad-button" data-btn-out="2">ABC</div>
+            <div class="keypad-button" data-btn-out="3">DEF</div>
+            <div class="keypad-button" data-btn-out="4">GHI</div>
+            <div class="keypad-button" data-btn-out="5">JKL</div>
+            <div class="keypad-button" data-btn-out="6">MNO</div>
+            <div class="keypad-button" data-btn-out="7">PQRS</div>
+            <div class="keypad-button" data-btn-out="8">TUV</div>
+            <div class="keypad-button" data-btn-out="9">WXYZ</div>
+            <div class="keypad-button" data-btn-out="*">&nbsp;</div>
+            <div class="keypad-button" data-btn-out="0">&nbsp;</div>
+            <div class="keypad-button" data-btn-out="#">&nbsp;</div>
+            <div class="keypad-button action-btn" data-btn-out="Reset"></div>
+            <div class="keypad-button action-btn" data-btn-out="Enter"></div>
+        </div>
+        <div class="status-and-input" data-status="locked">
+            <div class="lock-status-indicator"></div>
+    
+            <i class="fa-solid fa-shield"></i>
+            <div class="code-input-viewer-group">
+    <!-- 			<div class="code-input-viewer" data-code=""></div>
+                <div class="code-input-viewer" data-code=""></div>
+                <div class="code-input-viewer" data-code=""></div>
+                <div class="code-input-viewer" data-code=""></div> -->
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+    <script>
+        const code = new URLSearchParams(window.location.search).get('pw');
+        let keypad = new Keypad();
+        keypad.init(code);
+    </script>
+
+</body>
+</html>
