@@ -13,13 +13,13 @@ body {
 }
 
 .main {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+    display: flex;
 	gap: 2em; //32px
 	border-radius: 1em; //16px
 	padding: 1em; //16px
 	margin: 1em; //16px
 	border: 1px solid royalblue;
+    flex-flow: column-reverse;
 }
 
 .keypad-numbers {
@@ -156,6 +156,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+    aspect-ratio: 1;
 
 	.lock-status-indicator {
 		&:after {
