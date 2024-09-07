@@ -175,10 +175,12 @@ table {
 }
 table tr {
   border-bottom: 3px solid black;
-  padding: 0 0.25em;
 }
 table tbody tr:last-child {
   border-bottom: none;
+}
+table tbody tr:last-child td {
+  padding-bottom: 0;
 }
 table td {
   vertical-align: top;
