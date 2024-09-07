@@ -138,7 +138,7 @@ body {
   transition: opacity 100ms calc(var(--turn-transition-time) - 200ms);
 }
 
-p {
+p, table {
   position: absolute;
   top: 7rem;
   left: 4rem;
@@ -154,14 +154,42 @@ p {
   resize: none;
 }
 
+h1 {
+  font-family: "Homemade Apple", cursive;
+  font-size: 3em;
+  padding-left: 4rem;
+  text-align: center;
+  margin: 0;
+}
+
+table {
+  border-collapse: collapse;
+}
+table tr {
+  border-bottom: 1px solid black;
+  padding: 0 0.25em;
+}
+table td {
+  vertical-align: top;
+  line-height: 0.95em;
+  padding: 0.25em;
+}
+
+thead td {
+  line-height: 0.5em;
+  padding: 0.25em;
+}
+
 #page-0,
 .page-turned {
   transform-origin: left center;
   transform: scale(-1, 1);
   transition: transform var(--turn-transition-time) ease-in-out;
 }
-#page-0 p,
-.page-turned p {
+#page-0 p, #page-0 table, #page-0 h1,
+.page-turned p,
+.page-turned table,
+.page-turned h1 {
   opacity: 0;
   transition: opacity var(--turn-transition-time) steps(2, jump-none);
 }
@@ -171,7 +199,7 @@ p {
   transform: scale(1, 1);
   transition: transform var(--turn-transition-time) ease-in-out;
 }
-.page:not(.page-turned) p {
+.page:not(.page-turned) p, .page:not(.page-turned) table, .page:not(.page-turned) h1 {
   opacity: 1;
   transition: opacity var(--turn-transition-time) steps(2, jump-none);
 }

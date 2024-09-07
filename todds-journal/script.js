@@ -13,7 +13,10 @@ class Journal {
 			document.querySelectorAll('.page:not([data-order="0"])')
 		);
 		pages.forEach((page) => {
-			page.addEventListener("click", this.pageClicked.bind(this));
+			['click', 'touchstart'].forEach((event) => {
+				page.addEventListener(event, this.pageClicked.bind(this));
+			})
+			
 		});
 
 		const allTabs = document.querySelectorAll(".tab");
