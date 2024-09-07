@@ -171,8 +171,8 @@ table tr {
 }
 table td {
   vertical-align: top;
-  line-height: 0.95em;
-  padding: 0.25em;
+  line-height: 1.5em;
+  padding: 0.5em 0 0.97em 0;
 }
 
 thead td {

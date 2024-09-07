@@ -13,7 +13,7 @@ class Journal {
 			document.querySelectorAll('.page:not([data-order="0"])')
 		);
 		pages.forEach((page) => {
-			['click', 'touchstart'].forEach((event) => {
+			['click', 'touchend'].forEach((event) => {
 				page.addEventListener(event, this.pageClicked.bind(this));
 			})
 			
