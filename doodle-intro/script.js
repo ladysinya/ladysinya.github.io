@@ -16,7 +16,7 @@ class DoodleIntro {
 	init() {
         this.channel.addEventListener('message', e => this.messageEventListener(e))
         this.introAudio = new Audio("./assets/intro.mp3");
-        this.penguinsSavedAudio = new Audio("./assets/penguins-saved.m4a");
+        this.penguinsSavedAudio = new Audio("./assets/penguins-saved.mp3");
 
         this.introAudio.addEventListener("ended", () => {
             document.querySelector('.profiles')?.classList.remove('show');
