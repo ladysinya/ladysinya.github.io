@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>    
+<head>
+    <title>Doodle Intro Control</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&amp;family=Lobster&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://kit.fontawesome.com/6b595a6242.css" crossorigin="anonymous">
+</head>
+<body>
+    <style>
+        body {
+            padding: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            background-color: midnightblue;
+            margin: 0;
+            box-sizing: border-box;
+            height: fit-content;
+        }
+
+        button {
+            font-size: 32px;
+            padding: 32px;
+            border-radius: 8px;
+            height: fit-content;
+            background-color: darkcyan;
+            border: none;
+            color: white;
+        }
+
+        button:active {
+            background-color: seagreen;
+        }
+    </style>
+
+    <button id="intro">Intro</button>
+    <button id="penguins-saved">Penguins Saved</button>    
+    <button id="stop-timer">Stop Timer</button>    
+    <button id="resume-timer">Resume Timer</button>    
+    <button id="reset-timer">Reset Timer</button>  
+
+    <script>
+        channel = new BroadcastChannel('ladysinya.github.io_doodle_intro_broadcast_channel');
+        document.getElementById('intro').addEventListener('click', () => { sendEvent('intro-clicked') });
+        document.getElementById('penguins-saved').addEventListener('click', () => { sendEvent('penguins-saved-clicked') });
+        document.getElementById('stop-timer').addEventListener('click', () => { sendEvent('stop-timer-clicked') });
+        document.getElementById('resume-timer').addEventListener('click', () => { sendEvent('resume-timer-clicked') });
+        document.getElementById('reset-timer').addEventListener('click', () => { sendEvent('reset-timer-clicked') });
+
+        function sendEvent(message) {
+            this.channel.postMessage(message);
+        }
+    </script>
+</body>
+</html>
