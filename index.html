@@ -5,15 +5,118 @@
         <!-- <link rel="stylesheet" href="/home.css"> -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <!-- <link href="https://fonts.googleapis.com/css2?family=Mystery+Quest&display=swap" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Delius+Unicase:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Sail&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&amp;display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Mystery+Quest&amp;display=swap" rel="stylesheet">
     </head>
+    <style>
+        body {
+            margin: 0;
+
+            header,
+            main {
+                padding: 32px;
+            }
+
+            header {
+                font-family: "Sail", system-ui;
+                font-weight: 400;
+                font-style: normal;
+                font-size: 2em;
+                background-color: #7b3eb8;
+                color: white;
+                display: flex;
+                justify-content: space-between;
+                
+                img {
+                    max-height: 80px;
+                    margin-top: -24px;
+                    margin-bottom: -24px;
+                    transform: rotate(-90deg);
+                }
+            }
+
+            main {
+              font-family: "Open Sans", sans-serif;
+              display: grid;
+              grid-template-columns: 1fr 1fr 1fr 1fr;
+              grid-template-rows: 1fr 1fr 1fr 1fr;
+              gap: 24px;
+            }
+
+            .nav-btn {
+                font-size: 32px;
+                border-radius: 1em;
+                border: 1px solid gray;
+                padding: 16px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 16px;
+                text-align: center;
+
+                hr {
+                    width: 100%;
+                }
+
+                a {
+                    text-decoration: none;
+                    color: unset;
+                }
+
+                a, small {
+                    margin: 0 auto;
+                }
+
+                small {
+                    font-size: 16px;
+                }
+            }
+        }
+    </style>
     <body>
-        <div class="main main-control">
-            <h1>Index Test</h1>
-            <div>Additional text</div>
-        </div>
+        <header><div>LadySinya.Github.io</div><img src="./assets/SinyaLogo.png"></header>
+        <main>
+            <button class="nav-btn" style="background-image: url(./family-feud/assets/a1dbc75c1bbc9d5d63bb0024ffb74d97.jpg); font-family: 'Mystery Quest', Tofu; color: RoyalBlue;">
+                <a href="./family-feud/home.html" target="_blank" style="background-color: lightcyan; border-radius: 16px; padding: 8px;">Family Feud</a>
+                <small>
+                    <a href="./family-feud/home-control.html" target="_blank" style="background-color: lightcyan; border-radius: 16px; padding: 8px;">Control</a>
+                </small>
+            </button>
+            <button class="nav-btn" style="color: firebrick; background-color: darkseagreen; font-family: 'Mystery Quest', Tofu;">
+                <a href="/holiday-tasks/" target="_blank">Holiday Tasks</a>
+            </button>
+            <button class="nav-btn">
+                <a href="./dnd-character-details/" target="_blank">D&D Character Details</a>
+            </button>
+            <button class="nav-btn">
+                <a href="/penguin-forge-task-management/home.html" target="_blank">PF Task Management</a>
+            </button>
+            <button class="nav-btn" style="background-image: linear-gradient(0deg, #182848, #2980b9); color: white;">
+                <a href="./doodle-intro/" target="_blank">Doodle's Intro</a>
+                <small>
+                    <a href="./doodle-intro/control.html" target="_blank">Control</a>
+                </small>
+            </button>
+            <button class="nav-btn" style="font-family: 'Orbitron', sans-serif; background-color: black; color: #7fff00;">
+                <a href="./keypad/" target="_blank">Keypad</a>
+            </button>
+            <button class="nav-btn" style="background-color: DarkSeaGreen; color: white; font-family: Times New Roman;">
+                <a href="./ticket-scanner/" target="_blank">Ticket Scanner</a>
+            </button>
+            <button class="nav-btn" style="background-color: beige; background-size: 100% 3em; font-family: 'Homemade Apple', cursive;">
+                <a href="./todds-journal/" target="_blank">Todd's Journal</a>
+            </button>
+            <button class="nav-btn" style="">
+                <a href="./jeopardy/" target="_blank">Jeopardy</a>
+                <small>
+                    <a href="./jeopardy/control.html" target="_blank">Control</a>
+                </small>
+            </button>
+        </main>
         <script src="https://kit.fontawesome.com/6b595a6242.js" crossorigin="anonymous"></script>
-        <!-- <script src="/home-control.js"></script> -->
         <script>
             
         </script>
