@@ -22,6 +22,24 @@
         <div id="board" class="board"></div>
     </main>
 
+    <dialog id="daily-double-dialog" class="daily-double-dialog">
+        <h1 class="daily-double-label">Daily Double!</h1>
+        <label>What is your wager?</label>
+        <div class="input-group">
+            <i class="fa-duotone fa-solid fa-circle-dollar"></i>
+            <input type="text" id="daily-double-wager-input">
+        </div>
+        <button>Let's do this!</button>
+        <div class="team-bubbles">
+            <div data-team-color="red" class="team-bubble"></div>
+            <div data-team-color="orange" class="team-bubble"></div>
+            <div data-team-color="yellow" class="team-bubble"></div>
+            <div data-team-color="green" class="team-bubble"></div>
+            <div data-team-color="blue" class="team-bubble"></div>
+            <div data-team-color="purple" class="team-bubble"></div>
+        </div>
+    </dialog>
+
     <script src="./script.js"></script>
     <script>
         let jeopardy = new Jeopardy();

@@ -119,27 +119,6 @@ main {
 .board .category-container .card.show-question .card-back .question-text {
   display: block;
 }
-.board .category-container .card[data-scoring-team=red] .card-back .team-bubbles .team-bubble[data-team-color=red] {
-  opacity: 100%;
-}
-.board .category-container .card[data-scoring-team=orange] .card-back .team-bubbles .team-bubble[data-team-color=orange] {
-  opacity: 100%;
-}
-.board .category-container .card[data-scoring-team=yellow] .card-back .team-bubbles .team-bubble[data-team-color=yellow] {
-  opacity: 100%;
-}
-.board .category-container .card[data-scoring-team=green] .card-back .team-bubbles .team-bubble[data-team-color=green] {
-  opacity: 100%;
-}
-.board .category-container .card[data-scoring-team=blue] .card-back .team-bubbles .team-bubble[data-team-color=blue] {
-  opacity: 100%;
-}
-.board .category-container .card[data-scoring-team=purple] .card-back .team-bubbles .team-bubble[data-team-color=purple] {
-  opacity: 100%;
-}
-.board .category-container .card[data-scoring-team=none] .card-back .team-bubbles .team-bubble[data-team-color=none] {
-  opacity: 100%;
-}
 .board .category-container .card .card-back {
   transform: rotateY(180deg);
   display: none;
@@ -167,30 +146,6 @@ main {
   border-top: 1px solid white;
   margin-bottom: 48px;
 }
-.board .category-container .card .card-back .team-bubbles {
-  display: flex;
-  gap: 8px;
-  height: 40px;
-  width: 100%;
-  justify-content: center;
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-.board .category-container .card .card-back .team-bubbles .team-bubble {
-  opacity: 50%;
-  height: 100%;
-  aspect-ratio: 1;
-  border: 3px solid ghostwhite;
-  border-radius: 50%;
-  display: flex;
-}
-.board .category-container .card .card-back .team-bubbles .team-bubble .fa-xmark {
-  color: white;
-  font-size: 2em;
-  margin: 4.25px auto auto auto;
-}
 .board .category-container .card.card-open {
   position: absolute;
   top: 50%;
@@ -209,10 +164,123 @@ main {
   display: flex;
   animation: appear50 1s linear;
 }
+.board .category-container .card.card-open:has(.daily-double) .card-back {
+  height: unset;
+}
+.board .category-container .card.card-open:has(.daily-double) .timer,
+.board .category-container .card.card-open:has(.daily-double) .answer-text {
+  display: none;
+}
+.board .category-container .card.card-open .daily-double {
+  transform: rotateY(180deg);
+  display: flex;
+  animation: appear50 1s linear;
+}
 .board .category-container .card[data-disabled] .card-value {
   opacity: 10%;
   color: white;
   pointer-events: none;
+}
+
+.team-bubbles {
+  display: flex;
+  gap: 8px;
+  height: 40px;
+  width: 100%;
+  justify-content: center;
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.team-bubbles .team-bubble {
+  opacity: 50%;
+  height: 100%;
+  aspect-ratio: 1;
+  border: 3px solid ghostwhite;
+  border-radius: 50%;
+  display: flex;
+}
+.team-bubbles .team-bubble .fa-xmark {
+  color: white;
+  font-size: 2em;
+  margin: 4.25px auto auto auto;
+}
+
+[data-scoring-team=red] .team-bubbles .team-bubble[data-team-color=red] {
+  opacity: 100%;
+}
+
+[data-scoring-team=orange] .team-bubbles .team-bubble[data-team-color=orange] {
+  opacity: 100%;
+}
+
+[data-scoring-team=yellow] .team-bubbles .team-bubble[data-team-color=yellow] {
+  opacity: 100%;
+}
+
+[data-scoring-team=green] .team-bubbles .team-bubble[data-team-color=green] {
+  opacity: 100%;
+}
+
+[data-scoring-team=blue] .team-bubbles .team-bubble[data-team-color=blue] {
+  opacity: 100%;
+}
+
+[data-scoring-team=purple] .team-bubbles .team-bubble[data-team-color=purple] {
+  opacity: 100%;
+}
+
+[data-scoring-team=none] .team-bubbles .team-bubble[data-team-color=none] {
+  opacity: 100%;
+}
+
+.daily-double {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.daily-double .daily-double-label {
+  color: darkred;
+  font-size: 64px;
+}
+.daily-double label {
+  color: white;
+}
+.daily-double .input-group {
+  background-color: dimgray;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  gap: 4px;
+}
+.daily-double .input-group:before {
+  content: "$";
+  color: white;
+  margin-right: 4px;
+}
+.daily-double .input-group input {
+  margin: auto 0;
+  color: white;
+}
+.daily-double .input-group input {
+  font-family: "Metal Mania", system-ui;
+  border: none;
+  background-color: transparent;
+}
+.daily-double .input-group input::-webkit-outer-spin-button, .daily-double .input-group input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.daily-double .input-group input:active, .daily-double .input-group input:focus, .daily-double .input-group input:hover {
+  outline: none;
+}
+.daily-double button {
+  font-family: "Metal Mania", system-ui;
+  border-radius: 4px;
+  background-color: yellowgreen;
+  border: none;
 }
 
 @keyframes disappear50 {

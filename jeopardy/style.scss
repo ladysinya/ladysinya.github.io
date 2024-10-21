@@ -130,49 +130,6 @@ main {
                 }
             }
 
-            &[data-scoring-team="red"] {
-                .card-back .team-bubbles .team-bubble[data-team-color="red"] {
-                    opacity: 100%;
-                }
-            }
-
-            &[data-scoring-team="orange"] {
-                .card-back .team-bubbles .team-bubble[data-team-color="orange"] {
-                    opacity: 100%;
-                }
-            }
-
-            &[data-scoring-team="yellow"] {
-                .card-back .team-bubbles .team-bubble[data-team-color="yellow"] {
-                    opacity: 100%;
-                }
-            }
-
-            &[data-scoring-team="green"] {
-                .card-back .team-bubbles .team-bubble[data-team-color="green"] {
-                    opacity: 100%;
-                }
-            }
-
-            &[data-scoring-team="blue"] {
-                .card-back .team-bubbles .team-bubble[data-team-color="blue"] {
-                    opacity: 100%;
-                }
-            }
-            
-            
-            &[data-scoring-team="purple"] {
-                .card-back .team-bubbles .team-bubble[data-team-color="purple"] {
-                    opacity: 100%;
-                }
-            }
-
-            &[data-scoring-team="none"] {
-                .card-back .team-bubbles .team-bubble[data-team-color="none"] {
-                    opacity: 100%;
-                }
-            }
-
             .card-back {
                 transform: rotateY(180deg);
                 display: none;
@@ -202,33 +159,6 @@ main {
                     border-top: 1px solid white;
                     margin-bottom: 48px;
                 }
-
-                .team-bubbles {
-                    display: flex;
-                    gap: 8px;
-                    height: 40px;
-                    width: 100%;
-                    justify-content: center;
-                    position: absolute;
-                    bottom: 16px;
-                    left: 50%;
-                    transform: translate(-50%, 0);
-                    
-                    .team-bubble {
-                        opacity: 50%;
-                        height: 100%;
-                        aspect-ratio: 1;
-                        border: 3px solid ghostwhite;
-                        border-radius: 50%;
-                        display: flex;
-
-                        .fa-xmark {
-                            color: white;
-                            font-size: 2em;
-                            margin: 4.25px auto auto auto;
-                        }
-                    }
-                }
             }
             
             &.card-open {
@@ -250,6 +180,23 @@ main {
                     display: flex;
                     animation: appear50 1s linear;
                 }
+
+                &:has(.daily-double) {
+                    .card-back {
+                        height: unset;
+                    }
+
+                    .timer,
+                    .answer-text {
+                        display: none;
+                    }
+                }
+            
+                .daily-double {
+                    transform: rotateY(180deg);
+                    display: flex;
+                    animation: appear50 1s linear;
+                }
             }
 
             &[data-disabled] {
@@ -261,6 +208,135 @@ main {
             }
         }
     }    
+}
+
+.team-bubbles {
+    display: flex;
+    gap: 8px;
+    height: 40px;
+    width: 100%;
+    justify-content: center;
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    
+    .team-bubble {
+        opacity: 50%;
+        height: 100%;
+        aspect-ratio: 1;
+        border: 3px solid ghostwhite;
+        border-radius: 50%;
+        display: flex;
+
+        .fa-xmark {
+            color: white;
+            font-size: 2em;
+            margin: 4.25px auto auto auto;
+        }
+    }
+}
+
+[data-scoring-team="red"] {
+    .team-bubbles .team-bubble[data-team-color="red"] {
+        opacity: 100%;
+    }
+}
+
+[data-scoring-team="orange"] {
+    .team-bubbles .team-bubble[data-team-color="orange"] {
+        opacity: 100%;
+    }
+}
+
+[data-scoring-team="yellow"] {
+    .team-bubbles .team-bubble[data-team-color="yellow"] {
+        opacity: 100%;
+    }
+}
+
+[data-scoring-team="green"] {
+    .team-bubbles .team-bubble[data-team-color="green"] {
+        opacity: 100%;
+    }
+}
+
+[data-scoring-team="blue"] {
+    .team-bubbles .team-bubble[data-team-color="blue"] {
+        opacity: 100%;
+    }
+}
+
+[data-scoring-team="purple"] {
+    .team-bubbles .team-bubble[data-team-color="purple"] {
+        opacity: 100%;
+    }
+}
+
+[data-scoring-team="none"] {
+    .team-bubbles .team-bubble[data-team-color="none"] {
+        opacity: 100%;
+    }
+}
+
+.daily-double {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+
+    .daily-double-label {
+        color: darkred;
+        font-size: 64px;
+    }
+
+    label {
+        color: white;
+    }
+
+    .input-group {
+        background-color: dimgray;
+        padding: 4px;
+        border-radius: 4px;
+        display: flex;
+        gap: 4px;
+
+        &:before {
+            content: '$';
+            color: white;
+            margin-right: 4px;
+        }
+
+        input {
+            margin: auto 0;
+            color: white;
+        }
+        
+        input {
+            font-family: "Metal Mania", system-ui;
+            border: none;
+            background-color: transparent;
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            &:active,
+            &:focus,
+            &:hover {
+                outline: none;
+            }
+        }
+    }
+    
+    button {
+        font-family: "Metal Mania", system-ui;
+        border-radius: 4px;
+        background-color: yellowgreen;
+        border: none;
+    }
 }
 
 @keyframes disappear50 {
