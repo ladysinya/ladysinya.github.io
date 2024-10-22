@@ -100,9 +100,9 @@ class Jeopardy {
                                     innerHTML: `
                                         <div class="daily-double-label">Daily Double!</div>
                                         <label>What is your wager?</label>
-                                        <div class="input-group">
-                                            <input type="number" id="daily-double-wager-input">
-                                        </div>
+                                        <select id="daily-double-wager-select">
+                                            <option value="" selected hidden></option>
+                                        </select>
                                         <button id="daily-double-wager-button">Let's do this!</button>
                                     `
                                 });
@@ -110,6 +110,7 @@ class Jeopardy {
         dailyDoubleCard.insertBefore(dailyDoubleDiv, dailyDoubleCard.querySelector('.card-back'));
         document.getElementById('daily-double-wager-button').addEventListener('click', this.dailyDoubleWagerClicked.bind(this));
         document.getElementById('daily-double-wager-input').addEventListener('click', (e) => { e.stopPropagation(); });
+        document.getElementById('daily-double-wager-select').addEventListener('click', (e) => { e.stopPropagation(); });
     }
 
     dailyDoubleWagerClicked(e) {
@@ -173,6 +174,15 @@ class Jeopardy {
             otherBubbles.forEach(bubble => {
                 bubble.remove();
             });
+
+            const select = document.getElementById('daily-double-wager-select');
+
+            const scoreElem = document.querySelector(`.team-score[data-team-color="${this.lastTeam}"]`);
+            const score = parseInt(scoreElem.innerText);
+
+            for (let i = 0; i <= score/100; i++) {
+                select.append(Object.assign(document.createElement('option'), { value: i * 100, text: `$ ${i * 100}` }));
+            }
         }
 
         const value = card.querySelector('.card-value').innerText;
@@ -193,31 +203,73 @@ class Jeopardy {
 	}
 
     timeForFinalJeopardy() {
-        const card = `
-            <div 
-                data-id="${item.id}" 
-                data-question="${item.question}" 
-                data-answer="${item.answer}" 
-                data-value="${item.value}" 
-                data-daily-double="${item.value > 300 ? 'possible' : ''}"
-                class="card">
-                    <div class="card-value">${item.value}</div>
-                    <div class="card-back">
-                        <div class="timer">15</div>
-                        <div class="answer-text">${item.answer}</div>
-                        <div class="question-text">${item.question}</div>
-                        <div class="team-bubbles">
-                            <div data-team-color="red" class="team-bubble"></div>
-                            <div data-team-color="orange" class="team-bubble"></div>
-                            <div data-team-color="yellow" class="team-bubble"></div>
-                            <div data-team-color="green" class="team-bubble"></div>
-                            <div data-team-color="blue" class="team-bubble"></div>
-                            <div data-team-color="purple" class="team-bubble"></div>
-                            <div data-team-color="none" class="team-bubble"><i class="fa-duotone fa-solid fa-xmark"></i></div>
-                        </div>
-                    </div>
+        const card = this.buildCard({
+            id: 'final-jeopardy-card',
+            question: this.data.finalJeopardy.question,
+            answer: this.data.finalJeopardy.answer
+        });
+
+        const finalJeopardyStr = `
+            <div class="final-jeopardy">
+                <div class="final-jeopardy-label">Final Jeopardy!</div>
+                <label>What are your wagers?</label>
+                <div class="final-jeopardy-inputs">
+                    <select class="daily-double-wager-select" data-team-color="red">
+                        <option value="" selected hidden></option>
+                    </select>
+                    <select class="daily-double-wager-select" data-team-color="orange">
+                        <option value="" selected hidden></option>
+                    </select>
+                    <select class="daily-double-wager-select" data-team-color="yellow">
+                        <option value="" selected hidden>
+                    </select>
+                    <select class="daily-double-wager-select" data-team-color="green">
+                        <option value="" selected hidden>
+                    </select>
+                    <select class="daily-double-wager-select" data-team-color="blue">
+                        <option value="" selected hidden>
+                    </select>
+                    <select class="daily-double-wager-select" data-team-color="purple">
+                        <option value="" selected hidden>
+                    </select>
                 </div>
+                <button id="final-jeopardy-wager-button">May the odds.... something, something.</button>
+            </div>
         `;
+        
+        const finalJeopardyDiv = Object.assign(document.createElement('div'), { innerHTML: finalJeopardyStr }).children[0];
+        card.insertBefore(finalJeopardyDiv, card.querySelector('.card-back'));
+
+        document.getElementById('board').querySelector('.category-container').append(card);
+        document.getElementById('final-jeopardy-wager-button').addEventListener('click', this.finalJeopardyWagerClicked.bind(this));
+
+        const selects = Array.from(finalJeopardyDiv.querySelectorAll('select'));
+        selects.forEach(select => {
+            const scoreElem = document.querySelector(`.team-score[data-team-color="${select.dataset.teamColor}"]`);
+            const score = parseInt(scoreElem.innerText);
+            
+            for (let i = 0; i <= score/100; i++) {
+                select.append(Object.assign(document.createElement('option'), { value: i * 100, text: `$ ${i * 100}` }));
+            }
+
+            select.addEventListener('click', (e) => { e.stopPropagation(); });
+        });
+
+        card.click();
+        card.previousElementSibling.remove();
+    }
+
+    finalJeopardyWagerClicked(e) {
+        e.stopPropagation();
+        const card = e.currentTarget.closest('.card')
+
+        const selects = Array.from(card.querySelectorAll('select'));
+        selects.forEach(select => {
+            card.setAttribute(`data-value-${input.dataset.teamColor}`, select.value);
+        });
+        e.currentTarget.closest('.final-jeopardy').remove();
+
+        this.resetTimer(card.querySelector('.timer'));
     }
 
     lastTeam = 'red';

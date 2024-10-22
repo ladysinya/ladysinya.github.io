@@ -294,43 +294,91 @@ main {
         color: white;
     }
 
-    .input-group {
+    select {
+        width: 50%;
+        padding: 3px;
+        border-radius: 3px;
+        margin: auto 0;
+        color: white;
         background-color: dimgray;
-        padding: 4px;
-        border-radius: 4px;
-        display: flex;
-        gap: 4px;
+        font-family: "Metal Mania", system-ui;
+        border: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
 
-        &:before {
-            content: '$';
-            color: white;
-            margin-right: 4px;
+        &:active,
+        &:focus,
+        &:hover {
+            outline: none;
         }
 
-        input {
-            margin: auto 0;
+        option {
+            font-size: 48px;
             color: white;
-        }
-        
-        input {
-            font-family: "Metal Mania", system-ui;
-            border: none;
-            background-color: transparent;
-
-            &::-webkit-outer-spin-button,
-            &::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-            }
-
-            &:active,
-            &:focus,
-            &:hover {
-                outline: none;
-            }
+            background-color: black;
         }
     }
     
+    button {
+        font-family: "Metal Mania", system-ui;
+        border-radius: 4px;
+        background-color: yellowgreen;
+        border: none;
+    }
+}
+
+.board .category-container .card:has(.final-jeopardy).card-open .card-back {
+    display: none;
+}
+
+.final-jeopardy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transform: rotateY(180deg);
+
+    .final-jeopardy-inputs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: 4px;
+        width: 75%;
+    }
+
+    .final-jeopardy-label {
+        color: darkred;
+        font-size: 64px;
+    }
+
+    label {
+        color: white;
+    }
+
+    select {
+        width: 100%;
+        padding: 3px;
+        border-radius: 3px;
+        margin: auto 0;
+        color: white;
+        font-family: "Metal Mania", system-ui;
+        border: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+        &:active,
+        &:focus,
+        &:hover {
+            outline: none;
+        }
+
+        option {
+            font-size: 48px;
+            color: white;
+            background-color: black;
+        }
+    }
+
     button {
         font-family: "Metal Mania", system-ui;
         border-radius: 4px;

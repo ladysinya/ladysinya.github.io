@@ -248,35 +248,78 @@ main {
 .daily-double label {
   color: white;
 }
-.daily-double .input-group {
-  background-color: dimgray;
-  padding: 4px;
-  border-radius: 4px;
-  display: flex;
-  gap: 4px;
-}
-.daily-double .input-group:before {
-  content: "$";
-  color: white;
-  margin-right: 4px;
-}
-.daily-double .input-group input {
+.daily-double select {
+  width: 50%;
+  padding: 3px;
+  border-radius: 3px;
   margin: auto 0;
   color: white;
-}
-.daily-double .input-group input {
+  background-color: dimgray;
   font-family: "Metal Mania", system-ui;
   border: none;
-  background-color: transparent;
-}
-.daily-double .input-group input::-webkit-outer-spin-button, .daily-double .input-group input::-webkit-inner-spin-button {
   -webkit-appearance: none;
-  margin: 0;
+  -moz-appearance: none;
 }
-.daily-double .input-group input:active, .daily-double .input-group input:focus, .daily-double .input-group input:hover {
+.daily-double select:active, .daily-double select:focus, .daily-double select:hover {
   outline: none;
 }
+.daily-double select option {
+  font-size: 48px;
+  color: white;
+  background-color: black;
+}
 .daily-double button {
+  font-family: "Metal Mania", system-ui;
+  border-radius: 4px;
+  background-color: yellowgreen;
+  border: none;
+}
+
+.board .category-container .card:has(.final-jeopardy).card-open .card-back {
+  display: none;
+}
+
+.final-jeopardy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transform: rotateY(180deg);
+}
+.final-jeopardy .final-jeopardy-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 4px;
+  width: 75%;
+}
+.final-jeopardy .final-jeopardy-label {
+  color: darkred;
+  font-size: 64px;
+}
+.final-jeopardy label {
+  color: white;
+}
+.final-jeopardy select {
+  width: 100%;
+  padding: 3px;
+  border-radius: 3px;
+  margin: auto 0;
+  color: white;
+  font-family: "Metal Mania", system-ui;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.final-jeopardy select:active, .final-jeopardy select:focus, .final-jeopardy select:hover {
+  outline: none;
+}
+.final-jeopardy select option {
+  font-size: 48px;
+  color: white;
+  background-color: black;
+}
+.final-jeopardy button {
   font-family: "Metal Mania", system-ui;
   border-radius: 4px;
   background-color: yellowgreen;
