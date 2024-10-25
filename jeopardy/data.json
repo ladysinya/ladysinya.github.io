@@ -7,32 +7,32 @@
                     {
                         "id": 1,
                         "value": 200,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"A movie about 3 witches who come back on Halloween",
+                        "question": "What is Hocus Pocus?"
                     },
                     {
                         "id": 2,
                         "value": 400,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"A horror movie in which the villain attacks through dreams",
+                        "question": "What is Nightmare on Elm Street?"
                     },
                     {
                         "id": 3,
                         "value": 600,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"A movie that features a girl and her 2 siblings who have to save a town from evil spirits",
+                        "question": "What is Halloween Town?"
                     },
                     {
                         "id": 4,
                         "value": 800,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"A little alien that loves Reese's Pieces",
+                        "question": "What is ET?"
                     },
                     {
                         "id": 5,
                         "value": 1000,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"A Stephen King movie that has the iconic phrase REDRUM",
+                        "question": "What is The Shining?"
                     }
                 ]
             },
@@ -42,32 +42,32 @@
                     {
                         "id": 6,
                         "value": 200,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"Another name for Halloween",
+                        "question": "What is All Hallows Eve?"
                     },
                     {
                         "id": 7,
                         "value": 400,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"This was the most popular costume in the United States as of 2023",
+                        "question": "What is Barbie?"
                     },
                     {
                         "id": 8,
                         "value": 600,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
-                    },
-                    {
-                        "id": 9,
-                        "value": 800,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"Before pumpkins, people used this to carve Jack o' lanterns out of these",
+                        "question": "What is a Turnip?"
                     },
                     {
                         "id": 10,
+                        "value": 800,
+                        "answer":"The day after Halloween, or the 1st of November",
+                        "question": "What is All Saint's Day?"
+                    },
+                    {
+                        "id": 9,
                         "value": 1000,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"The people and event that brought the Halloween tradition to the United States",
+                        "question": "What is the Irish during the potato famine?"
                     }
                 ]
             },
@@ -77,32 +77,32 @@
                     {
                         "id": 11,
                         "value": 200,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"The music that mummies like listening to on Halloween",
+                        "question": "What is wrap music?"
                     },
                     {
                         "id": 12,
                         "value": 400,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"A panda ghost's favorite food",
+                        "question": "What is Bam-BOO?"
                     },
                     {
                         "id": 13,
                         "value": 600,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"This is how spiders communicate over long distances",
+                        "question": "What is the Web?"
                     },
                     {
                         "id": 14,
                         "value": 800,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"The girl Dracula took to the dance",
+                        "question": "Who is Dracula's Ghoul friend?"
                     },
                     {
                         "id": 15,
                         "value": 1000,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"What you get when you cross a vampire and a snowman",
+                        "question": "What is frostbite?"
                     }
                 ]
             },
@@ -112,32 +112,32 @@
                     {
                         "id": 16,
                         "value": 200,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"The clown in Stephen King's 'It'",
+                        "question": "Who is Pennywise?"
                     },
                     {
                         "id": 17,
                         "value": 400,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"The villain in the 'Halloween' movie franchise",
+                        "question": "Who is Michael Myers?"
                     },
                     {
                         "id": 18,
                         "value": 600,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"Oogie Boogie from Nightmare before Christmas is made out of this",
+                        "question": "What is A burlap sack and bugs?"
                     },
                     {
                         "id": 19,
                         "value": 800,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"The real life indivdual that inspired the story of Dracula",
+                        "question": "Who is Vlad the Impaler?"
                     },
                     {
                         "id": 20,
                         "value": 1000,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"The first name of Dr. Frankenstein",
+                        "question": "What is Victor?"
                     }
                 ]
             },
@@ -147,32 +147,32 @@
                     {
                         "id": 21,
                         "value": 200,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"In the movie Hocus Pocus, the name of the song the Sanderson sisters sing at the Halloween party",
+                        "question": "What is 'I put a spell on you'?"
                     },
                     {
                         "id": 22,
                         "value": 400,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"The main theme song for Jack Skellington's Halloween town in Nightmare before Christmas",
+                        "question": "What is 'This is halloween'?"
                     },
                     {
                         "id": 23,
                         "value": 600,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"A song that has what is often considered one of the greatest music videos of all time and a fan favorite 'Halloween' song",
+                        "question": "What is 'Thriller' by Michael Jackson?"
                     },
                     {
                         "id": 24,
                         "value": 800,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"The song that plays during the dinner party in the movie Beetlejuice",
+                        "question": "What is 'Jump in the line' by Harry Belafonte?"
                     },
                     {
                         "id": 25,
                         "value": 1000,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"A song with a three word alliteration title starting with the 19th letter of the alphabet",
+                        "question": "What is 'Spooky Scary Skeletons'?"
                     }
                 ]
             },
@@ -182,32 +182,32 @@
                     {
                         "id": 26,
                         "value": 200,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"Another name for a carved Pumpkin",
+                        "question": "What is a Jack-O-Lantern?"
                     },
                     {
                         "id": 27,
                         "value": 400,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"The most popular candy bought during the Halloween holiday",
+                        "question": "What are Reese's Peanut Butter Cups?"
                     },
                     {
                         "id": 28,
                         "value": 600,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"The 3 colors of a piece of candy corn, in order",
+                        "question": "What is Yellow, Orange, White?"
                     },
                     {
                         "id": 29,
                         "value": 800,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"What people sprinkle on their doorstep to keep evil spirits away",
+                        "question": "What is salt?"
                     },
                     {
                         "id": 30,
                         "value": 1000,
-                        "answer":"I'm the answer.",
-                        "question": "What is the question?"
+                        "answer":"The food category that a pumpkin falls into",
+                        "question": "What is fruit?"
                     }
                 ]
             }

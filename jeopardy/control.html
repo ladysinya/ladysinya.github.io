@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>    
+<head>
+    <title>Jeopardy</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://kit.fontawesome.com/6b595a6242.css" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main style="gap: 24px; padding: 24px; box-sizing: border-box;">
+        <div class="teams" style="padding: 0;">
+            <div class="team-score" data-team-color="red">0</div>
+            <div class="team-score" data-team-color="orange">0</div>
+            <div class="team-score" data-team-color="yellow">0</div>
+            <div class="team-score" data-team-color="green">0</div>
+            <div class="team-score" data-team-color="blue">0</div>
+            <div class="team-score" data-team-color="purple">0</div>
+        </div>
+        <div class="control-card">
+            <h1>Daily Double!</h1>
+            <select id="daily-double-wager-select">
+                <option value="" selected hidden></option>
+            </select>
+            <button id="daily-double-wager-button">Let's do this!</button>
+        </div>
+        <div class="control-card">
+            <h1>Final Jeopardy!</h1>
+            <div class="final-jeopardy-inputs">
+                <select class="daily-double-wager-select" data-team-color="red">
+                    <option value="" selected hidden></option>
+                </select>
+                <select class="daily-double-wager-select" data-team-color="orange">
+                    <option value="" selected hidden></option>
+                </select>
+                <select class="daily-double-wager-select" data-team-color="yellow">
+                    <option value="" selected hidden></option>
+                </select>
+                <select class="daily-double-wager-select" data-team-color="green">
+                    <option value="" selected hidden></option>
+                </select>
+                <select class="daily-double-wager-select" data-team-color="blue">
+                    <option value="" selected hidden></option>
+                </select>
+                <select class="daily-double-wager-select" data-team-color="purple">
+                    <option value="" selected hidden></option>
+                </select>
+            </div>
+            <button id="final-jeopardy-wager-button">May the odds.... something, something.</button>
+        </div>
+    </main>
+
+    <script src="./control.js"></script>
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+    <script>
+        let control = new JeopardyControl();
+        control.init();
+    </script>
+
+</body>
+</html>

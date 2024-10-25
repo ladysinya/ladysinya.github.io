@@ -1,10 +1,36 @@
 class Jeopardy {
     data;
-    // channel = new BroadcastChannel('ladysinya.github.io_jeopardy_broadcast_channel');
+    channel = new BroadcastChannel('ladysinya.github.io_jeopardy_broadcast_channel');
     theme = 'halloween'
 
 	async init() {
-        // this.channel.addEventListener('message', e => this.messageEventListener(e));
+        this.channel.addEventListener('message', e => this.messageEventListener(e));
+        // const peer = new Peer('ladysinya-github-io-jeopardy-peer-main');
+
+        // peer.on('open', function(id) {
+        //     console.log('My peer ID is: ' + id);
+        // });
+        // peer.on('error', function(err) {
+        //     console.log(err);
+        // });
+        // peer.on('connection', function(conn) { debugger; console.log('Connected to ' + conn.peer); });
+
+        // const conn = await peer.connect('ladysinya-github-io-jeopardy-peer-aux'); 
+        // conn.on('open', function() {
+        //     console.log('connection opened');
+        //     // Receive messages
+        //     conn.on('data', function(data) {
+        //       console.log('Received', data);
+        //     });
+        
+        //     // Send messages
+        //     conn.send('Hello!');
+        //   });
+
+        //   conn.send({
+        //     test: 'this is a test',
+        //     more: 'more test'
+        // })
 
         await fetch('./data.json')
             .then(async (response) => {
@@ -15,13 +41,50 @@ class Jeopardy {
         this.renderCards();
 	}
 
-    // messageEventListener(message) {
-    //     console.log('event', message);
-    // }
+    messageEventListener(message) {
+        switch (message.data.type) {
+            case `daily-double-wager`:
+                const dailyDoubleDiv = document.querySelector('.card[data-daily-double="true"]');
+                dailyDoubleDiv.dataset.value = message.data.value;
+                dailyDoubleDiv.querySelector('.question-text').append(document.createElement('hr'));
+                dailyDoubleDiv.querySelector('.question-text').append(Object.assign(
+                                                                        document.createElement('div'),
+                                                                        {
+                                                                            innerText: `$ ${message.data.value}`
+                                                                        }
+                                                                    ));
 
-    // sendEvent(message) {
-    //     this.channel.postMessage(message);
-    // }
+                dailyDoubleDiv.querySelector('.daily-double').remove();
+                
+                break;
+        
+            case `final-jeopardy-wager`:
+                const finalJeopardyDiv = document.querySelector('.card[data-id="final-jeopardy-card"]');
+                
+                let wagerValueDivs = '';
+                message.data.values.forEach(value => {
+                     wagerValueDivs += `<div class="final-jeopardy-wager-value">${value.value}</div>`
+                });
+
+                finalJeopardyDiv.querySelector('.question-text').append(document.createElement('hr'));
+                finalJeopardyDiv.querySelector('.question-text').append(Object.assign(
+                                                                        document.createElement('div'),
+                                                                        {
+                                                                            className: 'final-jeopardy-wager-values',
+                                                                            innerHTML: wagerValueDivs
+                                                                        }
+                                                                    ));
+
+                finalJeopardyDiv.querySelector('.final-jeopardy').remove();
+                break;
+            default:
+                break;
+        }
+    }
+
+    sendEvent(message) {
+        this.channel.postMessage(message);
+    }
 
     renderCards() {
         const board = document.getElementById('board');
@@ -97,20 +160,10 @@ class Jeopardy {
                                 document.createElement('div'),
                                 { 
                                     className: 'daily-double', 
-                                    innerHTML: `
-                                        <div class="daily-double-label">Daily Double!</div>
-                                        <label>What is your wager?</label>
-                                        <select id="daily-double-wager-select">
-                                            <option value="" selected hidden></option>
-                                        </select>
-                                        <button id="daily-double-wager-button">Let's do this!</button>
-                                    `
+                                    innerHTML: `Daily Double!`
                                 });
         
         dailyDoubleCard.insertBefore(dailyDoubleDiv, dailyDoubleCard.querySelector('.card-back'));
-        document.getElementById('daily-double-wager-button').addEventListener('click', this.dailyDoubleWagerClicked.bind(this));
-        document.getElementById('daily-double-wager-input').addEventListener('click', (e) => { e.stopPropagation(); });
-        document.getElementById('daily-double-wager-select').addEventListener('click', (e) => { e.stopPropagation(); });
     }
 
     dailyDoubleWagerClicked(e) {
@@ -170,20 +223,25 @@ class Jeopardy {
         });
 
         if (card.dataset.dailyDouble == 'true') {
+            this.sendEvent({
+                type: 'double-jeopardy',
+                team: this.lastTeam,
+            });
+
+            const bubbleContainer = card.querySelector(`.team-bubbles`);
+            bubbleContainer.style = 'grid-template-columns: 1fr 1fr'
             const otherBubbles = Array.from(card.querySelectorAll(`.team-bubble:not([data-team-color="${this.lastTeam}"],[data-team-color="none"])`));
             otherBubbles.forEach(bubble => {
                 bubble.remove();
             });
-
-            const select = document.getElementById('daily-double-wager-select');
-
-            const scoreElem = document.querySelector(`.team-score[data-team-color="${this.lastTeam}"]`);
-            const score = parseInt(scoreElem.innerText);
-
-            for (let i = 0; i <= score/100; i++) {
-                select.append(Object.assign(document.createElement('option'), { value: i * 100, text: `$ ${i * 100}` }));
-            }
         }
+
+        this.sendEvent({
+            type: 'Question',
+            value: card.dataset.value,
+            answer: card.dataset.answer,
+            question: card.dataset.question
+        });
 
         const value = card.querySelector('.card-value').innerText;
         const style = window.getComputedStyle(card);
@@ -209,51 +267,23 @@ class Jeopardy {
             answer: this.data.finalJeopardy.answer
         });
 
-        const finalJeopardyStr = `
-            <div class="final-jeopardy">
-                <div class="final-jeopardy-label">Final Jeopardy!</div>
-                <label>What are your wagers?</label>
-                <div class="final-jeopardy-inputs">
-                    <select class="daily-double-wager-select" data-team-color="red">
-                        <option value="" selected hidden></option>
-                    </select>
-                    <select class="daily-double-wager-select" data-team-color="orange">
-                        <option value="" selected hidden></option>
-                    </select>
-                    <select class="daily-double-wager-select" data-team-color="yellow">
-                        <option value="" selected hidden>
-                    </select>
-                    <select class="daily-double-wager-select" data-team-color="green">
-                        <option value="" selected hidden>
-                    </select>
-                    <select class="daily-double-wager-select" data-team-color="blue">
-                        <option value="" selected hidden>
-                    </select>
-                    <select class="daily-double-wager-select" data-team-color="purple">
-                        <option value="" selected hidden>
-                    </select>
-                </div>
-                <button id="final-jeopardy-wager-button">May the odds.... something, something.</button>
-            </div>
-        `;
-        
-        const finalJeopardyDiv = Object.assign(document.createElement('div'), { innerHTML: finalJeopardyStr }).children[0];
+        this.sendEvent({
+            type: 'final-jeopardy',
+            value: 'final',
+            answer: this.data.finalJeopardy.answer,
+            question: this.data.finalJeopardy.question
+        });
+
+        const finalJeopardyDiv = Object.assign(
+                                    document.createElement('div'), 
+                                    { 
+                                        className: 'final-jeopardy', 
+                                        innerHTML: 'Final Jeopardy!' 
+                                    });
+
         card.insertBefore(finalJeopardyDiv, card.querySelector('.card-back'));
 
         document.getElementById('board').querySelector('.category-container').append(card);
-        document.getElementById('final-jeopardy-wager-button').addEventListener('click', this.finalJeopardyWagerClicked.bind(this));
-
-        const selects = Array.from(finalJeopardyDiv.querySelectorAll('select'));
-        selects.forEach(select => {
-            const scoreElem = document.querySelector(`.team-score[data-team-color="${select.dataset.teamColor}"]`);
-            const score = parseInt(scoreElem.innerText);
-            
-            for (let i = 0; i <= score/100; i++) {
-                select.append(Object.assign(document.createElement('option'), { value: i * 100, text: `$ ${i * 100}` }));
-            }
-
-            select.addEventListener('click', (e) => { e.stopPropagation(); });
-        });
 
         card.click();
         card.previousElementSibling.remove();
@@ -294,6 +324,12 @@ class Jeopardy {
             })
 
             elem.innerText = totalScore;
+
+            this.sendEvent({
+                type: 'score',
+                team: elem.dataset.teamColor,
+                score: totalScore
+            });
         })
     }
 
