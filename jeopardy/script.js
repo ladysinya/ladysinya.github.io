@@ -118,6 +118,7 @@ class Jeopardy {
                 data-question="${item.question}" 
                 data-answer="${item.answer}" 
                 data-value="${item.value}" 
+                data-url="${item.url || ''}" 
                 data-daily-double="${item.value > 300 ? 'possible' : ''}"
                 class="card">
                     <div class="card-value">${item.value}</div>
@@ -240,7 +241,8 @@ class Jeopardy {
             type: 'Question',
             value: card.dataset.value,
             answer: card.dataset.answer,
-            question: card.dataset.question
+            question: card.dataset.question,
+            url: card.dataset.url
         });
 
         const value = card.querySelector('.card-value').innerText;

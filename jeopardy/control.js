@@ -69,8 +69,7 @@ class JeopardyControl {
         });
 	}
 
-    messageEventListener(message) {
-        
+    messageEventListener(message) {        
         switch (message.data.type) {
             case 'score':
                 document.querySelector(`.team-score[data-team-color="${message.data.team}"]`).innerText = `${message.data.score}`;
@@ -81,6 +80,10 @@ class JeopardyControl {
                 console.log(`%c$${message.data.value}`, 'color: orange; font-size: 20px; padding-left: 16px');
                 console.log(`%c${message.data.answer}`, 'color: orange; font-size: 20px; padding-left: 16px');
                 console.log(`%c${message.data.question}`, 'color: dimgray; font-size: 20px; padding-left: 16px');
+
+                if (Boolean(message.data.url)) {
+                    console.log(`%c${message.data.url}`, 'color: blue; font-size: 20px; padding-left: 16px');
+                }
                 break;
 
             case 'double-jeopardy':

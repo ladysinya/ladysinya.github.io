@@ -48,8 +48,8 @@
                     {
                         "id": 7,
                         "value": 400,
-                        "answer":"This was the most popular costume in the United States as of 2023",
-                        "question": "What is Barbie?"
+                        "answer":"Items that people used to wear to ward off ghosts",
+                        "question": "What are masks?"
                     },
                     {
                         "id": 8,
@@ -66,43 +66,43 @@
                     {
                         "id": 9,
                         "value": 1000,
-                        "answer":"The people and event that brought the Halloween tradition to the United States",
-                        "question": "What is the Irish during the potato famine?"
+                        "answer":"A small mammal that, in Medieval Europe, devils and witches were said to disguise themselves as",
+                        "question": "What is a Black Cat?"
                     }
                 ]
             },
             {
-                "categoryName": "Puns",
+                "categoryName": "Gatherings",
                 "items": [
                     {
                         "id": 11,
                         "value": 200,
-                        "answer":"The music that mummies like listening to on Halloween",
-                        "question": "What is wrap music?"
+                        "answer":"A coven",
+                        "question": "What is a group of witches?"
                     },
                     {
                         "id": 12,
                         "value": 400,
-                        "answer":"A panda ghost's favorite food",
-                        "question": "What is Bam-BOO?"
+                        "answer":"A traditional Halloween game that uses apples",
+                        "question": "WHat is Bobbing for Apples?"
                     },
                     {
                         "id": 13,
                         "value": 600,
-                        "answer":"This is how spiders communicate over long distances",
-                        "question": "What is the Web?"
+                        "answer":"Where the largest Halloween parade in the US takes place",
+                        "question": "What is New York city?"
                     },
                     {
                         "id": 14,
                         "value": 800,
-                        "answer":"The girl Dracula took to the dance",
-                        "question": "Who is Dracula's Ghoul friend?"
+                        "answer":"The religious group of people that first celebrated Halloween",
+                        "question": "What are Druids?"
                     },
                     {
                         "id": 15,
                         "value": 1000,
-                        "answer":"What you get when you cross a vampire and a snowman",
-                        "question": "What is frostbite?"
+                        "answer":"The country where Halloween is traditionally celebrated for three days",
+                        "question": "What is Spain?"
                     }
                 ]
             },
@@ -147,32 +147,37 @@
                     {
                         "id": 21,
                         "value": 200,
-                        "answer":"In the movie Hocus Pocus, the name of the song the Sanderson sisters sing at the Halloween party",
-                        "question": "What is 'I put a spell on you'?"
+                        "answer":"Name this Tune",
+                        "question": "What is 'Thriller' by Michael Jackson?",
+                        "url":"https://youtube.com/clip/UgkxJvqmiE0pORJU4pgQPRmBOKYURN8x3oNk?si=Kj1LS2VtYaODsVec"
                     },
                     {
                         "id": 22,
                         "value": 400,
-                        "answer":"The main theme song for Jack Skellington's Halloween town in Nightmare before Christmas",
-                        "question": "What is 'This is halloween'?"
+                        "answer":"Name this Tune",
+                        "question": "What is 'The Monster Mash' by Bobby 'Boris' Pickett?",
+                        "url":"https://youtube.com/clip/UgkxrbMg7LtQjTj6EnEmqVZSgpWpjkxYS_LB?si=waSu1BySGyPtxm9i"
                     },
                     {
                         "id": 23,
                         "value": 600,
-                        "answer":"A song that has what is often considered one of the greatest music videos of all time and a fan favorite 'Halloween' song",
-                        "question": "What is 'Thriller' by Michael Jackson?"
+                        "answer":"Name this Tune",
+                        "question": "What is the Ghostbuster Theme-song by Ray Parker Jr.?",
+                        "url":"https://youtube.com/clip/Ugkx2n__CiWj2PeTEJzv2DURRNTMFHU3EMMs?si=GR07ER2it01mHgR4"
                     },
                     {
                         "id": 24,
                         "value": 800,
-                        "answer":"The song that plays during the dinner party in the movie Beetlejuice",
-                        "question": "What is 'Jump in the line' by Harry Belafonte?"
+                        "answer":"Name this Tune",
+                        "question": "What is 'Don't Fear the Reaper' by Blue Oyster Cult?",
+                        "url":"https://youtube.com/clip/Ugkxg3rXA-gY9o-LeK_UAY8wL7kUTJ0x1SnG?si=xXtPvfonQihI0-i_"
                     },
                     {
                         "id": 25,
                         "value": 1000,
-                        "answer":"A song with a three word alliteration title starting with the 19th letter of the alphabet",
-                        "question": "What is 'Spooky Scary Skeletons'?"
+                        "answer":"Name this Tune",
+                        "question": "What is 'Spooky Scary Skeletons'?",
+                        "url":"https://youtube.com/clip/UgkxUpsIqXkGUWyAj9yNXcQOM9_sXtZdvIk1?si=t8BEzmLHUszTYxTf"
                     }
                 ]
             },
@@ -188,14 +193,14 @@
                     {
                         "id": 27,
                         "value": 400,
-                        "answer":"The most popular candy bought during the Halloween holiday",
-                        "question": "What are Reese's Peanut Butter Cups?"
+                        "answer":"A candy that was originally referred to as 'Chicken Feed'",
+                        "question": "What is Candy Corn?"
                     },
                     {
                         "id": 28,
                         "value": 600,
-                        "answer":"The 3 colors of a piece of candy corn, in order",
-                        "question": "What is Yellow, Orange, White?"
+                        "answer":"The most popular candy bought during the Halloween holiday",
+                        "question": "What are Reese's Peanut Butter Cups?"
                     },
                     {
                         "id": 29,
@@ -213,8 +218,8 @@
             }
         ],
         "finalJeopardy" : {
-            "question": "What is the question?",
-            "answer": "I'm the answer."
+            "answer": "The people and event that brought the Halloween tradition to the United States",
+            "question": "What is the Irish during the potato famine"
         }
     }
 }
