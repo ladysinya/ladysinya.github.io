@@ -1,0 +1,347 @@
+html, body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+:root {
+  --font-family: "Outfit", sans-serif;
+  --background-image: url(../family-feud/assets/thanksgiving_background_1.jpg);
+  --card-background-color: maroon;
+  --card-color: darkOrange;
+}
+
+[theme=halloween] {
+  --background-image: url(../assets/halloween-shelf-seamless-background.jpg);
+}
+
+body {
+  background-image: var(--background-image);
+  font-family: "Metal Mania", system-ui;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.teams {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px;
+  padding: 16px 32px;
+}
+
+.team-score {
+  border: 3px solid white;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 32px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.team-score:before {
+  content: "$";
+}
+
+[data-team-color=red] {
+  background-color: maroon !important;
+}
+
+[data-team-color=orange] {
+  background-color: chocolate !important;
+}
+
+[data-team-color=yellow] {
+  background-color: goldenrod !important;
+}
+
+[data-team-color=green] {
+  background-color: darkolivegreen !important;
+}
+
+[data-team-color=blue] {
+  background-color: midnightblue !important;
+}
+
+[data-team-color=purple] {
+  background-color: rebeccapurple !important;
+}
+
+[data-team-color=none] {
+  background-color: dimgray !important;
+}
+
+.board {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px;
+  padding: 16px 32px;
+  position: relative;
+}
+.board .category-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 8px;
+}
+.board .category-container .category-label,
+.board .category-container .card {
+  text-align: center;
+  background-color: maroon;
+  border: 3px solid ghostwhite;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-content: center;
+}
+.board .category-container .category-label {
+  font-size: 80px;
+  letter-spacing: 0.25em;
+  padding: 16px 4px 16px 16px;
+  color: yellowgreen;
+}
+.board .category-container .card {
+  color: darkOrange;
+}
+.board .category-container .card .card-value {
+  font-size: 56px;
+  font-weight: 600;
+}
+.board .category-container .card .card-value:before {
+  content: "$";
+}
+.board .category-container .card.show-question .card-back .question-text {
+  display: block;
+}
+.board .category-container .card .card-back {
+  transform: rotateY(180deg);
+  display: none;
+  flex-direction: column;
+  padding: 32px;
+  border-radius: 6px;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.board .category-container .card .card-back .timer {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+.board .category-container .card .card-back .answer-text,
+.board .category-container .card .card-back .question-text {
+  font-size: 1.125em;
+  letter-spacing: 0.125em;
+}
+.board .category-container .card .card-back .question-text {
+  display: none;
+  border-top: 1px solid white;
+  margin-bottom: 48px;
+}
+.board .category-container .card.card-open {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(3.5) rotateY(180deg);
+  width: 25%;
+  height: 24%;
+  transition: transform 1s linear;
+  z-index: 1;
+}
+.board .category-container .card.card-open .card-value {
+  display: none;
+  animation: disappear50 1s linear;
+}
+.board .category-container .card.card-open .card-back {
+  display: flex;
+  animation: appear50 1s linear;
+}
+.board .category-container .card.card-open:has(.daily-double) .card-back, .board .category-container .card.card-open:has(.final-jeopardy) .card-back {
+  display: none;
+  animation: none;
+}
+.board .category-container .card.card-open .daily-double,
+.board .category-container .card.card-open .final-jeopardy {
+  display: block;
+}
+.board .category-container .card[data-disabled] .card-value {
+  opacity: 10%;
+  color: white;
+  pointer-events: none;
+}
+
+.final-jeopardy-wager-values {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 8px;
+  bottom: 60px;
+  left: 50%;
+  transform: translate(-51%, 0);
+  width: 90%;
+}
+
+.final-jeopardy-wager-value::before {
+  content: "$";
+  margin-right: 4px;
+}
+
+.card:has(.final-jeopardy-wager-values) .team-bubbles .team-bubble {
+  opacity: 1 !important;
+}
+.card:has(.final-jeopardy-wager-values) .team-bubbles .team-bubble[data-team-color=none] {
+  opacity: 0 !important;
+}
+
+.team-bubbles {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 8px;
+  bottom: 16px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.team-bubbles .team-bubble {
+  opacity: 50%;
+  aspect-ratio: 1;
+  border: 3px solid ghostwhite;
+  border-radius: 50%;
+  display: flex;
+  box-sizing: border-box;
+}
+.team-bubbles .team-bubble .fa-xmark {
+  color: white;
+  font-size: 2em;
+  margin: 4.25px auto auto auto;
+}
+
+[data-scoring-team=red] .team-bubbles .team-bubble[data-team-color=red] {
+  opacity: 100%;
+}
+
+[data-scoring-team=orange] .team-bubbles .team-bubble[data-team-color=orange] {
+  opacity: 100%;
+}
+
+[data-scoring-team=yellow] .team-bubbles .team-bubble[data-team-color=yellow] {
+  opacity: 100%;
+}
+
+[data-scoring-team=green] .team-bubbles .team-bubble[data-team-color=green] {
+  opacity: 100%;
+}
+
+[data-scoring-team=blue] .team-bubbles .team-bubble[data-team-color=blue] {
+  opacity: 100%;
+}
+
+[data-scoring-team=purple] .team-bubbles .team-bubble[data-team-color=purple] {
+  opacity: 100%;
+}
+
+[data-scoring-team=none] .team-bubbles .team-bubble[data-team-color=none] {
+  opacity: 100%;
+}
+
+hr {
+  margin: 0;
+}
+
+.final-jeopardy,
+.daily-double {
+  display: none;
+  transform: rotateY(180deg);
+  animation: appear50 1s linear;
+  color: white;
+  font-size: 64px;
+}
+
+.board .category-container .card:has(.final-jeopardy).card-open .card-back {
+  display: none;
+}
+
+.board .category-container .card:has(.final-jeopardy) .card-value {
+  display: none;
+}
+
+.control-card {
+  text-align: center;
+  background-color: maroon;
+  color: white;
+  border: 3px solid ghostwhite;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  padding: 16px;
+}
+.control-card h1 {
+  font-size: 72px;
+}
+.control-card select {
+  padding: 3px;
+  border-radius: 3px;
+  margin: auto 0;
+  color: white;
+  background-color: dimgray;
+  font-family: "Metal Mania", system-ui;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  font-size: 48px;
+}
+.control-card select:active, .control-card select:focus, .control-card select:hover {
+  outline: none;
+}
+.control-card select option {
+  font-size: 48px;
+  color: white;
+  background-color: brown;
+}
+.control-card .final-jeopardy-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 16px;
+}
+.control-card button {
+  font-family: "Metal Mania", system-ui;
+  border-radius: 8px;
+  background-color: yellowgreen;
+  border: none;
+  font-size: 48px;
+}
+
+@keyframes disappear50 {
+  0% {
+    display: block;
+  }
+  50% {
+    display: none;
+  }
+  100% {
+    display: none;
+  }
+}
+@keyframes appear50 {
+  0% {
+    display: none;
+  }
+  50% {
+    display: none;
+  }
+  100% {
+    display: flex;
+  }
+}

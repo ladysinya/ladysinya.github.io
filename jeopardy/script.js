@@ -32,7 +32,7 @@ class Jeopardy {
         //     more: 'more test'
         // })
 
-        await fetch('./data.json')
+        await fetch('./data-thanksgiving.json')
             .then(async (response) => {
                 let responseContent = await response.text();
                 this.data = JSON.parse(responseContent)[this.theme];

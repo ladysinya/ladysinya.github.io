@@ -1,6 +1,6 @@
 @charset "UTF-8";
 html {
-  background-image: url(./assets/a1dbc75c1bbc9d5d63bb0024ffb74d97.jpg);
+  background-image: url(./assets/thanksgiving_background_1.jpg);
 }
 
 body {
@@ -32,7 +32,7 @@ body, html {
   text-align: center;
   font-family: "Brush Script MT", cursive;
   letter-spacing: 5px;
-  background-color: rgba(30, 144, 255, 0.7490196078);
+  background-color: brown;
   border: none;
   outline: none;
   border-radius: 8px;
@@ -83,7 +83,7 @@ body, html {
   text-align: center;
   font-weight: 600;
   font-variant: all-small-caps;
-  background-color: RoyalBlue;
+  background-color: indianred;
   border-radius: 10px;
   padding: 16px 24px;
 }
@@ -101,7 +101,7 @@ body, html {
   padding: 24px 36px;
   text-align: center;
   font-family: "Mystery Quest", Tofu;
-  color: RoyalBlue;
+  color: indianred;
 }
 .title-group .candy-corn-img {
   position: absolute;
@@ -132,7 +132,7 @@ body, html {
   background-color: lightcyan;
   border-radius: 10px;
   font-size: 44px;
-  color: DodgerBlue;
+  color: indianred;
   text-align: center;
   padding: 24px;
 }
@@ -161,8 +161,8 @@ body, html {
 }
 .answers-row .answer .answer-number {
   font-size: 44px;
-  color: DodgerBlue;
-  border: 5px solid DodgerBlue;
+  color: indianred;
+  border: 5px solid indianred;
   background-color: lightcyan;
   border-radius: 50%;
   aspect-ratio: 1;
