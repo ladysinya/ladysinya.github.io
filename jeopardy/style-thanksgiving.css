@@ -7,8 +7,8 @@ html, body {
 :root {
   --font-family: "Outfit", sans-serif;
   --background-image: url(../family-feud/assets/thanksgiving_background_1.jpg);
-  --card-background-color: maroon;
-  --card-color: darkOrange;
+  --card-background-color: gold;
+  --card-color: maroon;
 }
 
 [theme=halloween] {
@@ -48,7 +48,7 @@ main {
 }
 
 [data-team-color=red] {
-  background-color: maroon !important;
+  background-color: brown !important;
 }
 
 [data-team-color=orange] {
@@ -91,7 +91,7 @@ main {
 .board .category-container .category-label,
 .board .category-container .card {
   text-align: center;
-  background-color: maroon;
+  background-color: gold;
   border: 3px solid ghostwhite;
   border-radius: 8px;
   display: flex;
@@ -104,10 +104,10 @@ main {
   font-size: 80px;
   letter-spacing: 0.25em;
   padding: 16px 4px 16px 16px;
-  color: yellowgreen;
+  color: green;
 }
 .board .category-container .card {
-  color: darkOrange;
+  color: maroon;
 }
 .board .category-container .card .card-value {
   font-size: 56px;
@@ -275,7 +275,7 @@ hr {
 
 .control-card {
   text-align: center;
-  background-color: maroon;
+  background-color: gold;
   color: white;
   border: 3px solid ghostwhite;
   border-radius: 8px;
@@ -318,7 +318,7 @@ hr {
 .control-card button {
   font-family: "Metal Mania", system-ui;
   border-radius: 8px;
-  background-color: yellowgreen;
+  background-color: green;
   border: none;
   font-size: 48px;
 }
