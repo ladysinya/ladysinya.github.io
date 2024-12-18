@@ -1,3 +1,4 @@
+// sass --watch ./jeopardy/style.scss ./jeopardy/style.css --no-source-map
 html, body {
     margin: 0;
     height: 100vh;
@@ -5,21 +6,60 @@ html, body {
 }
 
 :root {
+    --background-image: url(../assets/wallpaperBackground.jpg);
     --font-family: "Outfit", sans-serif;
-    // --background-image: url(../assets/wallpaperBackground.jpg);
-    --background-image: url(../assets/halloween-shelf-seamless-background.jpg);
-    --card-background-color: black;
-    --card-color: orange;
+
+    --card-background-color: gray;
+
+    --category-card-text-color: white;
+    --card-text-color: white;
+    --card-text-stroke-color: white;
+
+    --card-border-color: white;
+    --score-card-border-color: white;
+    --bubble-border-color: white;
+
+    --team-color-red: red;
+    --team-color-orange: orange;
+    --team-color-yellow: yellow;
+    --team-color-green: green;
+    --team-color-blue: blue;
+    --team-color-purple: purple;
+    --team-color-none: dimgray;
 }
 
 [theme="halloween"] {
     --background-image: url(../assets/halloween-shelf-seamless-background.jpg);
+    --font-family: "Metal Mania", system-ui;
+
+    --card-background-color: black;
+
+    --team-color-red: brown;
+    --team-color-orange: chocolate;
+    --team-color-yellow: goldenrod;
+    --team-color-green: darkolivegreen;
+    --team-color-blue: midnightblue;
+    --team-color-purple: rebeccapurple;
+}
+
+[theme="christmas"] {
+    --background-image: url(../assets/geometric-minimal-scandinavian-christmas-trees-600nw-2353893853.webp);
+
+    --category-card-text-color: green;
+    --card-text-color: orangered;
+    --card-text-stroke-color: maroon;
+    --card-background-color: yellowgreen;
+    --card-border-color: green;
+
+    .snow-container {
+        display: block;
+    }
 }
 
 
 body {
     background-image: var(--background-image);
-    font-family: "Metal Mania", system-ui;
+    font-family: var(--font-family);
 }
 
 main {
@@ -37,46 +77,58 @@ main {
 }
 
 .team-score {
-    border: 3px solid white;
+    border: 3px solid var(--score-card-border-color);
     border-radius: 8px;
     padding: 16px;
     font-size: 32px;
-    color: white;
     display: flex;
     justify-content: center;
     gap: 8px;
     
-    &:before {
-        content: '$';
+    .team-score-content {
+        -webkit-filter: invert(100%);
+        filter: invert(100%);
+        font-weight: 600;
+
+        &:before {
+           content: '$';
+       }
     }
 }
 
 [data-team-color="red"] {
-    background-color: brown !important;
+    background-color: var(--team-color-red) !important;
+    color: var(--team-color-red) !important;
 }
 
 [data-team-color="orange"] {
-    background-color: chocolate !important;
+    background-color: var(--team-color-orange) !important;
+    color: var(--team-color-orange) !important;
 }
 
 [data-team-color="yellow"] {
-    background-color: goldenrod !important;
+    background-color: var(--team-color-yellow) !important;
+    color: var(--team-color-yellow) !important;
 }
 
 [data-team-color="green"] {
-    background-color: darkolivegreen !important;
+    background-color: var(--team-color-green) !important;
+    color: var(--team-color-green) !important;
 }
 
 [data-team-color="blue"] {
-    background-color: midnightblue !important;
+    background-color: var(--team-color-blue) !important;
+    color: var(--team-color-blue) !important;
 }
 
 [data-team-color="purple"] {
-    background-color: rebeccapurple !important;
+    background-color: var(--team-color-purple) !important;
+    color: var(--team-color-purple) !important;
 }
 
 [data-team-color="none"] {
-    background-color: dimgray !important;
+    background-color: var(--team-color-none) !important;
+    color: var(--team-color-none) !important;
 }
 
 .board {
@@ -95,8 +147,8 @@ main {
         .category-label,
         .card {
             text-align: center;
-            background-color: black;
-            border: 3px solid ghostwhite;
+            background-color: var(--card-background-color);
+            border: 3px solid var(--card-border-color);
             border-radius: 8px;
             display: flex;
             flex-wrap: wrap;
@@ -107,31 +159,34 @@ main {
         
         .category-label{
             font-size: 80px;
+            font-weight: 600;
             letter-spacing: 0.25em;
             padding: 16px 4px 16px 16px;
-            color: yellowgreen;
+            color: var(--category-card-text-color);
         }
 
         .card {
-            color: orange;
-
+            color: var(--card-text-color);
+            -webkit-text-stroke: 2px var(--card-text-stroke-color);
+            font-weight: 600;
+            
             .card-value {
                 font-size: 56px;
-                font-weight: 600;
-
+                
                 &:before {
                     content: '$';
                 }
             }
-
+            
             &.show-question {
                 .card-back .question-text {
                     display: block;
                 }
             }
-
+            
             .card-back {
                 transform: rotateY(180deg);
+                -webkit-text-stroke-width: 0.5px;
                 display: none;
                 flex-direction: column;
                 padding: 32px;
@@ -156,7 +211,7 @@ main {
 
                 .question-text {
                     display: none;
-                    border-top: 1px solid white;
+                    border-top: 1px solid var(--card-text-color);
                     margin-bottom: 48px;
                 }
             }
@@ -198,7 +253,7 @@ main {
             &[data-disabled] {
                 .card-value {
                     opacity: 10%;
-                    color: white;
+                    color: var(--card-text-color);
                     pointer-events: none;
                 }
             }
@@ -224,12 +279,32 @@ main {
     }
 }
 
-.card:has(.final-jeopardy-wager-values) {
+.card[data-id="final-jeopardy-card"] {
     .team-bubbles .team-bubble {
-        opacity: 1 !important;
+        color: white !important;
+        -webkit-text-stroke-width: 0;
+        min-height: 36px;
+        padding: 4px;
+        align-items: center;
 
         &[data-team-color="none"] {
-            opacity: 0 !important;
+            display: none;
+        }
+
+        &:before {
+            content: '$';
+        }
+
+        &:after {
+            content: '?';
+        }
+
+        &.show-wager {
+            opacity: 1 !important;
+
+            &:after {
+                content: attr(data-wager);
+            }
         }
     }
 }
@@ -246,7 +321,7 @@ main {
     .team-bubble {
         opacity: 50%;
         aspect-ratio: 1;
-        border: 3px solid ghostwhite;
+        border: 3px solid var(--bubble-border-color);
         border-radius: 50%;
         display: flex;
         box-sizing: border-box;
@@ -254,7 +329,7 @@ main {
         .fa-xmark {
             color: white;
             font-size: 2em;
-            margin: 4.25px auto auto auto;
+            margin: auto;
         }
     }
 }
@@ -310,7 +385,7 @@ hr {
     display: none;
     transform: rotateY(180deg);
     animation: appear50 1s linear;
-    color: darkred;
+    color: var(--card-text-color);
     font-size: 64px;
 }
 
@@ -324,9 +399,10 @@ hr {
 
 .control-card {
     text-align: center;
-    background-color: black;
-    color: brown;
-    border: 3px solid ghostwhite;
+    background-color: var(--card-background-color);
+    color: var(--card-text-color);
+    text-shadow: -1px 0 var(--card-text-stroke-color), 0 1px var(--card-text-stroke-color), 1px 0 var(--card-text-stroke-color), 0 -1px var(--card-text-stroke-color);
+    border: 3px solid var(--card-border-color);
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -343,9 +419,9 @@ hr {
         padding: 3px;
         border-radius: 3px;
         margin: auto 0;
-        color: white;
+        color: var(--card-text-color);
         background-color: dimgray;
-        font-family: "Metal Mania", system-ui;
+        font-family: var(--font-family);
         border: none;
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -359,8 +435,8 @@ hr {
 
         option {
             font-size: 48px;
-            color: white;
-            background-color: black;
+            color: var(--card-text-color);
+            background-color: var(--card-background-color);
         }
     }
 
@@ -372,9 +448,12 @@ hr {
     }
 
     button {
-        font-family: "Metal Mania", system-ui;
+        font-family: var(--font-family);
         border-radius: 8px;
-        background-color: yellowgreen;
+        color: var(--card-background-color);
+        background-color: var(--card-text-color);
+        // -webkit-filter: invert(100%);
+        // filter: invert(100%);
         border: none;
         font-size: 48px;
     }
@@ -403,3 +482,57 @@ hr {
         display: flex;
     }
 }
+
+  @function random_range($min, $max) {
+    $rand: random();
+    $random_range: $min + floor($rand * (($max - $min) + 1));
+    @return $random_range;
+  }
+  
+  .snow-container {
+    display: none;
+
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: absolute;
+  }
+
+  .snow {
+    $total: 200;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    z-index: 10;
+  
+    @for $i from 1 through $total {
+      $random-x: random(1000000) * 0.0001vw;
+      $random-offset: random_range(-100000, 100000) * 0.0001vw;
+      $random-x-end: $random-x + $random-offset;
+      $random-x-end-yoyo: $random-x + calc($random-offset / 2);
+      $random-yoyo-time: calc(random_range(30000, 80000) / 100000);
+      $random-yoyo-y: $random-yoyo-time * 100vh;
+      $random-scale: random(10000) * 0.0001;
+      $fall-duration: random_range(10, 30) * 1s;
+      $fall-delay: random(30) * -1s;
+  
+      &:nth-child(#{$i}) {
+        opacity: random(10000) * 0.0001;
+        transform: translate($random-x, -10px) scale($random-scale);
+        animation: fall-#{$i} $fall-duration $fall-delay linear infinite;
+      }
+  
+      @keyframes fall-#{$i} {
+        #{percentage($random-yoyo-time)} {
+          transform: translate($random-x-end, $random-yoyo-y) scale($random-scale);
+        }
+  
+        to {
+          transform: translate($random-x-end-yoyo, 100vh) scale($random-scale);
+        }
+      }
+    }
+  }
+  

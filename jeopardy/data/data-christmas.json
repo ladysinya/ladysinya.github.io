@@ -1,0 +1,48 @@
+{
+    "questions": [
+        {
+            "categoryName": "Foods",
+            "items": [
+                {
+                    "id": 1,
+                    "value": 200,
+                    "answer":"It is the most popular main course on Thanksgiving",
+                    "question": "What is turkey?"
+                },
+                {
+                    "id": 2,
+                    "value": 400,
+                    "answer":"The way people typically prepare potatoes for Thanksgiving dinner",
+                    "question": "What are mashed potatoes?"
+                },
+                {
+                    "id": 3,
+                    "value": 600,
+                    "answer":"The type of apple traditionally in apple pie",
+                    "question": "What is a Granny Smith apple?"
+                }
+            ]
+        },
+        {
+            "categoryName": "Traditions",
+            "items": [
+                {
+                    "id": 6,
+                    "value": 200,
+                    "answer":"The sport most americans like to play and watch on Thansgiving Day",
+                    "question": "What is Football?"
+                },
+                {
+                    "id": 7,
+                    "value": 400,
+                    "answer":"A special parade in US for Thanksgiving",
+                    "question": "WHat is the Macy's Parade?"
+                }
+            ]
+        }
+    ],
+    "finalJeopardy" : {
+        "answer": "The speed that turkeys can run when scared",
+        "question": "What is 20MPH?"
+    }
+}

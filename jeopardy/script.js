@@ -1,41 +1,22 @@
 class Jeopardy {
     data;
     channel = new BroadcastChannel('ladysinya.github.io_jeopardy_broadcast_channel');
-    theme = 'halloween'
+    theme;
 
 	async init() {
         this.channel.addEventListener('message', e => this.messageEventListener(e));
-        // const peer = new Peer('ladysinya-github-io-jeopardy-peer-main');
 
-        // peer.on('open', function(id) {
-        //     console.log('My peer ID is: ' + id);
-        // });
-        // peer.on('error', function(err) {
-        //     console.log(err);
-        // });
-        // peer.on('connection', function(conn) { debugger; console.log('Connected to ' + conn.peer); });
-
-        // const conn = await peer.connect('ladysinya-github-io-jeopardy-peer-aux'); 
-        // conn.on('open', function() {
-        //     console.log('connection opened');
-        //     // Receive messages
-        //     conn.on('data', function(data) {
-        //       console.log('Received', data);
-        //     });
-        
-        //     // Send messages
-        //     conn.send('Hello!');
-        //   });
-
-        //   conn.send({
-        //     test: 'this is a test',
-        //     more: 'more test'
-        // })
-
-        await fetch('./data-thanksgiving.json')
+        await fetch(`./config.json`)
             .then(async (response) => {
                 let responseContent = await response.text();
-                this.data = JSON.parse(responseContent)[this.theme];
+                this.theme = JSON.parse(responseContent).theme;
+                document.body.setAttribute('theme', this.theme);
+            });
+
+        await fetch(`./data/data-${this.theme}.json`)
+            .then(async (response) => {
+                let responseContent = await response.text();
+                this.data = JSON.parse(responseContent);
             });
 
         this.renderCards();
@@ -59,23 +40,18 @@ class Jeopardy {
                 break;
         
             case `final-jeopardy-wager`:
+                console.log('message.data', message.data);
+
                 const finalJeopardyDiv = document.querySelector('.card[data-id="final-jeopardy-card"]');
-                
-                let wagerValueDivs = '';
-                message.data.values.forEach(value => {
-                     wagerValueDivs += `<div class="final-jeopardy-wager-value">${value.value}</div>`
-                });
+                const bubbles = Array.from(finalJeopardyDiv?.querySelectorAll('.team-bubble'));
 
-                finalJeopardyDiv.querySelector('.question-text').append(document.createElement('hr'));
-                finalJeopardyDiv.querySelector('.question-text').append(Object.assign(
-                                                                        document.createElement('div'),
-                                                                        {
-                                                                            className: 'final-jeopardy-wager-values',
-                                                                            innerHTML: wagerValueDivs
-                                                                        }
-                                                                    ));
+                bubbles.forEach(bubble => {
+                    const teamValue = message.data.values.find(value => value.team == bubble.dataset.teamColor);
+                    console.log('teamValue', teamValue);
+                    bubble.dataset.wager = teamValue?.value;
+                })
 
-                finalJeopardyDiv.querySelector('.final-jeopardy').remove();
+                finalJeopardyDiv.querySelector('.final-jeopardy')?.remove();
                 break;
             default:
                 break;
@@ -108,7 +84,7 @@ class Jeopardy {
             this.autoSizeFont(categoryLabel);
         });
         
-        this.setDailyDouble();
+        // this.setDailyDouble();
     }
 
     buildCard(item) {
@@ -181,9 +157,19 @@ class Jeopardy {
 
     autoSizeFont(elem) {
         const container = elem.parentNode;
+        let lastWidth;
         while (elem.clientWidth >= container.clientWidth) {
+            if (lastWidth == elem.clientWidth) {
+                break;
+            }
+
+            lastWidth = elem.clientWidth;
             let fontSize = window.getComputedStyle(elem).fontSize;
             elem.style.fontSize = (parseFloat(fontSize) - 1) + 'px';
+
+            if(elem.style.fontSize == '8px') {
+                break;
+            }
         }
     }
 
@@ -213,6 +199,19 @@ class Jeopardy {
             const finalCheck = document.querySelector('.card:not([data-disabled="true"])');
             if (finalCheck == null) {
                 this.timeForFinalJeopardy();
+            }
+
+            if (card.matches('[data-id="final-jeopardy-card"]')) {
+                const bubbles = Array.from(card?.querySelectorAll('.team-bubble'));
+                bubbles.forEach(b => {
+                    const scoreDiv = document.querySelector(`.team-score[data-team-color="${b.dataset.teamColor}"]`)?.querySelector('.team-score-content');
+                    scoreDiv.innerText = parseInt(scoreDiv.innerText) + parseInt(b.dataset.wager);
+                    this.sendEvent({
+                        type: 'score',
+                        team: b.dataset.teamColor,
+                        score: parseInt(scoreDiv.innerText)
+                    });
+                })
             }
 
             return;
@@ -291,29 +290,33 @@ class Jeopardy {
         card.previousElementSibling.remove();
     }
 
-    finalJeopardyWagerClicked(e) {
-        e.stopPropagation();
-        const card = e.currentTarget.closest('.card')
+    // finalJeopardyWagerClicked(e) {
+    //     e.stopPropagation();
+    //     const card = e.currentTarget.closest('.card')
 
-        const selects = Array.from(card.querySelectorAll('select'));
-        selects.forEach(select => {
-            card.setAttribute(`data-value-${input.dataset.teamColor}`, select.value);
-        });
-        e.currentTarget.closest('.final-jeopardy').remove();
+    //     const selects = Array.from(card.querySelectorAll('select'));
+    //     selects.forEach(select => {
+    //         card.setAttribute(`data-value-${input.dataset.teamColor}`, select.value);
+    //     });
+    //     e.currentTarget.closest('.final-jeopardy').remove();
 
-        this.resetTimer(card.querySelector('.timer'));
-    }
+    //     this.resetTimer(card.querySelector('.timer'));
+    // }
 
     lastTeam = 'red';
     bubbleClicked(e) {
         e.stopPropagation();
 
         const card = e.currentTarget.closest('.card');
-        const teamColor = e.currentTarget.dataset.teamColor;
+        if (card.matches('[data-id="final-jeopardy-card"]')) {
+            e.currentTarget.classList.add('show-wager');
+        } else {
+            const teamColor = e.currentTarget.dataset.teamColor;
+            card.setAttribute('data-scoring-team', teamColor);
+            this.lastTeam = teamColor == 'none' ? this.lastTeam : teamColor;
+            card.classList.add('show-question');
+        }
 
-        card.classList.add('show-question');
-        card.setAttribute('data-scoring-team', teamColor);
-        this.lastTeam = teamColor == 'none' ? this.lastTeam : teamColor;
     }
 
     updateScores() {
@@ -325,7 +328,7 @@ class Jeopardy {
                 totalScore += parseInt(q.dataset.value);
             })
 
-            elem.innerText = totalScore;
+            elem.querySelector('.team-score-content').innerText = totalScore;
 
             this.sendEvent({
                 type: 'score',

@@ -1,30 +1,19 @@
 class JeopardyControl {
     data;
+    theme;
     channel = new BroadcastChannel('ladysinya.github.io_jeopardy_broadcast_channel');
 
 	async init() {
         this.channel.addEventListener('message', e => this.messageEventListener(e));
 
-        // const peer = new Peer('ladysinya-github-io-jeopardy-peer-aux');
-        // peer.on('open', function(id) {
-        //     console.log('My peer ID is: ' + id);
-        // });
-        // peer.on('connection', function(conn) { console.log('Connected to ' + conn.peer); });
-        // const conn = peer.connect('ladysinya-github-io-jeopardy-peer-main');
-        // conn.on('open', function() {
-        //     // Send messages
-        //     conn.send('Hello!');
-        //   });
+        await fetch(`./config.json`)
+            .then(async (response) => {
+                let responseContent = await response.text();
+                this.theme = JSON.parse(responseContent).theme;
+                document.body.setAttribute('theme', this.theme);
+            });
 
-        // conn.on('data', function(data) {
-        //     console.log('Received', data);
-        // });
-
-        // conn.on('error', function(data) {
-        //     console.log('error', data);
-        // })
-
-        await fetch('./data.json')
+        await fetch(`./data/data-${this.theme}.json`)
             .then(async (response) => {
                 let responseContent = await response.text();
                 this.data = JSON.parse(responseContent);
@@ -67,9 +56,9 @@ class JeopardyControl {
                 ]
             });
         });
-	}
+    }
 
-    messageEventListener(message) {        
+    async messageEventListener(message) {
         switch (message.data.type) {
             case 'score':
                 document.querySelector(`.team-score[data-team-color="${message.data.team}"]`).innerText = `${message.data.score}`;
@@ -95,7 +84,6 @@ class JeopardyControl {
                 }
                 break;
             case 'final-jeopardy':
-                console.log('final-jeopardy');
                 const selects = Array.from(document.querySelectorAll('.final-jeopardy-inputs select'));
                 selects.forEach(select => {
                     const scoreElem = document.querySelector(`.team-score[data-team-color="${select.dataset.teamColor}"]`);
