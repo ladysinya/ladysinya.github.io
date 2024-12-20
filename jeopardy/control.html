@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main style="gap: 24px; padding: 24px; box-sizing: border-box;">
+    <main class="control-main">
         <div class="teams" style="padding: 0;">
             <div class="team-score" data-team-color="red"><div class="team-score-content">0</div></div>
             <div class="team-score" data-team-color="orange"><div class="team-score-content">0</div></div>
@@ -19,36 +19,69 @@
             <div class="team-score" data-team-color="blue"><div class="team-score-content">0</div></div>
             <div class="team-score" data-team-color="purple"><div class="team-score-content">0</div></div>
         </div>
-        <div class="control-card">
-            <h1>Daily Double!</h1>
-            <select id="daily-double-wager-select">
-                <option value="" selected hidden></option>
-            </select>
-            <button id="daily-double-wager-button">Let's do this!</button>
-        </div>
-        <div class="control-card">
-            <h1>Final Jeopardy!</h1>
-            <div class="final-jeopardy-inputs">
-                <select class="daily-double-wager-select" data-team-color="red">
-                    <option value="" selected hidden></option>
-                </select>
-                <select class="daily-double-wager-select" data-team-color="orange">
-                    <option value="" selected hidden></option>
-                </select>
-                <select class="daily-double-wager-select" data-team-color="yellow">
-                    <option value="" selected hidden></option>
-                </select>
-                <select class="daily-double-wager-select" data-team-color="green">
-                    <option value="" selected hidden></option>
-                </select>
-                <select class="daily-double-wager-select" data-team-color="blue">
-                    <option value="" selected hidden></option>
-                </select>
-                <select class="daily-double-wager-select" data-team-color="purple">
-                    <option value="" selected hidden></option>
-                </select>
+        <div class="controls">
+            <div id="category-selects" class="control-card category-selects">
+                <div class="last-team" data-team-color="none"></div>
+                <div class="select-group">
+                    <h1>Category</h1>
+                    <select id="cat-list">
+                        <option value="" selected disabled hidden>Select</option>
+                        <!-- Build Dynamically -->
+                    </select>
+                </div>
+                <div class="select-group">
+                    <h1>$ Value</h1>
+                    <select id="cat-value-list">
+                        <option value="" selected disabled hidden>Select</option>
+                        <!-- Build Dynamically -->
+                    </select>
+                </div>
+                <button id="select-question-button" type="button">Woooo!</button>
             </div>
-            <button id="final-jeopardy-wager-button">May the odds.... something, something.</button>
+            <div id="control-qna" class="control-card control-qna"></div>
+            <div class="control-card">
+                <h1>Daily Double!</h1>
+                <select id="daily-double-wager-select">
+                    <option value="" selected hidden></option>
+                </select>
+                <button id="daily-double-wager-button">Let's do this!</button>
+            </div>
+            <div class="control-card">
+                <h1>Final Jeopardy!</h1>
+                <div class="final-jeopardy-inputs">
+                    <div data-team-color="red">
+                        <select>
+                            <option value="" selected hidden></option>
+                        </select>
+                    </div>
+                    <div data-team-color="orange">
+                        <select>
+                            <option value="" selected hidden></option>
+                        </select>
+                    </div>
+                    <div data-team-color="yellow">
+                        <select>
+                            <option value="" selected hidden></option>
+                        </select>
+                    </div>
+                    <div data-team-color="green">
+                        <select>
+                            <option value="" selected hidden></option>
+                        </select>
+                    </div>
+                    <div data-team-color="blue">
+                        <select>
+                            <option value="" selected hidden></option>
+                        </select>
+                    </div>
+                    <div data-team-color="purple">
+                        <select>
+                            <option value="" selected hidden></option>
+                        </select>
+                    </div>
+                </div>
+                <button id="final-jeopardy-wager-button">May the odds.... something, something.</button>
+            </div>
         </div>
     </main>
 

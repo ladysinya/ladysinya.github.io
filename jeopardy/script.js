@@ -84,7 +84,7 @@ class Jeopardy {
             this.autoSizeFont(categoryLabel);
         });
         
-        // this.setDailyDouble();
+        this.setDailyDouble();
     }
 
     buildCard(item) {

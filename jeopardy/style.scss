@@ -3,6 +3,7 @@ html, body {
     margin: 0;
     height: 100vh;
     width: 100vw;
+    overflow: hidden;
 }
 
 :root {
@@ -65,7 +66,23 @@ body {
 main {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 100vh;
+
+    &.control-main {
+        padding: 24px;
+        box-sizing: border-box;
+    }
+
+    .controls {
+        flex: 1;
+        display: grid;
+        grid-template-rows: auto auto;
+        grid-template-columns: 3fr 2fr;
+        grid-auto-flow: column;
+        margin-top: 24px;
+        gap: 24px;
+        overflow: auto;
+    }
 }
 
 .teams {
@@ -397,6 +414,18 @@ hr {
     display: none;
 }
 
+.category-selects {
+    position: relative;
+}
+
+.last-team {
+    height: 128px;
+    border-radius: 24px;
+    width: 48px;
+    position: absolute;
+    top: 24px;
+}
+
 .control-card {
     text-align: center;
     background-color: var(--card-background-color);
@@ -411,8 +440,24 @@ hr {
     justify-content: center;
     padding: 16px;
 
+    .select-group {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 16px;
+
+        h1 {
+            text-align: right;
+            margin: auto 0;
+        }
+        
+        select {
+            margin: auto 0;
+        }
+    }
+
     h1 {
-        font-size: 72px;
+        font-size: 48px;
+        margin: 0;
     }
 
     select {
@@ -437,6 +482,84 @@ hr {
             font-size: 48px;
             color: var(--card-text-color);
             background-color: var(--card-background-color);
+
+            &.q-completed {
+                background-color: gainsboro;
+                color: lightgray
+            }
+        }
+    }
+
+    &.control-qna:empty {
+        &:after {
+            content: 'Select a question above...';
+            font-size: 48px;
+            text-align: center;
+            font-weight: 600;
+        }
+    }
+
+    .qna {
+        display: flex;
+        flex-direction: column;
+        gap: 38px;
+        text-align: center;
+        justify-content: center;
+        margin-bottom: auto;
+        position: relative;
+        height: 100%;
+        
+        .cat-n-val {
+            font-size: 48px;
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--card-background-color);
+            background-color: var(--card-text-color);
+        }
+
+        .answer-text {
+            font-size: 56px;
+        }
+        
+        .question-text {
+            font-size: 48px;
+            opacity: 0.5;
+            margin-bottom: auto;
+        }
+
+        .team-radios {
+            display: flex;
+            gap: 8px;
+            margin: 0 auto;
+            
+            label {
+                height: 56px;
+                aspect-ratio: 1;
+                border-radius: 50%;
+                border: 3px solid var(--bubble-border-color);
+
+                input[type="radio"] {
+                    appearance: none;
+                    position: absolute;
+                }
+
+                &[data-team-color="none"]:after {
+                    font-family: "Font Awesome 6 Pro";
+                    content: "\f00d";
+                    color: white;
+                    font-size: 48px;
+                    font-weight: 600;
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 4px;
+                }
+
+                &:has(input[type="radio"]:not(:checked)) {
+                    opacity: 0.5;
+                }
+            }
         }
     }
 
@@ -445,6 +568,19 @@ hr {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
         gap: 16px;
+
+        div {
+            border-radius: 8px;
+
+            select {
+                width: 100%;
+                background-color: transparent;
+                -webkit-filter: invert(100%);
+                filter: invert(100%);
+                
+                color: inherit;
+            }
+        }
     }
 
     button {
@@ -452,8 +588,6 @@ hr {
         border-radius: 8px;
         color: var(--card-background-color);
         background-color: var(--card-text-color);
-        // -webkit-filter: invert(100%);
-        // filter: invert(100%);
         border: none;
         font-size: 48px;
     }
