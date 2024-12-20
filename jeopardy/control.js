@@ -40,17 +40,11 @@ class JeopardyControl {
             const item = this.allQuestions.find(item => item.id == catValue.value && item.categoryName == category.value);
 
             if (item.isDailyDouble) {
-
+                document.getElementById('control-qna').innerHTML = '<h1>Daily Double!</h1>'
+                this.startDailyDouble(item);
             } else {
                 this.loadQnACard(item);
             }
-        });
-
-        document.getElementById('daily-double-wager-button').addEventListener('click', () => {
-            this.sendEvent({
-                type: 'daily-double-wager',
-                value: document.getElementById('daily-double-wager-select').value
-            });
         });
 
         document.getElementById('final-jeopardy-wager-button').addEventListener('click', () => {
@@ -83,6 +77,47 @@ class JeopardyControl {
                     }
                 ]
             });
+        });
+
+        const startGameBtn = document.getElementById('smart-game-button');
+        startGameBtn.addEventListener('click', () => {
+            this.startGame();
+            startGameBtn.remove();
+        });
+    }
+
+    startGame() {
+        this.sendEvent({ type: 'start-game' });
+    }
+
+    startDailyDouble(item) {
+        const lastTeam = document.querySelector('.last-team').dataset.teamColor;
+        const scoreElem = document.querySelector(`.team-score[data-team-color="${lastTeam}"]`);
+        const score = parseInt(scoreElem.innerText);
+
+        Array.from(document.querySelectorAll('daily-double-wager-select option')).forEach(option => {
+            option.remove();
+        });
+
+        for (let i = 0; i <= score/100; i++) {
+            document.getElementById('daily-double-wager-select').append(Object.assign(document.createElement('option'), { value: i * 100, text: `$ ${i * 100}` }));
+        }
+
+        document.getElementById('daily-double-wager-button').addEventListener('click', () => {
+            item.value = parseInt(document.getElementById('daily-double-wager-select').value || 0);
+            this.loadQnACard(item);
+            this.sendEvent({
+                type: 'daily-double-wager',
+                value: document.getElementById('daily-double-wager-select').value
+            });
+
+            const teamRadios = document.getElementById('team-radios');
+            const bubblesToRemove = Array.from(teamRadios.querySelectorAll(`label:not([data-team-color="none"]):not([data-team-color="${lastTeam}"])`));
+
+            bubblesToRemove.forEach(bubble => {
+                bubble.remove();
+            });
+
         });
     }
     
@@ -187,7 +222,12 @@ class JeopardyControl {
     }
 
     async messageEventListener(message) {
+        console.log('message received', message)
         switch (message.data.type) {
+            case 'team-start':
+                console.log(message.data.team);
+                document.querySelector('.last-team').dataset.teamColor = message.data.team;
+                break;
             case 'score':
                 const teamDiv = document.querySelector(`.team-score[data-team-color="${message.data.team}"]`);
                 teamDiv.querySelector('.team-score-content').innerText = `${message.data.score}`;

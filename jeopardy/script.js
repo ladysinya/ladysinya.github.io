@@ -22,8 +22,16 @@ class Jeopardy {
         this.renderCards();
 	}
 
+    startGame() {
+        console.log('starting game');
+        this.spinWheel();
+    }
+
     messageEventListener(message) {
         switch (message.data.type) {
+            case 'start-game':
+                this.startGame();     
+                break;
             case `daily-double-wager`:
                 const dailyDoubleDiv = document.querySelector('.card[data-daily-double="true"]');
                 dailyDoubleDiv.dataset.value = message.data.value;
@@ -378,5 +386,44 @@ class Jeopardy {
     resetTimer(timeDisplay) {
         this.stopTimer(timeDisplay);
         timeDisplay.textContent = 15;
+    }
+
+    animation;
+    previousEndDegree = 0;
+    spinWheel() {
+        const wheel = document.querySelector('.ui-wheel-of-fortune ul');
+
+        if (this.animation) {
+            this.animation.cancel(); // Reset the animation if it already exists
+        }
+    
+        const randomAdditionalDegrees = Math.random() * 360 + 1800;
+        const newEndDegree = this.previousEndDegree + randomAdditionalDegrees;
+        const teams = ['orange', 'red', 'purple', 'blue', 'green', 'yellow']
+
+        const winner = teams[Math.floor((newEndDegree % 360) / 60)];
+        this.animation = wheel.animate([
+          { transform: `rotate(${this.previousEndDegree}deg)` },
+          { transform: `rotate(${newEndDegree}deg)` }
+        ], {
+          duration: 4000,
+          direction: 'normal',
+          easing: 'cubic-bezier(0.440, -0.205, 0.000, 1.130)',
+          fill: 'forwards',
+          iterations: 1
+        });
+
+        setTimeout(() => {
+            this.sendEvent({type: 'team-start', team: winner });
+            document.querySelector('.ui-wheel-of-fortune').remove();
+            this.setCurrentTurn(winner);
+        }, 8000)
+    
+        this.previousEndDegree = newEndDegree;
+    }
+
+    setCurrentTurn(teamColor) {
+        Array.from(document.querySelectorAll('.team-score')).forEach(elem => elem.classList.remove('current-turn'));
+        document.querySelector(`.teams .team-score[data-team-color="${teamColor}"]`).classList.add('current-turn');
     }
 }
