@@ -57,10 +57,49 @@ html, body {
     }
 }
 
-
 body {
     background-image: var(--background-image);
     font-family: var(--font-family);
+}
+
+.fa-candy-cane {
+    background-color: red;
+    color: white;
+    -webkit-text-stroke: 0;
+}
+
+.fa-bells {
+    background-color: orange;
+    color: yellow;
+    -webkit-text-stroke: 0;
+}
+
+.fa-stars {
+    background-color: yellow;
+    color: goldenrod;
+    -webkit-text-stroke: 0;
+}
+
+.fa-tree-christmas {
+    background-color: green;
+    color: greenyellow;
+    -webkit-text-stroke: 0;
+}
+
+.fa-snowflakes {
+    background-color: blue;
+    color: skyblue;
+    -webkit-text-stroke: 0;
+}
+
+.fa-gifts {
+    background-color: purple;
+    color: mediumpurple;
+    -webkit-text-stroke: 0;
+}
+
+.fa-xmark {
+    color: dimgray;
 }
 
 .start-game-button {
@@ -131,6 +170,7 @@ main {
     &.current-turn {
         box-shadow: 8px 8px 8px 0px #2e2e2e;
         transform: scale(1.25);
+        z-index: 1;
         transition: all 1s;
     }
 
@@ -232,7 +272,7 @@ main {
                 -webkit-text-stroke-width: 0.5px;
                 display: none;
                 flex-direction: column;
-                padding: 32px;
+                padding: 16px;
                 border-radius: 6px;
                 position: relative;
                 height: 100%;
@@ -240,12 +280,22 @@ main {
                 justify-content: center;
                 box-sizing: border-box;
 
-                .timer {
-                    position: absolute;
-                    top: 8px;
-                    right: 8px;
+                [team-buzzed] {
+                    width: 24px;
+                    padding: 16px;
+                    border-radius: 50%;
+                    margin: auto;
+                    aspect-ratio: 1;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 24px;
                 }
-                
+
+                .answer-text {
+                    flex: 1;
+                }
+
                 .answer-text,
                 .question-text {
                     font-size: 1.125em;
@@ -552,7 +602,21 @@ hr {
         .question-text {
             font-size: 48px;
             opacity: 0.5;
-            margin-bottom: auto;
+            margin: 0 auto auto auto;
+            width: fit-content;
+            padding: 16px;
+            border-radius: 8px;
+
+            &:hover {
+                opacity: 1;
+                cursor: pointer;
+            }
+
+            &.question-answered {
+                opacity: 1;
+                color: var(--card-background-color);
+                background-color: var(--card-text-color);
+            }
         }
 
         .team-radios {
@@ -665,7 +729,7 @@ hr {
     height: 10px;
     background: white;
     border-radius: 50%;
-    z-index: 10;
+    z-index: 100;
   
     @for $i from 1 through $total {
       $random-x: random(1000000) * 0.0001vw;
@@ -707,7 +771,7 @@ hr {
     box-sizing: border-box; 
 
     position: absolute;
-    z-index: 100;
+    z-index: 50;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

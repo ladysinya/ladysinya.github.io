@@ -24,7 +24,13 @@ class JeopardyControl {
                 this.allQuestions = this.data.questions.flatMap(cat => cat.items.map(item => ({...item, categoryName: cat.categoryName})));
 
                 const doubleableQuestions = this.allQuestions.filter(item => item.value > 200);
-                doubleableQuestions[Math.floor(Math.random()*doubleableQuestions.length)].isDailyDouble = true;
+                const dailyDoubleQuestion = doubleableQuestions[Math.floor(Math.random()*doubleableQuestions.length)];
+                dailyDoubleQuestion.isDailyDouble = true;
+
+                this.sendEvent({
+                    type: 'setDailyDouble',
+                    id: dailyDoubleQuestion.id
+                })
             });
 
         this.renderCategories();
@@ -42,6 +48,11 @@ class JeopardyControl {
             if (item.isDailyDouble) {
                 document.getElementById('control-qna').innerHTML = '<h1>Daily Double!</h1>'
                 this.startDailyDouble(item);
+
+                this.sendEvent({
+                    type: 'question-selected',
+                    id: item.id
+                });
             } else {
                 this.loadQnACard(item);
             }
@@ -138,8 +149,9 @@ class JeopardyControl {
                         <div> - $${item.value}</div>                        
                     </div>
                     <div class="answer-text">${item.answer}</div>
-                    <div class="question-text">${item.question}</div>
                     <div id="team-radios" class="team-radios"></div>
+                    <div class="question-text">${item.question}</div>
+                    <button id="save-question-button">Save</button>
             </div>
         `;
 
@@ -152,16 +164,29 @@ class JeopardyControl {
                     <input type="${bubbleType}" id="radio-${color}" name="team" value="${color}" wager="${this.isFinal ? this.finalWagers[color] : ''}" />
                 </label>
             `
+        });
+
+        Array.from(document.querySelectorAll('input[type="radio"]')).forEach(input => {
+            input.addEventListener('change', (e) => {
+                this.sendEvent({ type: 'question-buzzed', team: e.currentTarget.value });
+            });
+        });
+
+        const questionTextElem = document.getElementById('control-qna').querySelector('.question-text');
+        questionTextElem.addEventListener('click', (e) => {
+            const answeredTeam = document.querySelector('input[name="team"]:checked');
+            if (!answeredTeam) { return; }
+
+            e.currentTarget.classList.add('question-answered');
+            this.sendEvent({ type: 'show-answer' });
         })
 
-        const saveBtn = Object.assign(document.createElement('button'), { id: 'save-question-button', innerText: 'Save' });
-        teamRadiosDiv.append(saveBtn);
-
+        const saveBtn = document.getElementById('save-question-button');
         saveBtn.addEventListener('click', this.saveQuestionClicked.bind(this));
         
         this.sendEvent({
             type: 'question-selected',
-            value: ''
+            id: item.id
         });
     }
 
@@ -171,19 +196,24 @@ class JeopardyControl {
             selctedTeams.forEach(team => {
                 const scoreDiv = document.querySelector(`.team-score[data-team-color="${team.value}"]`);
                 scoreDiv.querySelector('.team-score-content').innerText = parseInt(scoreDiv.querySelector('.team-score-content').innerText) + parseInt(team.dataset.wager);
-            })
-
+            });
         } else {
             const category = document.getElementById('cat-list');
             const catValue = document.getElementById('cat-value-list');
+            const lastTeamElem = document.querySelector('.last-team');
     
-            const selectedTeam = document.querySelector('input[name="team"]:checked').value;
-            if (selectedTeam != 'none') {
-                document.querySelector('.last-team').dataset.teamColor = selectedTeam;
-            }
 
             const item = this.allQuestions.find(item => item.id == catValue.value && item.categoryName == category.value);
-            item.completed = selectedTeam;
+    
+            const selectedTeam = document.querySelector('input[name="team"]:checked').value;
+            if (selectedTeam == 'none' && item.isDailyDouble) {
+                const wager = parseInt(document.getElementById('daily-double-wager-select').value);
+                item.value = wager * -1;
+                item.completed = lastTeamElem.dataset.teamColor;
+            } else {
+                lastTeamElem.dataset.teamColor = selectedTeam;
+                item.completed = selectedTeam;
+            }
     
             document.getElementById('cat-list').value = '';
             document.getElementById('cat-value-list').value = '';
@@ -191,6 +221,7 @@ class JeopardyControl {
 
             this.updateScores();
             document.getElementById('control-qna').innerHTML = '';
+            this.sendEvent({ type: 'question-answered', team: selectedTeam });
         }
     }
 
@@ -227,6 +258,11 @@ class JeopardyControl {
             case 'team-start':
                 console.log(message.data.team);
                 document.querySelector('.last-team').dataset.teamColor = message.data.team;
+                break;
+
+            case 'initiateFinalJeopardy':
+                this.isFinal = true;
+                // do other things
                 break;
             case 'score':
                 const teamDiv = document.querySelector(`.team-score[data-team-color="${message.data.team}"]`);
@@ -278,10 +314,14 @@ class JeopardyControl {
 	updateScores() {
         const scoreDivs = Array.from(document.querySelectorAll('.team-score'));
 
+        const scores = [];
         scoreDivs.forEach(scoreDiv => {
             const teamValues = this.allQuestions.filter(q => q.completed == scoreDiv.dataset.teamColor).map(q => q.value);
             const score = teamValues.reduce((a, b) => a + b, 0);
             scoreDiv.querySelector('.team-score-content').innerText = score;
-        })
+            scores.push({ team: scoreDiv.dataset.teamColor, score: score });
+        });
+
+        this.sendEvent({ type: 'score-calculated', scores: scores });
     }
 }

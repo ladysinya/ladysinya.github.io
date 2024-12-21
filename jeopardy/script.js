@@ -23,17 +23,92 @@ class Jeopardy {
 	}
 
     startGame() {
-        console.log('starting game');
         this.spinWheel();
+    }
+
+    ack(message) {
+        console.log('message received: ' + message.data.type, message.data);
     }
 
     messageEventListener(message) {
         switch (message.data.type) {
+            case 'setDailyDouble':
+                this.ack(message);
+                this.setDailyDouble(message.data.id);
+                break
             case 'start-game':
+                this.ack(message);
                 this.startGame();     
                 break;
+            case 'question-selected':
+                this.ack(message);
+                const card = document.querySelector(`.card[data-id="${message.data.id}"]`);
+
+                const value = card.querySelector('.card-value').innerText;
+                const style = window.getComputedStyle(card);
+
+                const disabledCard = `
+                    <div class="card" data-disabled height="${style.height}" width="${style.width}">
+                        <div class="card-value">${value}</div>
+                    </div>
+                `
+
+                card.parentNode.insertBefore(Object.assign(document.createElement('div'), { innerHTML: disabledCard }).children[0], card);
+
+                card.classList.add('card-open');
+                break;
+            case 'question-buzzed':
+                this.ack(message);
+                const buzzedElem = document.querySelector('.card-open [team-buzzed]');
+                switch (message.data.team) {
+                    case 'red':
+                        buzzedElem.classList = 'fa-duotone fa-thin fa-candy-cane';
+                        break;
+                    case 'orange':
+                        buzzedElem.classList = 'fa-duotone fa-thin fa-bells';
+                        break;
+                    case 'yellow':
+                        buzzedElem.classList = 'fa-duotone fa-thin fa-stars';
+                        break;
+                    case 'green':
+                        buzzedElem.classList = 'fa-duotone fa-thin fa-tree-christmas';
+                        break;
+                    case 'blue':
+                        buzzedElem.classList = 'fa-duotone fa-light fa-snowflakes';
+                        break;
+                    case 'purple':
+                        buzzedElem.classList = 'fa-duotone fa-light fa-gifts';
+                        break;
+                    case 'none':
+                        buzzedElem.classList = 'fa-duotone fa-regular fa-x-mark';
+                        break;                
+                    default:
+                        break;
+                }
+                break;
+            case 'show-answer':
+                this.ack(message);
+                const openCard = document.querySelector('.card-open');
+                openCard.classList.add('show-question');
+                break;
+            case 'question-answered':
+                this.ack(message);
+                this.setCurrentTurn(message.data.team);
+                const currentCard = document.querySelector('.card-open');
+                currentCard.classList.remove('card-open');
+                currentCard.setAttribute('data-disabled', 'true');
+                currentCard.previousElementSibling.remove();
+
+                const finalCheck = document.querySelector('.card:not([data-disabled="true"])');
+                if (finalCheck == null) {
+                    this.sendEvent({
+                        type: 'initiateFinalJeopardy'
+                    })
+                }
+
+                break;
             case `daily-double-wager`:
-                const dailyDoubleDiv = document.querySelector('.card[data-daily-double="true"]');
+                const dailyDoubleDiv = document.querySelector('.card-open');
                 dailyDoubleDiv.dataset.value = message.data.value;
                 dailyDoubleDiv.querySelector('.question-text').append(document.createElement('hr'));
                 dailyDoubleDiv.querySelector('.question-text').append(Object.assign(
@@ -47,21 +122,28 @@ class Jeopardy {
                 
                 break;
         
-            case `final-jeopardy-wager`:
-                console.log('message.data', message.data);
+            // case `final-jeopardy-wager`:
+            //     console.log('message.data', message.data);
 
-                const finalJeopardyDiv = document.querySelector('.card[data-id="final-jeopardy-card"]');
-                const bubbles = Array.from(finalJeopardyDiv?.querySelectorAll('.team-bubble'));
+            //     const finalJeopardyDiv = document.querySelector('.card[data-id="final-jeopardy-card"]');
+            //     const bubbles = Array.from(finalJeopardyDiv?.querySelectorAll('.team-bubble'));
 
-                bubbles.forEach(bubble => {
-                    const teamValue = message.data.values.find(value => value.team == bubble.dataset.teamColor);
-                    console.log('teamValue', teamValue);
-                    bubble.dataset.wager = teamValue?.value;
+            //     bubbles.forEach(bubble => {
+            //         const teamValue = message.data.values.find(value => value.team == bubble.dataset.teamColor);
+            //         bubble.dataset.wager = teamValue?.value;
+            //     });
+
+            //     finalJeopardyDiv.querySelector('.final-jeopardy')?.remove();
+            //     break;
+            case 'score-calculated':
+                console.log('score calculated', message.data.scores);
+                message.data.scores.forEach(score => {
+                    const scoreElem = document.querySelector(`.team-score[data-team-color="${score.team}"]`);
+                    scoreElem.querySelector('.team-score-content').innerText = score.score;
                 })
-
-                finalJeopardyDiv.querySelector('.final-jeopardy')?.remove();
                 break;
             default:
+                console.log('unknown event received: ' + message.data.type);
                 break;
         }
     }
@@ -91,8 +173,6 @@ class Jeopardy {
             const categoryLabel = catContainer.querySelector('.category-label');
             this.autoSizeFont(categoryLabel);
         });
-        
-        this.setDailyDouble();
     }
 
     buildCard(item) {
@@ -107,38 +187,20 @@ class Jeopardy {
                 class="card">
                     <div class="card-value">${item.value}</div>
                     <div class="card-back">
-                        <div class="timer">15</div>
+                        <i team-buzzed></i>
                         <div class="answer-text">${item.answer}</div>
                         <div class="question-text">${item.question}</div>
-                        <div class="team-bubbles">
-                            <div data-team-color="red" class="team-bubble"></div>
-                            <div data-team-color="orange" class="team-bubble"></div>
-                            <div data-team-color="yellow" class="team-bubble"></div>
-                            <div data-team-color="green" class="team-bubble"></div>
-                            <div data-team-color="blue" class="team-bubble"></div>
-                            <div data-team-color="purple" class="team-bubble"></div>
-                            <div data-team-color="none" class="team-bubble"><i class="fa-duotone fa-solid fa-xmark"></i></div>
-                        </div>
                     </div>
                 </div>
         `;
 
         const card = Object.assign(document.createElement('div'), { innerHTML: cardStr }).children[0];
-        card.querySelector('.timer').addEventListener('click', this.timerClicked.bind(this));
-        card.querySelector('.timer').addEventListener('dblclick', this.timerDblClicked.bind(this));
-        card.addEventListener('click', this.cardClicked.bind(this))
 
-        const bubbles = Array.from(card.querySelectorAll('.team-bubble'));
-        bubbles.forEach(bubble => {
-            bubble.addEventListener('click', this.bubbleClicked.bind(this));
-        })
-        
         return card;
     }
 
-    setDailyDouble() {
-        const possibleDailyDoubleCards = Array.from(board.querySelectorAll('.card[data-daily-double="possible"]'));
-        const dailyDoubleCard = possibleDailyDoubleCards[Math.floor(Math.random() * possibleDailyDoubleCards.length)];
+    setDailyDouble(itemId) {
+        const dailyDoubleCard = document.querySelector(`.card[data-id="${itemId}"`);
 
         dailyDoubleCard.dataset.dailyDouble = 'true';
         const dailyDoubleDiv = Object.assign(
@@ -159,8 +221,6 @@ class Jeopardy {
 
         card.dataset.value = wager;
         card.querySelector('.daily-double').remove();
-
-        this.resetTimer(card.querySelector('.timer'));
     }
 
     autoSizeFont(elem) {
@@ -184,30 +244,30 @@ class Jeopardy {
 	cardClicked(e) {
         const card = e.currentTarget;
         if (card.matches('.card-open')){
-            switch (card.dataset.scoringTeam) {
-                case 'none':
-                        if(card.dataset.dailyDouble == 'true') {
-                            card.dataset.scoringTeam = this.lastTeam;
-                            card.dataset.value = `-${card.dataset.value}`;
-                        }
+            // switch (card.dataset.scoringTeam) {
+            //     case 'none':
+            //             if(card.dataset.dailyDouble == 'true') {
+            //                 card.dataset.scoringTeam = this.lastTeam;
+            //                 card.dataset.value = `-${card.dataset.value}`;
+            //             }
 
-                        card.setAttribute('data-disabled', 'true');
-                    break;
-                case null:                    
-                    break;
-                default:
-                    card.setAttribute('data-disabled', 'true');
-                break;
-            }
+            //             card.setAttribute('data-disabled', 'true');
+            //         break;
+            //     case null:                    
+            //         break;
+            //     default:
+            //         card.setAttribute('data-disabled', 'true');
+            //     break;
+            // }
                 
             this.updateScores();
-            card.classList.remove('card-open');
-            card.previousElementSibling.remove();
+            // card.classList.remove('card-open');
+            // card.previousElementSibling.remove();
 
-            const finalCheck = document.querySelector('.card:not([data-disabled="true"])');
-            if (finalCheck == null) {
-                this.timeForFinalJeopardy();
-            }
+            // const finalCheck = document.querySelector('.card:not([data-disabled="true"])');
+            // if (finalCheck == null) {
+            //     this.timeForFinalJeopardy();
+            // }
 
             if (card.matches('[data-id="final-jeopardy-card"]')) {
                 const bubbles = Array.from(card?.querySelectorAll('.team-bubble'));
@@ -252,21 +312,17 @@ class Jeopardy {
             url: card.dataset.url
         });
 
-        const value = card.querySelector('.card-value').innerText;
-        const style = window.getComputedStyle(card);
+        // const value = card.querySelector('.card-value').innerText;
+        // const style = window.getComputedStyle(card);
 
-        const disabledCard = `
-            <div class="card" data-disabled height="${style.height}" width="${style.width}">
-                <div class="card-value">${value}</div>
-            </div>
-        `
+        // const disabledCard = `
+        //     <div class="card" data-disabled height="${style.height}" width="${style.width}">
+        //         <div class="card-value">${value}</div>
+        //     </div>
+        // `
 
-        card.parentNode.insertBefore(Object.assign(document.createElement('div'), { innerHTML: disabledCard }).children[0], card);
-        card.classList.add('card-open');
-
-        setTimeout(() => {
-            card.querySelector('.timer').click();
-        }, 15000);
+        // card.parentNode.insertBefore(Object.assign(document.createElement('div'), { innerHTML: disabledCard }).children[0], card);
+        // card.classList.add('card-open');
 	}
 
     timeForFinalJeopardy() {
@@ -307,25 +363,22 @@ class Jeopardy {
     //         card.setAttribute(`data-value-${input.dataset.teamColor}`, select.value);
     //     });
     //     e.currentTarget.closest('.final-jeopardy').remove();
-
-    //     this.resetTimer(card.querySelector('.timer'));
     // }
 
-    lastTeam = 'red';
-    bubbleClicked(e) {
-        e.stopPropagation();
+    // lastTeam = 'red';
+    // bubbleClicked(e) {
+    //     e.stopPropagation();
 
-        const card = e.currentTarget.closest('.card');
-        if (card.matches('[data-id="final-jeopardy-card"]')) {
-            e.currentTarget.classList.add('show-wager');
-        } else {
-            const teamColor = e.currentTarget.dataset.teamColor;
-            card.setAttribute('data-scoring-team', teamColor);
-            this.lastTeam = teamColor == 'none' ? this.lastTeam : teamColor;
-            card.classList.add('show-question');
-        }
-
-    }
+    //     const card = e.currentTarget.closest('.card');
+    //     if (card.matches('[data-id="final-jeopardy-card"]')) {
+    //         e.currentTarget.classList.add('show-wager');
+    //     } else {
+    //         const teamColor = e.currentTarget.dataset.teamColor;
+    //         card.setAttribute('data-scoring-team', teamColor);
+    //         this.lastTeam = teamColor == 'none' ? this.lastTeam : teamColor;
+    //         card.classList.add('show-question');
+    //     }
+    // }
 
     updateScores() {
         const teamScoreElems = Array.from(document.querySelectorAll('.team-score'));
@@ -346,48 +399,6 @@ class Jeopardy {
         })
     }
 
-    // Timer Stuff
-    timer;
-    
-    timerClicked(e) {
-        e.stopPropagation();
-        const timeDisplay = e.currentTarget;
-        if(timeDisplay.dataset.isRunning) {
-            this.stopTimer(timeDisplay);
-        } else {
-            this.startTimer(timeDisplay);
-        }
-    }
-
-    timerDblClicked(e) {
-        e.stopPropagation();
-        this.resetTimer(e.currentTarget);
-    }
-    
-    startTimer(timeDisplay) {
-        timeDisplay.dataset.isRunning = true;
-        this.timer = setInterval(() => {
-            let seconds = parseInt(timeDisplay.textContent)
-            seconds--;
-            timeDisplay.textContent = seconds;
-
-            if (seconds == 0) {
-                timeDisplay.removeAttribute('data-is-running');
-                clearInterval(this.timer);
-            }
-        }, 1000);
-    }
-
-    stopTimer(timeDisplay) {
-        timeDisplay.removeAttribute('data-is-running');
-        clearInterval(this.timer);
-    }
-
-    resetTimer(timeDisplay) {
-        this.stopTimer(timeDisplay);
-        timeDisplay.textContent = 15;
-    }
-
     animation;
     previousEndDegree = 0;
     spinWheel() {
@@ -406,7 +417,7 @@ class Jeopardy {
           { transform: `rotate(${this.previousEndDegree}deg)` },
           { transform: `rotate(${newEndDegree}deg)` }
         ], {
-          duration: 4000,
+          duration: 400, // TODO: 4000
           direction: 'normal',
           easing: 'cubic-bezier(0.440, -0.205, 0.000, 1.130)',
           fill: 'forwards',
@@ -417,7 +428,7 @@ class Jeopardy {
             this.sendEvent({type: 'team-start', team: winner });
             document.querySelector('.ui-wheel-of-fortune').remove();
             this.setCurrentTurn(winner);
-        }, 8000)
+        }, 750) // TODO: 7500
     
         this.previousEndDegree = newEndDegree;
     }
