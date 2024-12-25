@@ -59,31 +59,33 @@ class Jeopardy {
                 break;
             case 'question-buzzed':
                 this.ack(message);
-                const buzzedElem = document.querySelector('.card-open [team-buzzed]');
-                switch (message.data.team) {
-                    case 'red':
-                        buzzedElem.classList = 'fa-duotone fa-thin fa-candy-cane';
-                        break;
-                    case 'orange':
-                        buzzedElem.classList = 'fa-duotone fa-thin fa-bells';
-                        break;
-                    case 'yellow':
-                        buzzedElem.classList = 'fa-duotone fa-thin fa-stars';
-                        break;
-                    case 'green':
-                        buzzedElem.classList = 'fa-duotone fa-thin fa-tree-christmas';
-                        break;
-                    case 'blue':
-                        buzzedElem.classList = 'fa-duotone fa-light fa-snowflakes';
-                        break;
-                    case 'purple':
-                        buzzedElem.classList = 'fa-duotone fa-light fa-gifts';
-                        break;
-                    case 'none':
-                        buzzedElem.classList = 'fa-duotone fa-regular fa-x-mark';
-                        break;                
-                    default:
-                        break;
+                const teamIconClasses = {
+                    red: 'fa-duotone fa-thin fa-candy-cane',
+                    orange: 'fa-duotone fa-thin fa-bells',
+                    yellow: 'fa-duotone fa-thin fa-stars',
+                    green: 'fa-duotone fa-thin fa-tree-christmas',
+                    blue: 'fa-duotone fa-light fa-snowflakes',
+                    purple: 'fa-duotone fa-light fa-gifts',
+                    none: 'fa-duotone fa-regular fa-x-mark'
+                }
+
+                if (this.isFinal) {
+                    const buzzedElem = document.querySelector('.buzzed-container');
+                    buzzedElem.innerHTML = '';
+
+                    message.data.wagers.forEach(wager => {
+                        const teamElem = `
+                            <div class="team-buzzed-group ${wager.isCorrect ? 'final-correct' : ''}">
+                                <div class="team-wager">${wager.value}</div>
+                                <i team-buzzed class="${teamIconClasses[wager.team]}"></i>
+                            </div>
+                        `;
+
+                        buzzedElem.innerHTML += teamElem;
+                    })                    
+                } else {
+                    const buzzedElem = document.querySelector('.card-open [team-buzzed]');
+                    buzzedElem.classList = teamIconClasses[message.data.team];
                 }
                 break;
             case 'show-answer':
@@ -98,14 +100,6 @@ class Jeopardy {
                 currentCard.classList.remove('card-open');
                 currentCard.setAttribute('data-disabled', 'true');
                 currentCard.previousElementSibling.remove();
-
-                const finalCheck = document.querySelector('.card:not([data-disabled="true"])');
-                if (finalCheck == null) {
-                    this.sendEvent({
-                        type: 'initiateFinalJeopardy'
-                    })
-                }
-
                 break;
             case `daily-double-wager`:
                 const dailyDoubleDiv = document.querySelector('.card-open');
@@ -119,22 +113,20 @@ class Jeopardy {
                                                                     ));
 
                 dailyDoubleDiv.querySelector('.daily-double').remove();
+                dailyDoubleDiv.previousElementSibling.remove();
                 
                 break;
         
-            // case `final-jeopardy-wager`:
-            //     console.log('message.data', message.data);
+            case `start-final-jeopardy`:
+                console.log('message.data', message.data);
 
-            //     const finalJeopardyDiv = document.querySelector('.card[data-id="final-jeopardy-card"]');
-            //     const bubbles = Array.from(finalJeopardyDiv?.querySelectorAll('.team-bubble'));
+                const finalJeopardyDiv = document.querySelector('.card[data-id="final-jeopardy-card"]');
+                finalJeopardyDiv.querySelector('.final-jeopardy')?.remove();
+                break;
 
-            //     bubbles.forEach(bubble => {
-            //         const teamValue = message.data.values.find(value => value.team == bubble.dataset.teamColor);
-            //         bubble.dataset.wager = teamValue?.value;
-            //     });
-
-            //     finalJeopardyDiv.querySelector('.final-jeopardy')?.remove();
-            //     break;
+            case 'initiateFinalJeopardy':
+                this.timeForFinalJeopardy();
+                break;
             case 'score-calculated':
                 console.log('score calculated', message.data.scores);
                 message.data.scores.forEach(score => {
@@ -156,22 +148,21 @@ class Jeopardy {
         const board = document.getElementById('board');
         board.innerHTML = '';
 
-        this.data.questions.forEach((cat, i) => {
-            const catDiv = `
-                <div class="category-container" data-category-count="${i + 1}">
-                    <div class="category-label">${cat.categoryName}</div>
-                </div>
-            `;
+        this.data.questions.forEach(cat => {
+            const catContainer = Object.assign(document.createElement('div'), 
+                            { 
+                                className: 'category-container', 
+                                innerHTML: `<div class="category-label">${cat.categoryName}</div>`
+                            });
 
-            board.append(Object.assign(document.createElement('div'), { innerHTML: catDiv }).children[0]);
+            board.append(catContainer);
 
-            const catContainer = board.querySelector(`.category-container[data-category-count="${i + 1}"]`);
             cat.items.forEach(item => {
                 catContainer.append(this.buildCard(item));                
             });
 
             const categoryLabel = catContainer.querySelector('.category-label');
-            this.autoSizeFont(categoryLabel);
+            // this.autoSizeFont(categoryLabel);
         });
     }
 
@@ -186,21 +177,28 @@ class Jeopardy {
                 data-daily-double="${item.value > 300 ? 'possible' : ''}"
                 class="card">
                     <div class="card-value">${item.value}</div>
-                    <div class="card-back">
-                        <i team-buzzed></i>
+                    <div class="card-back">                        
                         <div class="answer-text">${item.answer}</div>
                         <div class="question-text">${item.question}</div>
                     </div>
                 </div>
         `;
-
         const card = Object.assign(document.createElement('div'), { innerHTML: cardStr }).children[0];
+        const cardBack = card.querySelector('.card-back');
 
+        if (this.isFinal) {
+            cardBack.prepend(Object.assign(document.createElement('div'), { innerHTML: '<div class="buzzed-container"></div>' }).children[0])
+        } else {
+            cardBack.prepend(Object.assign(document.createElement('div'), { innerHTML: '<i team-buzzed></i>' }).children[0])
+        }
+    
         return card;
     }
 
     setDailyDouble(itemId) {
-        const dailyDoubleCard = document.querySelector(`.card[data-id="${itemId}"`);
+        const dailyDoubleCard = document.querySelector(`.card[data-id="${itemId}"]`);
+        
+        console.log('dailyDoubleCard', dailyDoubleCard)
 
         dailyDoubleCard.dataset.dailyDouble = 'true';
         const dailyDoubleDiv = Object.assign(
@@ -244,30 +242,6 @@ class Jeopardy {
 	cardClicked(e) {
         const card = e.currentTarget;
         if (card.matches('.card-open')){
-            // switch (card.dataset.scoringTeam) {
-            //     case 'none':
-            //             if(card.dataset.dailyDouble == 'true') {
-            //                 card.dataset.scoringTeam = this.lastTeam;
-            //                 card.dataset.value = `-${card.dataset.value}`;
-            //             }
-
-            //             card.setAttribute('data-disabled', 'true');
-            //         break;
-            //     case null:                    
-            //         break;
-            //     default:
-            //         card.setAttribute('data-disabled', 'true');
-            //     break;
-            // }
-                
-            this.updateScores();
-            // card.classList.remove('card-open');
-            // card.previousElementSibling.remove();
-
-            // const finalCheck = document.querySelector('.card:not([data-disabled="true"])');
-            // if (finalCheck == null) {
-            //     this.timeForFinalJeopardy();
-            // }
 
             if (card.matches('[data-id="final-jeopardy-card"]')) {
                 const bubbles = Array.from(card?.querySelectorAll('.team-bubble'));
@@ -284,59 +258,16 @@ class Jeopardy {
 
             return;
         }
-
-        Array.from(document.querySelectorAll('.card-open')).forEach(openCard => {
-            openCard.previousElementSibling.remove();
-            openCard.classList.remove('card-open');
-        });
-
-        if (card.dataset.dailyDouble == 'true') {
-            this.sendEvent({
-                type: 'double-jeopardy',
-                team: this.lastTeam,
-            });
-
-            const bubbleContainer = card.querySelector(`.team-bubbles`);
-            bubbleContainer.style = 'grid-template-columns: 1fr 1fr'
-            const otherBubbles = Array.from(card.querySelectorAll(`.team-bubble:not([data-team-color="${this.lastTeam}"],[data-team-color="none"])`));
-            otherBubbles.forEach(bubble => {
-                bubble.remove();
-            });
-        }
-
-        this.sendEvent({
-            type: 'Question',
-            value: card.dataset.value,
-            answer: card.dataset.answer,
-            question: card.dataset.question,
-            url: card.dataset.url
-        });
-
-        // const value = card.querySelector('.card-value').innerText;
-        // const style = window.getComputedStyle(card);
-
-        // const disabledCard = `
-        //     <div class="card" data-disabled height="${style.height}" width="${style.width}">
-        //         <div class="card-value">${value}</div>
-        //     </div>
-        // `
-
-        // card.parentNode.insertBefore(Object.assign(document.createElement('div'), { innerHTML: disabledCard }).children[0], card);
-        // card.classList.add('card-open');
 	}
 
     timeForFinalJeopardy() {
+        this.isFinal = true;
+        document.querySelector('.current-turn').classList.remove('current-turn');
+
         const card = this.buildCard({
             id: 'final-jeopardy-card',
             question: this.data.finalJeopardy.question,
             answer: this.data.finalJeopardy.answer
-        });
-
-        this.sendEvent({
-            type: 'final-jeopardy',
-            value: 'final',
-            answer: this.data.finalJeopardy.answer,
-            question: this.data.finalJeopardy.question
         });
 
         const finalJeopardyDiv = Object.assign(
@@ -350,7 +281,7 @@ class Jeopardy {
 
         document.getElementById('board').querySelector('.category-container').append(card);
 
-        card.click();
+        card.classList.add('card-open');
         card.previousElementSibling.remove();
     }
 
@@ -363,21 +294,6 @@ class Jeopardy {
     //         card.setAttribute(`data-value-${input.dataset.teamColor}`, select.value);
     //     });
     //     e.currentTarget.closest('.final-jeopardy').remove();
-    // }
-
-    // lastTeam = 'red';
-    // bubbleClicked(e) {
-    //     e.stopPropagation();
-
-    //     const card = e.currentTarget.closest('.card');
-    //     if (card.matches('[data-id="final-jeopardy-card"]')) {
-    //         e.currentTarget.classList.add('show-wager');
-    //     } else {
-    //         const teamColor = e.currentTarget.dataset.teamColor;
-    //         card.setAttribute('data-scoring-team', teamColor);
-    //         this.lastTeam = teamColor == 'none' ? this.lastTeam : teamColor;
-    //         card.classList.add('show-question');
-    //     }
     // }
 
     updateScores() {
@@ -417,7 +333,7 @@ class Jeopardy {
           { transform: `rotate(${this.previousEndDegree}deg)` },
           { transform: `rotate(${newEndDegree}deg)` }
         ], {
-          duration: 400, // TODO: 4000
+          duration: 4000, // TODO: 4000
           direction: 'normal',
           easing: 'cubic-bezier(0.440, -0.205, 0.000, 1.130)',
           fill: 'forwards',
@@ -425,16 +341,26 @@ class Jeopardy {
         });
 
         setTimeout(() => {
+            const bellsAudio = new Audio("https://cdn.freesound.org/previews/411/411420_6014995-lq.mp3");
+            bellsAudio.play();            
+        }, 2000);
+
+
+        setTimeout(() => {
             this.sendEvent({type: 'team-start', team: winner });
             document.querySelector('.ui-wheel-of-fortune').remove();
             this.setCurrentTurn(winner);
-        }, 750) // TODO: 7500
+        }, 7500) // TODO: 7500
     
         this.previousEndDegree = newEndDegree;
     }
 
     setCurrentTurn(teamColor) {
-        Array.from(document.querySelectorAll('.team-score')).forEach(elem => elem.classList.remove('current-turn'));
-        document.querySelector(`.teams .team-score[data-team-color="${teamColor}"]`).classList.add('current-turn');
+        const scoreElem = document.querySelector(`.teams .team-score[data-team-color="${teamColor}"]`);
+
+        if (scoreElem) {
+            Array.from(document.querySelectorAll('.team-score')).forEach(elem => elem.classList.remove('current-turn'));
+            scoreElem.classList.add('current-turn');
+        }
     }
 }

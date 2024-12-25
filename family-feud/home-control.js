@@ -7,17 +7,24 @@ class HomeControl {
     async init() {
         this.questionTemplate = document.getElementById('question-template');
 
-        await fetch('./data.json')
-        .then(async (response) => {
-            let responseContent = await response.text();
-            this.data = JSON.parse(responseContent);
-
-            this.data.forEach((dObj, i) => {
-                if(i > 0) {
-                    this.renderQuestion(dObj);
-                }
+        await fetch(`./config.json`)
+            .then(async (response) => {
+                let responseContent = await response.text();
+                this.theme = JSON.parse(responseContent).theme;
+                document.documentElement.setAttribute('theme', this.theme);
             });
-        });
+
+        await fetch(`./data/data-${this.theme}.json`)
+            .then(async (response) => {
+                let responseContent = await response.text();
+                this.data = JSON.parse(responseContent);
+
+                this.data.forEach((dObj, i) => {
+                    if(i > 0) {
+                        this.renderQuestion(dObj);
+                    }
+                });
+            });
 
         document.getElementById('next-question-button').addEventListener('click', this.loadNextQuestion.bind(this));
         document.getElementById('team-1-add-1').addEventListener('click', this.addPoints.bind(this,1,1))

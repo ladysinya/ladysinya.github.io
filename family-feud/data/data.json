@@ -1,0 +1,167 @@
+[
+    {
+        "order": 0,
+        "question": "Racers take your places!",
+        "answers": []
+    },
+    {
+        "order": 1,
+        "question": "Name a popular Christmas song.",
+        "answers": [
+            "Jingle Bells",
+            "White Christmas",
+            "Rudolph the Red Nosed Reindeer",
+            "O Holy Night",
+            "Silver Bells",
+            "We Wish You a Merry Christmas",
+            "Silent Night",
+            "Jingle Bell Rock"
+        ]
+    },
+    {
+        "order": 2,
+        "question": "Name the best Christmas movie.",
+        "answers": [
+            "Elf",
+            "It's a Wonderful Life",
+            "A Christmas Story",
+            "Home Alone",
+            "White Christmas",
+            "National Lamopoon's Christmas Vacation",
+            "Miracle on 34th Street",
+            "How the Grinch Stole Christmas"
+        ]
+    },
+    {
+        "order": 3,
+        "question": "Name one thing you do on Christmas Eve.",
+        "answers": [
+            "Attend Church",
+            "Open Gifts",
+            "Party/Celebrate with Friends and Family",
+            "Wrap Gifts",
+            "Eat/Drink",
+            "Play Games",
+            "Watch Movies"
+        ]
+    },
+    {
+        "order": 4,
+        "question": "Name something you put on a Christmas tree.",
+        "answers": [
+            "Ornaments",
+            "Lights",
+            "Star",
+            "Angel",
+            "Tinsel/Garland",
+            "Pickle",
+            "Candy Canes",
+            "Ribbon"
+        ]
+    },
+    {
+        "order": 5,
+        "question": "Name one gift you should never get someone for Christmas.",
+        "answers": [
+            "Underwear",
+            "Vaccuum Cleaner/Cleaning Supplies",
+            "Fruitcake",
+            "Socks",
+            "Weight Loss Items",
+            "Coal",
+            "Clothes/Lingerie",
+            "Personal Hygiene Items"
+        ]
+    },
+    {
+        "order": 6,
+        "question": "If you met Santa, name one thing that would give it away that it was the REAL Santa.",
+        "answers": [
+            "Twinkle in His Eye",
+            "His Beard",
+            "His Laugh",
+            "He'd Know You or Your Christmas Wishes",
+            "His Red Suit",
+            "His Belly",
+            "His Sleigh/Reindeer",
+            "His Naughty/Nice List"
+        ]
+    },
+    {
+        "order": 7,
+        "question": "Name a Popular Christmas Book.",
+        "answers": [
+            "The Night Before Christmas",
+            "Polar Express",
+            "How the Grinch Stole Christmas",
+            "A Christmas Carol",
+            "The Bible",
+            "Rudolph",
+            "Elf on the Shelf",
+            "Frosty"
+        ]
+    },
+    {
+        "order": 8,
+        "question": "Name one piece of a traditional nativity set.",
+        "answers": [
+            "Baby Jesus",
+            "The Manger",
+            "Animals",
+            "Wise Men",
+            "Mary",
+            "Joseph"
+        ]
+    },
+    {
+        "order": 9,
+        "question": "Name a popular Christmas tradition.",
+        "answers": [
+            "Decorating/Putting up the Tree",
+            "Hanging Stockings",
+            "Caroling",
+            "Opening/Exchanging Gifts",
+            "Midnight Mass/Going to Church",
+            "Advent Calendars",
+            "Baking"
+        ]
+    },
+    {
+        "order": 10,
+        "question": "Name something you drink during Christmas time.",
+        "answers": [
+            "Eggnog",
+            "Wine",
+            "Hot chocolate/cocoa",
+            "Apple cider/wassail",
+            "Other alcoholic drink",
+            "Punch",
+            "Tea",
+            "Water"
+        ]
+    },
+    {
+        "order": 11,
+        "question": "Name something you'd often find in a stocking.",
+        "answers": [
+            "Candy/candy canes",
+            "Orange",
+            "Chocolate",
+            "Gift card",
+            "Toothbrush",
+            "Chapstick/lip gloss",
+            "Socks"
+        ]
+    },
+    {
+        "order": 12,
+        "question": "Name one thing you might do in the snow.",
+        "answers": [
+            "Make snow angels",
+            "Build a snowman",
+            "Go sledding",
+            "Have a snowball fight",
+            "Shovel it"
+        ]
+    }
+]

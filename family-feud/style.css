@@ -1,6 +1,38 @@
 @charset "UTF-8";
+:root {
+  --background-image: url(../assets/wallpaperBackground.jpg);
+  --font-family: "Outfit", sans-serif;
+  --card-background-color: gray;
+  --title-background-color: gray;
+  --title-text-color: white;
+  --card-text-color: white;
+  --card-text-stroke-color: white;
+  --card-border-color: white;
+  --score-card-border-color: white;
+  --bubble-border-color: white;
+}
+
+[theme=halloween] {
+  --background-image: url(../assets/halloween-shelf-seamless-background.jpg);
+  --font-family: "Metal Mania", system-ui;
+  --card-background-color: black;
+}
+
+[theme=christmas] {
+  --background-image: url(../assets/a1dbc75c1bbc9d5d63bb0024ffb74d97.jpg);
+  --title-text-color: green;
+  --title-background-color: yellowgreen;
+  --card-text-color: orangered;
+  --card-text-stroke-color: maroon;
+  --card-background-color: yellowgreen;
+  --card-border-color: green;
+}
+[theme=christmas] .snow-container {
+  display: block;
+}
+
 html {
-  background-image: url(./assets/thanksgiving_background_1.jpg);
+  background-image: var(--background-image);
 }
 
 body {
@@ -15,7 +47,7 @@ body, html {
 
 .main {
   padding: 24px;
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--font-family);
 }
 
 .header-row {
@@ -28,11 +60,11 @@ body, html {
 }
 .team-group .team-name {
   font-size: 48px;
-  color: lightcyan;
+  color: var(--title-text-color);
+  background-color: var(--title-background-color);
   text-align: center;
   font-family: "Brush Script MT", cursive;
   letter-spacing: 5px;
-  background-color: brown;
   border: none;
   outline: none;
   border-radius: 8px;
@@ -42,15 +74,15 @@ body, html {
 .team-group .team-name:active, .team-group .team-name:focus {
   outline: none;
 }
-.team-group .team-strikes {
+.team-group .team-name .team-strikes {
   display: flex;
   gap: 10px;
   justify-content: center;
-  background-color: lightcyan;
+  background-color: var(--card-background-color);
   border-radius: 8px;
   margin-bottom: 10px;
 }
-.team-group .team-strikes .strike {
+.team-group .team-name .team-strikes .strike {
   position: relative;
   color: red;
   border: 5px solid red;
@@ -60,7 +92,7 @@ body, html {
   height: 80px;
   width: 60px;
 }
-.team-group .team-strikes .strike::after {
+.team-group .team-name .team-strikes .strike:after {
   position: absolute;
   content: "×";
   font-size: 100px;
@@ -70,20 +102,20 @@ body, html {
   top: -16px;
   left: 1px;
 }
-.team-group .team-strikes .strike[disabled] {
+.team-group .team-name .team-strikes .strike[disabled] {
   opacity: 0.5;
   border: 5px solid gray;
 }
-.team-group .team-strikes .strike[disabled]::after {
+.team-group .team-name .team-strikes .strike[disabled]:after {
   color: gray;
 }
 .team-group .team-points {
   font-size: 36px;
-  color: lightcyan;
+  color: var(--card-text-color);
   text-align: center;
   font-weight: 600;
   font-variant: all-small-caps;
-  background-color: indianred;
+  background-color: var(--card-background-color);
   border-radius: 10px;
   padding: 16px 24px;
 }
@@ -145,10 +177,10 @@ body, html {
 }
 .answers-row .answer-col-border {
   --mask:
-    radial-gradient(15.24px at 21.50px 50%,#000 99%,#0000 101%) 0 calc(50% - 20px)/51% 40px repeat-y,
-    radial-gradient(15.24px at -11.5px 50%,#0000 99%,#000 101%) 10px 50%/calc(51% - 10px) 40px repeat-y,
-    radial-gradient(15.24px at calc(100% - 21.50px) 50%,#000 99%,#0000 101%) 100% 50%/51% 40px repeat-y,
-    radial-gradient(15.24px at calc(100% + 11.50px) 50%,#0000 99%,#000 101%) calc(100% - 10px) calc(50% - 20px)/calc(51% - 10px) 40px repeat-y;
+  radial-gradient(15.24px at 21.50px 50%,#000 99%,#0000 101%) 0 calc(50% - 20px)/51% 40px repeat-y,
+  radial-gradient(15.24px at -11.5px 50%,#0000 99%,#000 101%) 10px 50%/calc(51% - 10px) 40px repeat-y,
+  radial-gradient(15.24px at calc(100% - 21.50px) 50%,#000 99%,#0000 101%) 100% 50%/51% 40px repeat-y,
+  radial-gradient(15.24px at calc(100% + 11.50px) 50%,#0000 99%,#000 101%) calc(100% - 10px) calc(50% - 20px)/calc(51% - 10px) 40px repeat-y;
   -webkit-mask: var(--mask);
   mask: var(--mask);
   background: lightcyan;
@@ -229,11 +261,13 @@ body, html {
   border: none;
   transform: translateY(-50%);
 }
-.teams .points button#team-1-add-1, .teams .points button#team-2-add-1 {
+.teams .points button #team-1-add-1,
+.teams .points button #team-2-add-1 {
   right: 56px;
   background-color: lightseagreen;
 }
-.teams .points button#team-1-add-5, .teams .points button#team-2-add-5 {
+.teams .points button #team-1-add-5,
+.teams .points button #team-2-add-5 {
   right: 16px;
   background-color: green;
 }
@@ -254,7 +288,7 @@ body, html {
   border-radius: 8px;
   padding: 4px 16px;
 }
-#questions-container details[open] {
+#questions-container details [open] {
   border: 3px solid RoyalBlue;
 }
 #questions-container details summary {
@@ -320,7 +354,7 @@ body, html {
   font-size: 20px;
   border: none;
 }
-.next-and-strikes .strike-btn::after {
+.next-and-strikes .strike-btn:after {
   border: 3px solid red;
   position: absolute;
   content: "×";
@@ -343,7 +377,7 @@ body, html {
   font-size: 20px;
   color: green;
 }
-.next-and-strikes .clear-strikes-btn::after {
+.next-and-strikes .clear-strikes-btn:after {
   border: 3px solid green;
   position: absolute;
   font-size: 50px;

@@ -1,16 +1,24 @@
 class Home {
     data;
+    theme;
     channel = new BroadcastChannel('ladysinya.github.io_family_feud_broadcast_channel');
     qNumber = 0;
     
     async init() {
-        this.channel.addEventListener('message', e => this.messageEventListener(e))
-        
-        await fetch('./data.json')
-        .then(async (response) => {
-            let responseContent = await response.text();
-            this.data = JSON.parse(responseContent);
-        });
+        this.channel.addEventListener('message', e => this.messageEventListener(e));
+
+        await fetch(`./config.json`)
+            .then(async (response) => {
+                let responseContent = await response.text();
+                this.theme = JSON.parse(responseContent).theme;
+                document.body.setAttribute('theme', this.theme);
+            });
+
+        await fetch(`./data/data-${this.theme}.json`)
+            .then(async (response) => {
+                let responseContent = await response.text();
+                this.data = JSON.parse(responseContent);
+            });
         
         this.loadNextQuestion();
     }

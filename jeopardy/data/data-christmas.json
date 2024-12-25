@@ -1,48 +1,218 @@
 {
     "questions": [
         {
-            "categoryName": "Foods",
+            "categoryName": "History /Facts",
             "items": [
                 {
                     "id": 1,
                     "value": 200,
-                    "answer":"It is the most popular main course on Thanksgiving",
-                    "question": "What is turkey?"
+                    "answer":"A holiday drink that contains sugar, milk & eggs.",
+                    "question": "What is Eggnog?"
                 },
                 {
                     "id": 2,
                     "value": 400,
-                    "answer":"The way people typically prepare potatoes for Thanksgiving dinner",
-                    "question": "What are mashed potatoes?"
+                    "answer":"Glittery bits of metal that are hung on a Christmas tree.",
+                    "question": "What is Tinsel?"
                 },
                 {
                     "id": 3,
                     "value": 600,
-                    "answer":"The type of apple traditionally in apple pie",
-                    "question": "What is a Granny Smith apple?"
+                    "answer":"A Children's toy that is often seen revolving around a Christmas tree.",
+                    "question": "What is a train?"
+                },
+                {
+                    "id": 4,
+                    "value": 800,
+                    "answer":"A popular Christmas toy that is based on a 1903 poilitical caricature.",
+                    "question": "What is the Teddy Bear?"
+                },
+                {
+                    "id": 5,
+                    "value": 1000,
+                    "answer":"The amount it cost to send a Christmas card in the same city early in the Victorian era.",
+                    "question": "What is Nothing?"
                 }
             ]
         },
         {
-            "categoryName": "Traditions",
+            "categoryName": "Traditions Around the World",
             "items": [
                 {
                     "id": 6,
                     "value": 200,
-                    "answer":"The sport most americans like to play and watch on Thansgiving Day",
-                    "question": "What is Football?"
+                    "answer":"The most popular tree topper.",
+                    "question": "What is an angel?"
                 },
                 {
                     "id": 7,
                     "value": 400,
-                    "answer":"A special parade in US for Thanksgiving",
-                    "question": "WHat is the Macy's Parade?"
+                    "answer":"A plant creation that is hung on doors during Christmas.",
+                    "question": "What is a wreath?"
+                },
+                {
+                    "id": 8,
+                    "value": 600,
+                    "answer":"The country who's Christmas celebration features the Feast of the Lanterns and the Festival of the Dragons.",
+                    "question": "What is China?"
+                },
+                {
+                    "id": 10,
+                    "value": 800,
+                    "answer":"The opening in the house through which Old Man Christmas enters a home in Chile.",
+                    "question": "What is the window?"
+                },
+                {
+                    "id": 9,
+                    "value": 1000,
+                    "answer":"The type of fish that is served as the main course on Christmas Day in Austria.",
+                    "question": "What is Carp?"
+                }
+            ]
+        },
+        {
+            "categoryName": "Cartoons /TV",
+            "items": [
+                {
+                    "id": 11,
+                    "value": 200,
+                    "answer":"This is the finest skater in 'A Charlie Brown Christmas'.",
+                    "question": "Who is Snoopy?"
+                },
+                {
+                    "id": 12,
+                    "value": 400,
+                    "answer":"The island that Rudolph and his friends land upon in 'Rudolph the Red Nosed Reindeer'.",
+                    "question": "What is The Island of Misfit Toys?"
+                },
+                {
+                    "id": 13,
+                    "value": 600,
+                    "answer":"The Frankenstein actor that provided the voice of the Grinch in 'How the Grinch Stole Christmas'.",
+                    "question": "Who is Boris Karloff?"
+                },
+                {
+                    "id": 14,
+                    "value": 800,
+                    "answer":"The Crooner who's last Christmas special aired in December 1977.",
+                    "question": "Who is Bing Crosby?"
+                },
+                {
+                    "id": 15,
+                    "value": 1000,
+                    "answer":"The M*A*S*H star who portrayed Grace Bradley in 'The Best Christmas Pagent Ever'.",
+                    "question": "Who is Loretta Swit?"
+                }
+            ]
+        },
+        {
+            "categoryName": "Carols /Songs",
+            "items": [
+                {
+                    "id": 16,
+                    "value": 200,
+                    "answer":"The toy that Alvin wants for Christmas.",
+                    "question": "What is a Hula-Hoop?"
+                },
+                {
+                    "id": 17,
+                    "value": 400,
+                    "answer":"The sad Christmas song that Elvis Presley recorded in the 50's.",
+                    "question": "What is 'Blue Christmas'?"
+                },
+                {
+                    "id": 18,
+                    "value": 600,
+                    "answer":"Recorded in 1952, the song that could make Daddy suspicious.",
+                    "question": "What is 'I saw Mommy Kissing Santa Clause'?"
+                },
+                {
+                    "id": 19,
+                    "value": 800,
+                    "answer":"This child's stocking comes first in 'Up on the Housetop'.",
+                    "question": "Who is Little Nell?"
+                },
+                {
+                    "id": 20,
+                    "value": 1000,
+                    "answer":"The bigest selling Christmas single of all time.",
+                    "question": "What is White Christmas?"
+                }
+            ]
+        },
+        {
+            "categoryName": "Movies",
+            "items": [
+                {
+                    "id": 21,
+                    "value": 200,
+                    "answer":"This 1990 movie told the story of a boy's experience when two men try to break into his house during Christmas.",
+                    "question": "What is 'Home Alone'?"
+                },
+                {
+                    "id": 22,
+                    "value": 400,
+                    "answer":"In the movie 'The Santa Clause', this kept reappearing on Tim Allen's face even after he removed it.",
+                    "question": "What is his beard?"
+                },
+                {
+                    "id": 23,
+                    "value": 600,
+                    "answer":"The 1996 Christmas movie, staring Arnold Schwarzenegger, in which Turbo Man was the desired toy.",
+                    "question": "What is 'Jingle All the Way'?"
+                },
+                {
+                    "id": 24,
+                    "value": 800,
+                    "answer":"The name of the boy in 'The Christmas Story'.",
+                    "question": "What is 'Ralph'?"
+                },
+                {
+                    "id": 25,
+                    "value": 1000,
+                    "answer":"The holiday classic in which Mamie was the name of the housekeeper.",
+                    "question": "What is 'Holiday Inn'?"
+                }
+            ]
+        },
+        {
+            "categoryName": "Literature /Performing Arts",
+            "items": [
+                {
+                    "id": 26,
+                    "value": 200,
+                    "answer":"The most famous Christmas ballet.",
+                    "question": "What is 'The Nutcracker'?"
+                },
+                {
+                    "id": 27,
+                    "value": 400,
+                    "answer":"In 'Twas the Night Before Christmas', visions of these dance through the children's heads.",
+                    "question": "What are sugarplums?"
+                },
+                {
+                    "id": 28,
+                    "value": 600,
+                    "answer":"The type of business that Scrooge and Marley ran.",
+                    "question": "What is a countinghouse?"
+                },
+                {
+                    "id": 29,
+                    "value": 800,
+                    "answer":"The piece of heavenly apparel that the Littlest Angel does not wear correctly.",
+                    "question": "What is his halo?"
+                },
+                {
+                    "id": 30,
+                    "value": 1000,
+                    "answer":"The famous Christmas story written by O. Henry.",
+                    "question": "What is 'The Gift of the Magi'?"
                 }
             ]
         }
     ],
     "finalJeopardy" : {
-        "answer": "The speed that turkeys can run when scared",
-        "question": "What is 20MPH?"
+        "answer": "This holiday film appears on television more than 300 times annually.",
+        "question": "What is 'It's a Wonderful Life'?"
     }
 }

@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <button id="smart-game-button" class="start-game-button" type="button">Start Game!</button>
     <main class="control-main">
@@ -48,7 +49,10 @@
                 <button id="daily-double-wager-button">Let's do this!</button>
             </div>
             <div class="control-card">
-                <h1>Final Jeopardy!</h1>
+                <div id="final-header" class="final-header">
+                    <h1>Final Jeopardy!</h1>
+                    <button class="start-final-jeopardy">Start!</button>
+                </div>
                 <div class="final-jeopardy-inputs">
                     <div data-team-color="red">
                         <select>
@@ -81,7 +85,7 @@
                         </select>
                     </div>
                 </div>
-                <button id="final-jeopardy-wager-button">May the odds.... something, something.</button>
+                <!-- <button id="final-jeopardy-wager-button">May the odds.... something, something.</button> -->
             </div>
         </div>
     </main>

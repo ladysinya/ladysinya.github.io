@@ -1,0 +1,454 @@
+// sass --watch ./family-feud/style.scss ./family-feud/style.css --no-source-map
+
+:root {
+    --background-image: url(../assets/wallpaperBackground.jpg);
+    --font-family: "Outfit", sans-serif;
+
+    --card-background-color: gray;
+    --title-background-color: gray;
+
+    --title-text-color: white;
+    --card-text-color: white;
+    --card-text-stroke-color: white;
+
+    --card-border-color: white;
+    --score-card-border-color: white;
+    --bubble-border-color: white;
+}
+
+[theme="halloween"] {
+    --background-image: url(../assets/halloween-shelf-seamless-background.jpg);
+    --font-family: "Metal Mania", system-ui;
+
+    --card-background-color: black;
+}
+
+[theme="christmas"] {
+    --background-image: url(../assets/a1dbc75c1bbc9d5d63bb0024ffb74d97.jpg);
+
+    --title-text-color: green;
+    --title-background-color: yellowgreen;
+
+    --card-text-color: orangered;
+    --card-text-stroke-color: maroon;
+    --card-background-color: yellowgreen;
+    --card-border-color: green;
+
+    .snow-container {
+        display: block;
+    }
+}
+
+html {
+    background-image: var(--background-image);
+}
+
+body {
+    background-color: rgba(224, 255, 255, 0.3019607843);
+}
+
+body, html {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+}
+
+.main {
+    padding: 24px;
+    font-family: var(--font-family);
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.team-group {
+    margin: auto 0;
+    
+    .team-name {
+        font-size: 48px;
+        color: var(--title-text-color);
+        background-color: var(--title-background-color);
+        text-align: center;
+        font-family: "Brush Script MT", cursive;
+        letter-spacing: 5px;
+        border: none;
+        outline: none;
+        border-radius: 8px;
+        margin: 10px auto;
+        width: 100%;
+        
+        &:active, 
+        &:focus {
+            outline: none;
+        }
+        
+        .team-strikes {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            background-color: var(--card-background-color);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            
+            .strike {
+                position: relative;
+                color: red;
+                border: 5px solid red;
+                margin: 8px;
+                border-radius: 4px;
+                font-size: 36px;
+                height: 80px;
+                width: 60px;
+                
+                &:after {
+                    position: absolute;
+                    content: "×";
+                    font-size: 100px;
+                    color: red;
+                    text-align: center;
+                    font-weight: 600;
+                    top: -16px;
+                    left: 1px;
+                }
+                
+                &[disabled] {
+                    opacity: 0.5;
+                    border: 5px solid gray;
+                    
+                    &:after {
+                        color: gray;
+                    }
+                }
+                
+            }
+
+        }
+    }
+
+    .team-points {
+        font-size: 36px;
+        color: var(--card-text-color);
+        text-align: center;
+        font-weight: 600;
+        font-variant: all-small-caps;
+        background-color: var(--card-background-color);
+        border-radius: 10px;
+        padding: 16px 24px;
+    }
+}
+
+.title-group {
+    display: flex;
+    position: relative;
+    border-radius: 10px;
+    width: 330px;
+    margin: auto;
+    background-color: lightcyan;
+    
+    .page-title {
+        font-size: 48px;
+        padding: 24px 36px;
+        text-align: center;
+        font-family: "Mystery Quest", Tofu;
+        color: indianred;
+    }
+    
+    .candy-corn-img {
+        position: absolute;
+        transform: rotate(45deg) translate(70%, 0%);
+        bottom: 0;
+        right: 0;
+        height: 80px;
+        width: auto;
+    }
+    
+    .bat-img {
+        position: absolute;
+        transform: rotate(-32deg) translate(-10%, -55%);
+        top: 0;
+        left: 0;
+        height: 160px;
+        width: auto;
+    }
+    
+    .turkey-img {
+        position: absolute;
+        top: -17px;
+        left: 14px;
+        height: 300px;
+        width: auto;
+    }
+}
+
+
+.question-row {
+    margin: 24px 0;
+    background-color: lightcyan;
+    border-radius: 10px;
+    font-size: 44px;
+    color: indianred;
+    text-align: center;
+    padding: 24px;
+}
+
+.answers-row {
+    display: flex;
+
+    & > * {
+        width: 50%;
+    }
+    
+    .answer-col-border {
+        --mask:
+        radial-gradient(15.24px at 21.50px 50%,#000 99%,#0000 101%) 0 calc(50% - 20px)/51% 40px repeat-y,
+        radial-gradient(15.24px at -11.5px 50%,#0000 99%,#000 101%) 10px 50%/calc(51% - 10px) 40px repeat-y,
+        radial-gradient(15.24px at calc(100% - 21.50px) 50%,#000 99%,#0000 101%) 100% 50%/51% 40px repeat-y,
+        radial-gradient(15.24px at calc(100% + 11.50px) 50%,#0000 99%,#000 101%) calc(100% - 10px) calc(50% - 20px)/calc(51% - 10px) 40px repeat-y;
+        -webkit-mask: var(--mask);
+        mask: var(--mask);
+        background: lightcyan;
+        width: 30px;
+    }
+    
+    .answer {
+        display: flex;
+        gap: 10px;
+        padding: 16px;
+        
+        .answer-number {
+            font-size: 44px;
+            color: indianred;
+            border: 5px solid indianred;
+            background-color: lightcyan;
+            border-radius: 50%;
+            aspect-ratio: 1;
+            height: 50px;
+            text-align: center;
+            font-family: "Mystery Quest", Tofu;
+        }
+
+        .answer-text {
+            position: relative;
+            width: -webkit-fill-available;
+            
+            .answer-text-content {
+                background-color: lightcyan;
+                border-radius: 10px;
+                height: 100%;
+                font-size: 36px;
+                padding: 8px;
+                box-sizing: border-box;
+                color: RoyalBlue;
+            }
+            
+            .answer-text-overlay {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                border-radius: 10px;
+                background-color: RoyalBlue;
+                width: 100%;
+                transition: width 1s ease-in-out;
+            }
+            
+            .answer-text-overlay.hide-overlay {
+                width: 0%;
+                transition: width 1s ease-in-out;
+            }
+        }
+
+        &:has(.answer-text-content:empty) {
+            visibility: hidden;
+        }
+    }
+}
+
+.main-control {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+  .team-group {
+    width: 40%;
+  }
+}
+
+.teams {
+    display: flex;
+    gap: 10px;
+    justify-content: space-around;
+  
+    .points {
+        position: relative;
+        
+        button {
+            position: absolute;
+            top: 50%;
+            font-weight: 600;
+            padding: 8px;
+            color: lightcyan;
+            border-radius: 4px;
+            border: none;
+            transform: translateY(-50%);
+            
+            #team-1-add-1, 
+            #team-2-add-1 {
+                right: 56px;
+                background-color: lightseagreen;
+            }
+
+            #team-1-add-5, 
+            #team-2-add-5 {
+                right: 16px;
+                background-color: green;
+            }
+
+            &:hover {
+                opacity: 0.75;
+            }
+
+            &:active {
+                opacity: 0.5;
+            }
+        }
+    }
+
+}
+
+#questions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+  details {
+    background-color: lightcyan;
+    border-radius: 8px;
+    padding: 4px 16px;
+    
+    [open] {
+      border: 3px solid RoyalBlue;
+    }
+    
+    summary {
+      font-size: 24px;
+      
+      &::marker {
+        content: "";
+      }
+    }    
+    
+    ul {
+      padding: 0;
+      
+      li {
+        display: flex;
+        gap: 10px;
+        padding: 4px 16px;
+        
+        .a {
+          display: flex;
+          gap: 10px;
+        }
+        
+        &:first-child {
+          border-top-right-radius: 8px;
+          border-top-left-radius: 8px;
+        }
+        
+        &:nth-child(2n) {
+          background-color: rgba(0, 0, 0, 0.3019607843);
+        }
+        
+        &:nth-child(2n-1) {
+          background-color: rgba(0, 0, 0, 0.1019607843);
+        }
+        
+        &:last-child {
+          border-bottom-right-radius: 8px;
+          border-bottom-left-radius: 8px;
+        }
+      }
+    }
+    
+    .icons {
+        .fa-eye {
+          color: green;
+        }
+        
+        .fa-eye-slash {
+          color: RoyalBlue;
+        }
+    }    
+  } 
+}
+
+
+#next-question-button {
+  font-size: 24px;
+  background-color: DodgerBlue;
+  color: lightcyan;
+  margin: 8px auto;
+  padding: 8px;
+  border-radius: 4px;
+  border: none;
+}
+
+.next-and-strikes {
+  display: flex;
+  justify-content: space-around;
+
+  .strike-btn {
+    position: relative;
+    margin: 8px;
+    border-radius: 4px;
+    height: 80px;
+    width: 60px;
+    color: transparent;
+    font-size: 20px;
+    border: none;
+    
+    &:after {
+      border: 3px solid red;
+      position: absolute;
+      content: "×";
+      font-size: 50px;
+      color: red;
+      text-align: center;
+      font-weight: 600;
+      top: 10px;
+      left: 10px;
+      bottom: 10px;
+      right: 10px;
+    }
+  }
+  
+  .clear-strikes-btn {
+    position: relative;
+    margin: 8px;
+    border-radius: 4px;
+    height: 80px;
+    width: 60px;
+    border: none;
+    font-size: 20px;
+    color: green;
+    
+    &:after {
+      border: 3px solid green;
+      position: absolute;
+      font-size: 50px;
+      content: "-";
+      color: transparent;
+      text-align: center;
+      font-weight: 600;
+      top: 10px;
+      left: 10px;
+      bottom: 10px;
+      right: 10px;
+    }
+  }
+}
+

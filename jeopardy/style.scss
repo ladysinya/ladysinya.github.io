@@ -131,7 +131,7 @@ main {
     .controls {
         flex: 1;
         display: grid;
-        grid-template-rows: auto auto;
+        grid-template-rows: auto 1fr;
         grid-template-columns: 3fr 2fr;
         grid-auto-flow: column;
         margin-top: 24px;
@@ -151,7 +151,7 @@ main {
 .team-score {
     border: 3px solid var(--score-card-border-color);
     border-radius: 8px;
-    padding: 16px;
+    padding: 16px 48px;
     font-size: 32px;
     display: flex;
     justify-content: space-between;
@@ -241,7 +241,7 @@ main {
         }
         
         .category-label{
-            font-size: 80px;
+            font-size: 36px;
             font-weight: 600;
             letter-spacing: 0.25em;
             padding: 16px 4px 16px 16px;
@@ -578,7 +578,7 @@ hr {
     .qna {
         display: flex;
         flex-direction: column;
-        gap: 38px;
+        gap: 16px;
         text-align: center;
         justify-content: center;
         margin-bottom: auto;
@@ -630,7 +630,7 @@ hr {
                 border-radius: 50%;
                 border: 3px solid var(--bubble-border-color);
 
-                input[type="radio"] {
+                input {
                     appearance: none;
                     position: absolute;
                 }
@@ -646,11 +646,17 @@ hr {
                     margin-top: 4px;
                 }
 
-                &:has(input[type="radio"]:not(:checked)) {
+                &:has(input:not(:checked)) {
                     opacity: 0.5;
                 }
             }
         }
+    }
+
+    .final-header {
+        display: flex;
+        gap: 16px;
+        margin: 0 auto;
     }
 
     .final-jeopardy-inputs {
@@ -658,6 +664,7 @@ hr {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
         gap: 16px;
+        margin: auto 0;
 
         div {
             border-radius: 8px;
@@ -680,6 +687,17 @@ hr {
         background-color: var(--card-text-color);
         border: none;
         font-size: 48px;
+    }
+}
+
+.buzzed-container {
+    display: flex;
+    gap: 8px;
+    min-height: 60px;
+    justify-content: center;
+
+    .team-buzzed-group:not(.final-correct) [team-buzzed] {
+        opacity: 0.5;
     }
 }
 
