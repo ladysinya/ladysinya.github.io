@@ -1,8 +1,8 @@
 class CanvasDraw {
-	tagsToDraw = [		
-		// new TagDraw()
+	tagsToDraw = [
+		new Tag('signature', 148, 392, 958, 52)
 	]
-	
+
 	async init() {
 		const img = new Image();
 		const documents = await getDocuments();
@@ -10,23 +10,23 @@ class CanvasDraw {
 		img.id = "my-img";
 		img.onload = (e) => {
 			document.body.appendChild(e.currentTarget);
-			drawBaseCanvas(e.currentTarget);
+			[this.cHeight, this.cWidth] = drawBaseCanvas(e.currentTarget);
+			this.redrawCanvas();
 		};
 
 		window.addEventListener("resize", () => {
 			drawBaseCanvas(document.getElementById("my-img"));
+			this.redrawCanvas();
 		});
 
-		//documentDraw = new DocumentsDraw();
-
-		// this.tagsToDraw.forEach((sprite) =>  {
-		// 	sprite.draw(canvas)
-		// });
+		window.addEventListener('click', (e) => { console.log('offsetX', e.offsetX, 'offsetY', e.offsetY) })
 	}
 
 	redrawCanvas() {
-		shitToDraw.forEach((sprite) =>  {
-			sprite.draw(canvas)
+		const canvas = document.getElementById("my-canvas");
+		const ctx = canvas.getContext('2d');
+		this.tagsToDraw.forEach(tag =>  {
+			tag.draw(ctx)
 		});
 	}
 }
@@ -64,6 +64,8 @@ function drawBaseCanvas(img) {
 
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.drawImage(img, centerShift_x, 0, adjImgWidth, adjImgHeight);
+
+	return [canvas.height, canvas.width];
 }
 
 async function getDocuments() {
